@@ -4,5 +4,7 @@
     <string name="app_name">OnTap</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="this_application_does_not_support_under_age_drinking_so_to_help_alleviate_minors_obtaining_information_on_alcholic_beverages_please_vefiy_your_birthdate_">"This application does not support under-age drinking so to help alleviate minors obtaining information on alcholic beverages please vefiy your birthdate. "</string>
+    <string name="todo">TODO</string>
 
 </resources>
