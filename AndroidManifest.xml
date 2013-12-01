@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="13"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="18" />
 
     <application
         android:allowBackup="true"
@@ -16,6 +16,11 @@
         <activity
             android:name="com.cmozie.ontap.MainActivity"
             android:label="@string/app_name" >
+           
+        </activity>
+        <activity
+            android:name="com.cmozie.ontap.SplashPage"
+            android:label="@string/title_activity_splash_page" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
