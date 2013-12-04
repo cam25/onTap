@@ -16,6 +16,8 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -35,6 +37,10 @@ public class AgeVerification extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+                                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_age_verification);
         displayDate = (TextView) findViewById(R.id.displayDate);
         pickDate = (Button) findViewById(R.id.pickDate);
@@ -90,6 +96,9 @@ public class AgeVerification extends Activity {
                 if (go.isShown()) {
 					go.setVisibility(View.GONE);
 				}
+                if (go.isPressed()) {
+        			displayDate.setText("");
+        		}
             }
         });
        
@@ -122,8 +131,8 @@ public class AgeVerification extends Activity {
     	
     	if (year <= 1990) {
     		
-    		displayDate .setText(String.valueOf(day) + "/"
-                    + String.valueOf(month + 1) + "/" + String.valueOf(year));
+    		displayDate .setText("Your birthday is " + String.valueOf(month + 1) + "/"
+                    + String.valueOf(day) + "/" + String.valueOf(year));
     	
     		
     		
@@ -131,6 +140,9 @@ public class AgeVerification extends Activity {
     		go.setVisibility(View.VISIBLE);
     	        	
     			
+		}else if(year > 1990 ){
+			displayDate.setText("");
+			Toast.makeText(getActivity(), "You must be 21 years old to access this app!", Toast.LENGTH_SHORT).show();
 		}
     	
         

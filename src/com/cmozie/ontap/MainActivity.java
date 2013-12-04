@@ -2,15 +2,18 @@ package com.cmozie.ontap;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,7 +28,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	
+	public static Context context;
 	public static  List<String> arrayList;
 	 String[] beers = {
 		    	"Samuel Adams Octoberfest",
@@ -73,7 +76,19 @@ go.setOnClickListener(new View.OnClickListener() {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+		alert.setTitle("Search a Beer");
+		alert.setMessage("Feature Coming Soon...");
+		alert.setCancelable(false);
+		alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
 		
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+				dialog.cancel();
+			}
+		});
+		alert.show();
 	}
 });
 
@@ -82,7 +97,19 @@ scan.setOnClickListener(new View.OnClickListener() {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-	
+		AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+		alert.setTitle("Scan A Beer");
+		alert.setMessage("Feature Coming Soon...");
+		alert.setCancelable(false);
+		alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
+		
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+				dialog.cancel();
+			}
+		});
+		alert.show();
 		
 	}
 });
@@ -127,7 +154,48 @@ scan.setOnClickListener(new View.OnClickListener() {
 	}
 
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+		switch (item.getItemId()) {
+		
+		//returns to main activity
+		case R.id.add:
+			AlertDialog.Builder alert = new AlertDialog.Builder(this);
+				alert.setTitle("Add Favs");
+				alert.setMessage("Feature Coming Soon...");
+				alert.setCancelable(false);
+				alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
+				
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
 
+						dialog.cancel();
+					}
+				});
+				alert.show();
+
+			break;
+		case R.id.share:
+			AlertDialog.Builder alert2 = new AlertDialog.Builder(this);
+			alert2.setTitle("Share Feature");
+			alert2.setMessage("Feature Coming Soon...");
+			alert2.setCancelable(false);
+			alert2.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
+			
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+					dialog.cancel();
+				}
+			});
+			alert2.show();
+			  break;
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+		
+	}
 
 	
 

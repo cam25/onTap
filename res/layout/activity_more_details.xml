@@ -10,23 +10,6 @@
     android:background="@drawable/texturebkg" >
 
     <TextView
-        android:id="@+id/beerName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="BEER NAME HERE:"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <ImageView
-        android:id="@+id/beerLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/images" />
-
-    <TextView
         android:id="@+id/abv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,5 +52,22 @@
         android:layout_alignRight="@+id/description"
         android:layout_marginRight="16dp"
         android:text="Available" />
+
+    <TextView
+        android:id="@+id/beerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="BEER NAME HERE:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/beerLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/abv"
+        android:layout_below="@+id/beerName"
+        android:src="@drawable/images" />
 
 </RelativeLayout>
