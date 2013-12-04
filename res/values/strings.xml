@@ -11,5 +11,6 @@
     <string name="title_activity_find_abeer">FindABeer</string>
     <string name="title_activity_events">Events</string>
     <string name="title_activity_more_details">MoreDetails</string>
+    <string name="title_activity_brewery_details">BreweryDetails</string>
 
 </resources>

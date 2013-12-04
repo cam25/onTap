@@ -112,6 +112,42 @@
                     android1:layout_width="match_parent"
                     android1:layout_height="match_parent"
                     android1:orientation="vertical" >
+
+                    <TextView
+                        android1:id="@+id/textView3"
+                        android1:layout_width="wrap_content"
+                        android1:layout_height="wrap_content"
+                        android1:text="EventName:"
+                        android1:textAppearance="?android:attr/textAppearanceLarge" 
+                        android1:gravity="center"/>
+
+                    <TextView
+                        android1:id="@+id/textView4"
+                        android1:layout_width="wrap_content"
+                        android1:layout_height="wrap_content"
+                        android1:text="Description of event here:" />
+
+                    <TextView
+                        android1:id="@+id/textView5"
+                        android1:layout_width="wrap_content"
+                        android1:layout_height="wrap_content"
+                        android1:text="Event Type:"
+                        android1:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android1:id="@+id/textView6"
+                        android1:layout_width="wrap_content"
+                        android1:layout_height="wrap_content"
+                        android1:text="Venue:"
+                        android1:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android1:id="@+id/textView7"
+                        android1:layout_width="wrap_content"
+                        android1:layout_height="wrap_content"
+                        android1:text="Website:"
+                        android1:textAppearance="?android:attr/textAppearanceLarge" />
+
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>

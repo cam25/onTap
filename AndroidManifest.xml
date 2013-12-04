@@ -42,6 +42,10 @@
             android:name="com.cmozie.ontap.MoreDetails"
             android:label="@string/title_activity_more_details" >
         </activity>
+        <activity
+            android:name="com.cmozie.ontap.BreweryDetails"
+            android:label="@string/title_activity_brewery_details" >
+        </activity>
     </application>
 
 </manifest>
