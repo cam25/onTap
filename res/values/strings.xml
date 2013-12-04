@@ -12,5 +12,26 @@
     <string name="title_activity_events">Events</string>
     <string name="title_activity_more_details">MoreDetails</string>
     <string name="title_activity_brewery_details">BreweryDetails</string>
+    <string name="title_activity_favorites">Favorites</string>
+    <string name="beertitlehere">BeerTitleHere</string>
+    <string name="beer_description_will_go_here_and_will_give_specific_details_on_beer">BEER DESCRIPTION WILL GO HERE AND WILL GIVE SPECIFIC DETAILS ON BEER</string>
+    <string name="search_beer">Search Beer</string>
+    <string name="website_">Website:</string>
+    <string name="venue_">Venue:</string>
+    <string name="event_type_">Event Type:</string>
+    <string name="description_of_event_here_">Description of event here:</string>
+    <string name="eventname_">EventName:</string>
+    <string name="birthdate_will_be_shown_here">Birthdate will be shown here</string>
+    <string name="age_verified_continue">Age Verified..Continue</string>
+    <string name="click_here_to_enter_birthdate">Click Here to Enter Birthdate</string>
+    <string name="enter_your_birthdate_to_gain_access">Enter Your Birthdate to gain access</string>
+    <string name="your_favorite_beers">Your Favorite Beers</string>
+    <string name="the_favorite_beers_will_be_loaded_inside_here">The favorite beers will be loaded inside here</string>
+    <string name="type_beer">Type:Beer</string>
+    <string name="description_goes_here_">DESCRIPTION GOES HERE...</string>
+    <string name="abv_4_5_">ABV:4.5%</string>
+    <string name="available">Available</string>
+    <string name="beer_name_here_">BEER NAME HERE:</string>
+    <string name="brewerydetails">BreweryDetails</string>
 
 </resources>

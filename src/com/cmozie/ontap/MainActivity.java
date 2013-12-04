@@ -42,10 +42,10 @@ public class MainActivity extends Activity {
 		//elements
 		ActionBar actionBar = getActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(true);
-	     EditText ed = (EditText) findViewById(R.id.search);
+	     EditText ed = (EditText) findViewById(R.id.beerText);
 	     ListView lv = (ListView) findViewById(R.id.list);
-	     Button go = (Button) findViewById(R.id.button1);
-	     ImageButton scan = (ImageButton) findViewById(R.id.imageButton1);
+	     Button search = (Button) findViewById(R.id.searchButn);
+	     ImageButton scan = (ImageButton) findViewById(R.id.scannerButn);
 	     ed.setText("Searched Beer");
 	    
 	     //arraylist for listview
@@ -71,7 +71,7 @@ lv.setOnItemClickListener(new OnItemClickListener() {
 	}
 });
 
-go.setOnClickListener(new View.OnClickListener() {
+search.setOnClickListener(new View.OnClickListener() {
 	
 	@Override
 	public void onClick(View v) {
@@ -190,6 +190,11 @@ scan.setOnClickListener(new View.OnClickListener() {
 			});
 			alert2.show();
 			  break;
+		case R.id.favorites:
+			
+			startActivity(new Intent(MainActivity.this, Favorites.class));
+
+			break;
 		default:
 			break;
 		}

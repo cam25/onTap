@@ -13,18 +13,18 @@
         android:id="@+id/abv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageView1"
+     
         android:layout_centerVertical="true"
-        android:text="ABV:4.5%" />
+        android:text="@string/abv_4_5_" />
 
     <TextView
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/textView4"
+      
         android:layout_below="@+id/abv"
-        android:text="DESCRIPTION GOES HERE..." />
+        android:text="@string/description_goes_here_" />
 
     <TextView
         android:id="@+id/beertype"
@@ -32,17 +32,17 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Type:Beer" />
+        android:text="@string/type_beer" />
 
     <TextView
         android:id="@+id/breweryDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/description"
-        android:layout_alignRight="@+id/beertype"
+      
         android:layout_marginBottom="44dp"
         android:layout_marginRight="18dp"
-        android:text="BreweryDetails" />
+        android:text="@string/brewerydetails" />
 
     <TextView
         android:id="@+id/available"
@@ -51,7 +51,7 @@
         android:layout_above="@+id/description"
         android:layout_alignRight="@+id/description"
         android:layout_marginRight="16dp"
-        android:text="Available" />
+        android:text="@string/available" />
 
     <TextView
         android:id="@+id/beerName"
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="BEER NAME HERE:"
+        android:text="@string/beer_name_here_"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
@@ -68,6 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/abv"
         android:layout_below="@+id/beerName"
+        android:contentDescription="@string/todo"
         android:src="@drawable/images" />
 
 </RelativeLayout>

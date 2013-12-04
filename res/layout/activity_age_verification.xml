@@ -16,7 +16,7 @@
         android:layout_above="@+id/pickDate"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="26dp"
-        android:text="Birthdate will be shown here"
+        android:text="@string/birthdate_will_be_shown_here"
         android:textSize="24sp" />
 
     <Button
@@ -26,7 +26,7 @@
         android:layout_alignTop="@+id/pickDate"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="58dp"
-        android:text="Age Verified..Continue" />
+        android:text="@string/age_verified_continue" />
 
     <Button
         android:id="@+id/pickDate"
@@ -35,19 +35,19 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="112dp"
-        android:text="Click Here to Enter Birthdate" />
+        android:text="@string/click_here_to_enter_birthdate" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/enterBirthdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="29dp"
-        android:text="Enter Your Birthdate to gain access"
+        android:text="@string/enter_your_birthdate_to_gain_access"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/lockImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/displayDate"

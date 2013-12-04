@@ -42,35 +42,22 @@
                         android1:id="@+id/textView1"
                         android1:layout_width="wrap_content"
                         android1:layout_height="wrap_content"
-                        android1:text="BeerTitleHere" />
+                        android1:text="@string/beertitlehere" />
 
                     <ImageView
                         android1:id="@+id/imageView1"
                         android1:layout_width="wrap_content"
                         android1:layout_height="wrap_content"
-                        android1:src="@drawable/images" />
+                        android1:src="@drawable/images" android1:contentDescription="TODO"/>
 
                     <TextView
                         android1:id="@+id/textView2"
                         android1:layout_width="wrap_content"
                         android1:layout_height="match_parent"
-                        android1:text="BEER DESCRIPTION WILL GO HERE AND WILL GIVE SPECIFIC DETAILS ON BEER"
+                        android1:text="@string/beer_description_will_go_here_and_will_give_specific_details_on_beer"
                         android1:textAppearance="?android:attr/textAppearanceLarge" />
-
-                    <ScrollView
-                        android1:id="@+id/scrollView1"
-                        android1:layout_width="match_parent"
-                        android1:layout_height="86dp"
-                        android1:layout_weight="0.77" >
-
-                        <LinearLayout
-                            android1:layout_width="match_parent"
-                            android1:layout_height="match_parent"
-                            android1:orientation="vertical" >
-                        </LinearLayout>
-                    </ScrollView>
-                </LinearLayout>
-
+</LinearLayout>
+                   
                 <LinearLayout
                     android1:id="@+id/tab2"
                     android1:layout_width="match_parent"
@@ -78,21 +65,21 @@
                     android1:orientation="vertical" >
 
                     <Button
-                        android1:id="@+id/button1"
+                        android1:id="@+id/searchButn"
                         android1:layout_width="wrap_content"
                         android1:layout_height="wrap_content"
-                        android1:text="Search Beer" />
+                        android1:text="@string/search_beer" />
 
                     <ImageButton
-                        android1:id="@+id/imageButton1"
+                        android1:id="@+id/scannerButn"
                         android1:layout_width="wrap_content"
                         android1:layout_height="wrap_content"
-                        android1:layout_alignRight="@id/button1" 
+                        android1:layout_alignRight="@id/searchButn" 
            
                         android1:src="@drawable/reader" />
                     
                      <EditText
-                        android1:id="@+id/search"
+                        android1:id="@+id/beerText"
                         android1:layout_width="wrap_content"
                         android1:layout_height="wrap_content" android1:inputType=""/>
 
@@ -114,38 +101,38 @@
                     android1:orientation="vertical" >
 
                     <TextView
-                        android1:id="@+id/textView3"
+                        android1:id="@+id/eventName"
                         android1:layout_width="wrap_content"
                         android1:layout_height="wrap_content"
-                        android1:text="EventName:"
+                        android1:text="@string/eventname_"
                         android1:textAppearance="?android:attr/textAppearanceLarge" 
                         android1:gravity="center"/>
 
                     <TextView
-                        android1:id="@+id/textView4"
+                        android1:id="@+id/description"
                         android1:layout_width="wrap_content"
                         android1:layout_height="wrap_content"
-                        android1:text="Description of event here:" />
+                        android1:text="@string/description_of_event_here_" />
 
                     <TextView
-                        android1:id="@+id/textView5"
+                        android1:id="@+id/eventType"
                         android1:layout_width="wrap_content"
                         android1:layout_height="wrap_content"
-                        android1:text="Event Type:"
+                        android1:text="@string/event_type_"
                         android1:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <TextView
-                        android1:id="@+id/textView6"
+                        android1:id="@+id/venue"
                         android1:layout_width="wrap_content"
                         android1:layout_height="wrap_content"
-                        android1:text="Venue:"
+                        android1:text="@string/venue_"
                         android1:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <TextView
-                        android1:id="@+id/textView7"
+                        android1:id="@+id/webSite"
                         android1:layout_width="wrap_content"
                         android1:layout_height="wrap_content"
-                        android1:text="Website:"
+                        android1:text="@string/website_"
                         android1:textAppearance="?android:attr/textAppearanceLarge" />
 
                 </LinearLayout>
