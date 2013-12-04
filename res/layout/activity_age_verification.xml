@@ -9,32 +9,32 @@
     tools:context=".AgeVerification" 
     android:background="@drawable/texturebkg">
 
-    <Button
-        android:id="@+id/pickDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="105dp"
-        android:text="Verify Your Date Here..." />
-
-    <TextView
+     <TextView
         android:id="@+id/displayDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/pickDate"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="28dp"
-        android:text="TextView"
+        android:layout_marginBottom="26dp"
+        android:text="Birthdate will be shown here"
         android:textSize="24sp" />
 
     <Button
         android:id="@+id/go"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/displayDate"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="49dp"
+        android:layout_alignTop="@+id/pickDate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="58dp"
         android:text="Age Verified" />
+
+    <Button
+        android:id="@+id/pickDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="112dp"
+        android:text="Validate Here" />
 
 </RelativeLayout>

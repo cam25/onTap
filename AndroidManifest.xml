@@ -19,7 +19,7 @@
         </activity>
         <activity
             android:name="com.cmozie.ontap.SplashPage"
-            android:label="@string/title_activity_splash_page" >
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,6 +29,18 @@
         <activity
             android:name="com.cmozie.ontap.AgeVerification"
             android:label="@string/title_activity_age_verification" >
+        </activity>
+        <activity
+            android:name="com.cmozie.ontap.FindABeer"
+            android:label="@string/title_activity_find_abeer" >
+        </activity>
+        <activity
+            android:name="com.cmozie.ontap.Events"
+            android:label="@string/title_activity_events" >
+        </activity>
+        <activity
+            android:name="com.cmozie.ontap.MoreDetails"
+            android:label="@string/title_activity_more_details" >
         </activity>
     </application>
 

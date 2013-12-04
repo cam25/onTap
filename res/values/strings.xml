@@ -8,5 +8,8 @@
     <string name="this_application_does_not_support_under_age_drinking_so_to_help_alleviate_minors_obtaining_information_on_alcholic_beverages_please_vefiy_your_birthdate_">TODO</string>
     <string name="title_activity_splash_page">SplashPage</string>
     <string name="title_activity_age_verification">AgeVerification</string>
+    <string name="title_activity_find_abeer">FindABeer</string>
+    <string name="title_activity_events">Events</string>
+    <string name="title_activity_more_details">MoreDetails</string>
 
 </resources>

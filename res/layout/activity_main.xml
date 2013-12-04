@@ -3,48 +3,72 @@
     xmlns:android1="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/texturebkg"
-    tools:context=".MainActivity" 
-    >
+    tools:context=".MainActivity" >
 
     <TabHost
-        
         android1:id="@+id/tabhost"
-        android1:layout_width="match_parent"
-        android1:layout_height="match_parent"
-        android1:layout_alignParentLeft="true"
-        android1:layout_alignParentTop="true" 
-        >
+        android1:layout_width="fill_parent"
+        android1:layout_height="fill_parent"
+>
 
         <LinearLayout
             android1:layout_width="match_parent"
-            android1:layout_height="match_parent"
-            android1:orientation="vertical"
-             >
+            android1:layout_height="380dp"
+            android1:orientation="vertical" >
 
             <TabWidget
                 android1:id="@android:id/tabs"
                 android1:layout_width="match_parent"
-                android1:layout_height="wrap_content" >
+                android1:layout_height="wrap_content"
+                android1:background="@color/sysLtGray"
+                android1:gravity="top" >
+
             </TabWidget>
 
             <FrameLayout
                 android1:id="@android:id/tabcontent"
-                android1:layout_width="match_parent"
-                android1:layout_height="match_parent" >
+                android1:layout_width="fill_parent"
+                android1:layout_height="fill_parent" >
 
                 <LinearLayout
                     android1:id="@+id/tab1"
                     android1:layout_width="match_parent"
-                    android1:layout_height="match_parent"
-                    android1:orientation="vertical"
-                    
-                  
-                     >
+                    android1:layout_height="410dp"
+                    android1:gravity="center|top"
+                    android1:orientation="vertical" >
+
+                    <TextView
+                        android1:id="@+id/textView1"
+                        android1:layout_width="wrap_content"
+                        android1:layout_height="wrap_content"
+                        android1:text="BeerTitleHere" />
+
+                    <ImageView
+                        android1:id="@+id/imageView1"
+                        android1:layout_width="wrap_content"
+                        android1:layout_height="wrap_content"
+                        android1:src="@drawable/images" />
+
+                    <TextView
+                        android1:id="@+id/textView2"
+                        android1:layout_width="wrap_content"
+                        android1:layout_height="match_parent"
+                        android1:text="BEER DESCRIPTION WILL GO HERE AND WILL GIVE SPECIFIC DETAILS ON BEER"
+                        android1:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <ScrollView
+                        android1:id="@+id/scrollView1"
+                        android1:layout_width="match_parent"
+                        android1:layout_height="86dp"
+                        android1:layout_weight="0.77" >
+
+                        <LinearLayout
+                            android1:layout_width="match_parent"
+                            android1:layout_height="match_parent"
+                            android1:orientation="vertical" >
+                        </LinearLayout>
+                    </ScrollView>
                 </LinearLayout>
 
                 <LinearLayout
@@ -52,6 +76,35 @@
                     android1:layout_width="match_parent"
                     android1:layout_height="match_parent"
                     android1:orientation="vertical" >
+
+                    <Button
+                        android1:id="@+id/button1"
+                        android1:layout_width="wrap_content"
+                        android1:layout_height="wrap_content"
+                        android1:text="Search Beer" />
+
+                    <ImageButton
+                        android1:id="@+id/imageButton1"
+                        android1:layout_width="wrap_content"
+                        android1:layout_height="wrap_content"
+                        android1:layout_alignRight="@id/button1" 
+           
+                        android1:src="@drawable/reader" />
+                    
+                     <EditText
+                        android1:id="@+id/search"
+                        android1:layout_width="wrap_content"
+                        android1:layout_height="wrap_content" android1:inputType=""/>
+
+                     <ListView
+                         android1:id="@+id/list"
+                         android1:layout_width="fill_parent"
+                         android1:layout_height="wrap_content" >
+                     </ListView>
+                    <TextView android:id="@+id/homeItemName" 
+    			android:layout_width="wrap_content"
+   			 android:layout_height="wrap_content"
+    			android:layout_weight="1"/>
                 </LinearLayout>
 
                 <LinearLayout
