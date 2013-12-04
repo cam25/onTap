@@ -1,3 +1,12 @@
+/*
+ * project 			onTap
+ * 
+ * package			com.cmozie.ontap
+ * 
+ * name				cameronmozie
+ * 
+ * date				Dec 4, 2013
+ */
 package com.cmozie.ontap;
 
 import android.os.Bundle;
@@ -11,11 +20,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MoreDetails.
+ */
 public class MoreDetails extends Activity {
 
 	
 
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,6 +54,9 @@ public class MoreDetails extends Activity {
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -45,6 +64,9 @@ public class MoreDetails extends Activity {
 		return true;
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()) {

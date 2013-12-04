@@ -1,3 +1,12 @@
+/*
+ * project 			onTap
+ * 
+ * package			com.cmozie.ontap
+ * 
+ * name				cameronmozie
+ * 
+ * date				Dec 4, 2013
+ */
 package com.cmozie.ontap;
 
 import android.os.Bundle;
@@ -8,8 +17,15 @@ import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SplashPage.
+ */
 public class SplashPage extends Activity {
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,6 +46,9 @@ public class SplashPage extends Activity {
         }, secondsDelayed * 3000);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

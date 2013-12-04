@@ -1,3 +1,12 @@
+/*
+ * project 			onTap
+ * 
+ * package			com.cmozie.ontap
+ * 
+ * name				cameronmozie
+ * 
+ * date				Dec 4, 2013
+ */
 package com.cmozie.ontap;
 
 import java.util.ArrayList;
@@ -6,11 +15,9 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,8 +31,11 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TabHost.TabSpec;
-import android.widget.Toast;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MainActivity.
+ */
 public class MainActivity extends Activity {
 
 	public static Context context;
@@ -35,6 +45,10 @@ public class MainActivity extends Activity {
 		    	"Samuel Adams WinterLager",
 		    	"Samuel Adams DoubleBock"
 		     };
+	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -146,6 +160,9 @@ scan.setOnClickListener(new View.OnClickListener() {
 
 	
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -154,6 +171,9 @@ scan.setOnClickListener(new View.OnClickListener() {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()) {

@@ -1,20 +1,24 @@
+/*
+ * project 			onTap
+ * 
+ * package			com.cmozie.ontap
+ * 
+ * name				cameronmozie
+ * 
+ * date				Dec 4, 2013
+ */
 package com.cmozie.ontap;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -24,16 +28,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AgeVerification.
+ */
 public class AgeVerification extends Activity {
 	private static TextView displayDate;
     private static Button pickDate;
     private static Button go;
-    private static final int AGE_LIMIT = 1990;
-    private static final int DEFAULT_END_YEAR = 2013;
     public static String filename = "StoredBirthdays";
   SharedPreferences sharedData;
    public static Context context;
     
+    /* (non-Javadoc)
+     * @see android.app.Activity#onCreate(android.os.Bundle)
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,12 +115,18 @@ public class AgeVerification extends Activity {
     }   
     
     //date picker fragment
+    /**
+     * The Class DatePickerFragment.
+     */
     public static class DatePickerFragment extends DialogFragment
     implements DatePickerDialog.OnDateSetListener {
 
         public EditText editText;
         DatePicker datePicker;
 
+    /* (non-Javadoc)
+     * @see android.app.DialogFragment#onCreateDialog(android.os.Bundle)
+     */
     public Dialog onCreateDialog(Bundle savedInstanceState) {
     // Use the current date as the default date in the picker
     final Calendar cal = Calendar.getInstance();
@@ -127,6 +142,9 @@ public class AgeVerification extends Activity {
     }
 
     //on set of the date display the birthday to the text view. 
+    /* (non-Javadoc)
+     * @see android.app.DatePickerDialog.OnDateSetListener#onDateSet(android.widget.DatePicker, int, int, int)
+     */
     public void onDateSet(DatePicker view, int year, int month, int day) {
     	
     	if (year <= 1990) {
