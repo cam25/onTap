@@ -36,13 +36,14 @@
             android:configChanges="orientation|keyboardHidden">
         </activity>
         <activity
-            android:name="com.cmozie.ontap.FindABeer"
+            android:name="com.cmozie.fragclasses.FindABrew"
             android:label="@string/title_activity_find_abeer" 
             android:configChanges="orientation|keyboardHidden">
         </activity>
         <activity
-            android:name="com.cmozie.ontap.Events"
+            android:name="com.cmozie.fragclasses.Events"
             android:label="@string/title_activity_events" 
+            android:configChanges="orientation|keyboardHidden"
            >
         </activity>
         <activity

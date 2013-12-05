@@ -13,8 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import android.os.Bundle;
 import android.app.ActionBar;
+import android.app.ActionBar.TabListener;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.app.ActionBar.Tab;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,6 +35,10 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TabHost.TabSpec;
+import com.cmozie.*;
+import com.cmozie.fragclasses.Events;
+import com.cmozie.fragclasses.FindABrew;
+import com.cmozie.fragclasses.WhatToDrink;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -46,6 +54,16 @@ public class MainActivity extends Activity {
 		    	"Samuel Adams DoubleBock"
 		     };
 	
+	 
+	 
+	ActionBar.Tab WTD,FAB,EVNT;
+	//sets tab elements to each class
+	Fragment tabFrag1 = new WhatToDrink();
+	Fragment tabFrag2 = new FindABrew();
+	Fragment tabFrag3 = new Events();
+	
+	
+	
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -53,10 +71,29 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		//elements
+		
+		
+		//enables action bar
 		ActionBar actionBar = getActionBar();
-	    actionBar.setDisplayHomeAsUpEnabled(true);
-	     EditText ed = (EditText) findViewById(R.id.beerText);
+	    actionBar.setDisplayHomeAsUpEnabled(false);
+	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+	    actionBar.setTitle("onTap");
+	    
+	    
+	    //sets text to tabs
+	    WTD = actionBar.newTab().setText("What To Drink");
+	    FAB = actionBar.newTab().setText("Find A Brew");
+	    EVNT = actionBar.newTab().setText("Events");
+	    
+	    //listens for click event on the tabs
+	    WTD.setTabListener(new TabListener(tabFrag1));
+	    FAB.setTabListener(new TabListener(tabFrag2));
+	    EVNT.setTabListener(new TabListener(tabFrag3));
+	   
+	    actionBar.addTab(WTD);
+	    actionBar.addTab(FAB);
+	    actionBar.addTab(EVNT);
+	  /*   EditText ed = (EditText) findViewById(R.id.beerText);
 	     ListView lv = (ListView) findViewById(R.id.list);
 	     Button search = (Button) findViewById(R.id.searchButn);
 	     ImageButton scan = (ImageButton) findViewById(R.id.scannerButn);
@@ -127,9 +164,9 @@ scan.setOnClickListener(new View.OnClickListener() {
 		
 	}
 });
+*/
 
-
-		TabHost tabHost = (TabHost)findViewById(R.id.tabhost);
+		/*TabHost tabHost = (TabHost)findViewById(R.id.tabhost);
 		
 		
 		//tabbar setup
@@ -153,17 +190,41 @@ scan.setOnClickListener(new View.OnClickListener() {
 		tabHost.addTab(tab1);
 		tabHost.addTab(tab2);
 		tabHost.addTab(tab3);
-		
+		*/
 		
 	}
 	
-
-	
-
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
-	 */
-	@Override
+//TabListener class 
+	public class TabListener implements ActionBar.TabListener {
+		 
+	    Fragment fragment;
+	 
+	    public TabListener(Fragment fragment) {
+	        // TODO Auto-generated constructor stub
+	        this.fragment = fragment;
+	    }
+	 
+	    @Override
+	    public void onTabSelected(Tab tab, FragmentTransaction ft) {
+	        // TODO Auto-generated method stub
+	        ft.replace(R.id.container, fragment);
+	    }
+	 
+	    @Override
+	    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+	        // TODO Auto-generated method stub
+	        ft.remove(fragment);
+	    }
+	 
+	    @Override
+	    public void onTabReselected(Tab tab, FragmentTransaction ft) {
+	        // TODO Auto-generated method stub
+	 
+	    }
+	}
+	    
+	  
+	 @Override   
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
@@ -174,7 +235,7 @@ scan.setOnClickListener(new View.OnClickListener() {
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
 	 */
-	@Override
+	 @Override
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()) {
 		
@@ -221,7 +282,7 @@ scan.setOnClickListener(new View.OnClickListener() {
 		return super.onOptionsItemSelected(item);
 		
 	}
-
+}
 	
 
-}
+	
