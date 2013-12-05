@@ -125,9 +125,11 @@ public final class R {
         public static final int enter_your_birthdate_to_gain_access=0x7f060017;
         public static final int event_type_=0x7f060011;
         public static final int eventname_=0x7f060013;
+        public static final int favorites=0x7f060021;
         public static final int hello_world=0x7f060002;
         public static final int sam_adams=0x7f060020;
         public static final int search_beer=0x7f06000e;
+        public static final int share=0x7f060022;
         public static final int the_favorite_beers_will_be_loaded_inside_here=0x7f060019;
         public static final int this_application_does_not_support_under_age_drinking_so_to_help_alleviate_minors_obtaining_information_on_alcholic_beverages_please_vefiy_your_birthdate_=0x7f060004;
         public static final int title_activity_age_verification=0x7f060006;
