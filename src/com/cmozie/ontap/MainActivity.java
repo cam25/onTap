@@ -5,37 +5,21 @@
  * 
  * name				cameronmozie
  * 
- * date				Dec 4, 2013
+ * date				Dec 5, 2013
  */
 package com.cmozie.ontap;
 
-import java.util.ArrayList;
-import java.util.List;
 import android.os.Bundle;
 import android.app.ActionBar;
-import android.app.ActionBar.TabListener;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.TabHost;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.TabHost.TabSpec;
-import com.cmozie.*;
 import com.cmozie.fragclasses.Events;
 import com.cmozie.fragclasses.FindABrew;
 import com.cmozie.fragclasses.WhatToDrink;
@@ -46,8 +30,6 @@ import com.cmozie.fragclasses.WhatToDrink;
  */
 public class MainActivity extends Activity {
 
-	public static Context context;
-	public static  List<String> arrayList;
 	 String[] beers = {
 		    	"Samuel Adams Octoberfest",
 		    	"Samuel Adams WinterLager",
@@ -93,130 +75,58 @@ public class MainActivity extends Activity {
 	    actionBar.addTab(WTD);
 	    actionBar.addTab(FAB);
 	    actionBar.addTab(EVNT);
-	  /*   EditText ed = (EditText) findViewById(R.id.beerText);
-	     ListView lv = (ListView) findViewById(R.id.list);
-	     Button search = (Button) findViewById(R.id.searchButn);
-	     ImageButton scan = (ImageButton) findViewById(R.id.scannerButn);
-	     ed.setText("Searched Beer");
-	    
-	     //arraylist for listview
-	    List<String> arrayList = new ArrayList<String>();
-	    
-	    arrayList.add("Beer1");
-	    arrayList.add("Beer2");
-	    arrayList.add("Beer3");
-	    
-	    //array adapter for listview
-	    ArrayAdapter<String> arrayAdapter = (new ArrayAdapter(this,android.R.layout.simple_list_item_1, beers));
-		lv.setAdapter(arrayAdapter);
-		
-		//starts intent for listview item select
-lv.setOnItemClickListener(new OnItemClickListener() {
-
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		// TODO Auto-generated method stub
-		Log.i("TEST", "TEST");
-		startActivity(new Intent(MainActivity.this, MoreDetails.class));
-		
-	}
-});
-
-search.setOnClickListener(new View.OnClickListener() {
 	
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-		alert.setTitle("Search a Beer");
-		alert.setMessage("Feature Coming Soon...");
-		alert.setCancelable(false);
-		alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
-		
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-
-				dialog.cancel();
-			}
-		});
-		alert.show();
-	}
-});
-
-scan.setOnClickListener(new View.OnClickListener() {
-	
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-		alert.setTitle("Scan A Beer");
-		alert.setMessage("Feature Coming Soon...");
-		alert.setCancelable(false);
-		alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
-		
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-
-				dialog.cancel();
-			}
-		});
-		alert.show();
-		
-	}
-});
-*/
-
-		/*TabHost tabHost = (TabHost)findViewById(R.id.tabhost);
-		
-		
-		//tabbar setup
-		tabHost.setup();
-		TabSpec tab1 =tabHost.newTabSpec("Tab 1");
-	
-		tab1.setContent(R.id.tab1);
-		tab1.setIndicator("What To Drink?");
-
-		TabSpec tab2 = tabHost.newTabSpec("Tab 2");
-		tab2.setIndicator("Find A Beer");
-	
-		tab2.setContent(R.id.tab2);
-
-		TabSpec tab3=tabHost.newTabSpec("Tab 3");
-		tab3.setIndicator("Events");
-		tab3.setContent(R.id.tab3);
-
-		
-		//adding tabs to the host
-		tabHost.addTab(tab1);
-		tabHost.addTab(tab2);
-		tabHost.addTab(tab3);
-		*/
 		
 	}
 	
 //TabListener class 
-	public class TabListener implements ActionBar.TabListener {
+	/**
+ * The listener interface for receiving tab events.
+ * The class that is interested in processing a tab
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addTabListener<code> method. When
+ * the tab event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see TabEvent
+ */
+public class TabListener implements ActionBar.TabListener {
 		 
 	    Fragment fragment;
 	 
-	    public TabListener(Fragment fragment) {
+	    /**
+    	 * Instantiates a new tab listener.
+    	 *
+    	 * @param fragment the fragment
+    	 */
+    	public TabListener(Fragment fragment) {
 	        // TODO Auto-generated constructor stub
 	        this.fragment = fragment;
 	    }
 	 
-	    @Override
+	    /* (non-Javadoc)
+    	 * @see android.app.ActionBar.TabListener#onTabSelected(android.app.ActionBar.Tab, android.app.FragmentTransaction)
+    	 */
+    	@Override
 	    public void onTabSelected(Tab tab, FragmentTransaction ft) {
 	        // TODO Auto-generated method stub
 	        ft.replace(R.id.container, fragment);
 	    }
 	 
-	    @Override
+	    /* (non-Javadoc)
+    	 * @see android.app.ActionBar.TabListener#onTabUnselected(android.app.ActionBar.Tab, android.app.FragmentTransaction)
+    	 */
+    	@Override
 	    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 	        // TODO Auto-generated method stub
 	        ft.remove(fragment);
 	    }
 	 
-	    @Override
+	    /* (non-Javadoc)
+    	 * @see android.app.ActionBar.TabListener#onTabReselected(android.app.ActionBar.Tab, android.app.FragmentTransaction)
+    	 */
+    	@Override
 	    public void onTabReselected(Tab tab, FragmentTransaction ft) {
 	        // TODO Auto-generated method stub
 	 
@@ -224,7 +134,10 @@ scan.setOnClickListener(new View.OnClickListener() {
 	}
 	    
 	  
-	 @Override   
+	 /* (non-Javadoc)
+ 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+ 	 */
+ 	@Override   
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);

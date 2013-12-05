@@ -1,19 +1,23 @@
+/*
+ * project 			onTap
+ * 
+ * package			com.cmozie.fragclasses
+ * 
+ * name				cameronmozie
+ * 
+ * date				Dec 5, 2013
+ */
 package com.cmozie.fragclasses;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.cmozie.ontap.MoreDetails;
 import com.cmozie.ontap.R;
-import com.cmozie.ontap.R.id;
-import com.cmozie.ontap.R.layout;
-
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,6 +30,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FindABrew.
+ */
 public class FindABrew extends Fragment {
 	
 	//beer object
@@ -34,6 +42,10 @@ public class FindABrew extends Fragment {
 	    	"Samuel Adams WinterLager",
 	    	"Samuel Adams DoubleBock"
 	     };
+	
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -44,6 +56,9 @@ public class FindABrew extends Fragment {
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onActivityCreated(android.os.Bundle)
+	 */
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -54,7 +69,7 @@ public class FindABrew extends Fragment {
 	     ListView lv = (ListView)getActivity().findViewById(R.id.listView1);
 	     Button search = (Button)getActivity().findViewById(R.id.searchButn);
 	     ImageButton scan = (ImageButton)getActivity().findViewById(R.id.scannerButn);
-	     ed.setText("Searched Beer");
+	     ed.setText("Sam Adams");
 	    
 	     //arraylist for listview
 	    List<String> arrayList = new ArrayList<String>();
@@ -64,7 +79,7 @@ public class FindABrew extends Fragment {
 	    arrayList.add("Beer3");
 	    
 	    //array adapter for listview
-	    ArrayAdapter<String> arrayAdapter = (new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1, beers));
+	    ArrayAdapter<String> arrayAdapter = (new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, beers));
 		lv.setAdapter(arrayAdapter);
 		
 		

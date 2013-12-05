@@ -33,5 +33,6 @@
     <string name="available">Available</string>
     <string name="beer_name_here_">BEER NAME HERE:</string>
     <string name="brewerydetails">BreweryDetails</string>
+    <string name="sam_adams">Sam Adams</string>
 
 </resources>

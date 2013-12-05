@@ -64,8 +64,8 @@ public final class R {
         public static final int disclaimer=0x7f090018;
         public static final int displayDate=0x7f090000;
         public static final int enterBirthdate=0x7f090003;
-        public static final int eventName=0x7f090019;
-        public static final int eventType=0x7f09001a;
+        public static final int eventName=0x7f09001c;
+        public static final int eventType=0x7f090019;
         public static final int favorites=0x7f090022;
         public static final int go=0x7f090002;
         public static final int imageView1=0x7f090006;
@@ -85,8 +85,8 @@ public final class R {
         public static final int textView6=0x7f09000b;
         public static final int textView7=0x7f09000c;
         public static final int textView8=0x7f09000d;
-        public static final int venue=0x7f09001b;
-        public static final int webSite=0x7f09001c;
+        public static final int venue=0x7f09001a;
+        public static final int webSite=0x7f09001b;
     }
     public static final class layout {
         public static final int activity_age_verification=0x7f030000;
@@ -126,6 +126,7 @@ public final class R {
         public static final int event_type_=0x7f060011;
         public static final int eventname_=0x7f060013;
         public static final int hello_world=0x7f060002;
+        public static final int sam_adams=0x7f060020;
         public static final int search_beer=0x7f06000e;
         public static final int the_favorite_beers_will_be_loaded_inside_here=0x7f060019;
         public static final int this_application_does_not_support_under_age_drinking_so_to_help_alleviate_minors_obtaining_information_on_alcholic_beverages_please_vefiy_your_birthdate_=0x7f060004;
