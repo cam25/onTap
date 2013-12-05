@@ -11,7 +11,11 @@ package com.cmozie.ontap;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -26,6 +30,29 @@ public class BreweryDetails extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_brewery_details);
+		
+		TextView zipcode = (TextView)findViewById(R.id.textView5);
+		
+		zipcode.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				AlertDialog.Builder alert = new AlertDialog.Builder(BreweryDetails.this);
+				alert.setTitle("GPS Feature");
+				alert.setMessage("Feature Coming Soon...");
+				alert.setCancelable(false);
+				alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
+				
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+						dialog.cancel();
+					}
+				});
+				alert.show();
+			}
+		});
 	}
 
 	/* (non-Javadoc)
