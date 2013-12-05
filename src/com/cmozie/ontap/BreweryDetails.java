@@ -10,10 +10,13 @@
 package com.cmozie.ontap;
 
 import android.os.Bundle;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -30,7 +33,8 @@ public class BreweryDetails extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_brewery_details);
-		
+		ActionBar actionBar = getActionBar();
+	    actionBar.setDisplayHomeAsUpEnabled(true);
 		TextView zipcode = (TextView)findViewById(R.id.textView5);
 		
 		zipcode.setOnClickListener(new View.OnClickListener() {
@@ -64,5 +68,20 @@ public class BreweryDetails extends Activity {
 		getMenuInflater().inflate(R.menu.brewery_details, menu);
 		return true;
 	}
+	 @Override
+		public boolean onOptionsItemSelected(MenuItem item){
+			switch (item.getItemId()) {
+			
+			
+			case R.id.favorites:
+				
+				startActivity(new Intent(BreweryDetails.this, Favorites.class));
 
+				break;
+			default:
+				break;
+			}
+			return super.onOptionsItemSelected(item);
+			
+		}
 }
