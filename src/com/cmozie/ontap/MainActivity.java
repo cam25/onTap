@@ -29,17 +29,12 @@ import com.cmozie.fragclasses.WhatToDrink;
  * The Class MainActivity.
  */
 public class MainActivity extends Activity {
-
-	 String[] beers = {
-		    	"Samuel Adams Octoberfest",
-		    	"Samuel Adams WinterLager",
-		    	"Samuel Adams DoubleBock"
-		     };
 	
 	 
-	 
+	//instatiates tabs
 	ActionBar.Tab WTD,FAB,EVNT;
-	//sets tab elements to each class
+	
+	//sets tab fragments to each  custom class
 	Fragment tabFrag1 = new WhatToDrink();
 	Fragment tabFrag2 = new FindABrew();
 	Fragment tabFrag3 = new Events();
@@ -59,6 +54,8 @@ public class MainActivity extends Activity {
 		ActionBar actionBar = getActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(false);
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+	    
+	    //set title to action bar
 	    actionBar.setTitle("onTap");
 	    
 	    
@@ -72,6 +69,7 @@ public class MainActivity extends Activity {
 	    FAB.setTabListener(new TabListener(tabFrag2));
 	    EVNT.setTabListener(new TabListener(tabFrag3));
 	   
+	    //adds the specific tabs to the action bar
 	    actionBar.addTab(WTD);
 	    actionBar.addTab(FAB);
 	    actionBar.addTab(EVNT);
@@ -152,7 +150,7 @@ public class TabListener implements ActionBar.TabListener {
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()) {
 		
-		//returns to main activity
+		//opens alert for add
 		case R.id.add:
 			AlertDialog.Builder alert = new AlertDialog.Builder(this);
 				alert.setTitle("Add Favs");
@@ -169,6 +167,8 @@ public class TabListener implements ActionBar.TabListener {
 				alert.show();
 
 			break;
+			
+			//opens alert for share
 		case R.id.share:
 			AlertDialog.Builder alert2 = new AlertDialog.Builder(this);
 			alert2.setTitle("Share Feature");
@@ -184,6 +184,7 @@ public class TabListener implements ActionBar.TabListener {
 			});
 			alert2.show();
 			  break;
+			  //opens favorites activity
 		case R.id.favorites:
 			
 			startActivity(new Intent(MainActivity.this, Favorites.class));

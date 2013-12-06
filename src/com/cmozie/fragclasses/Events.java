@@ -29,8 +29,8 @@ public class Events extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View rootView = inflater.inflate(R.layout.events, container,false);
-		return rootView;
+		View mainView = inflater.inflate(R.layout.events, container,false);
+		return mainView;
 	}
 
 }
