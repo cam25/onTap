@@ -136,9 +136,14 @@ public class AgeVerification extends Activity {
     int month = cal.get(Calendar.MONTH);
     int day = cal.get(Calendar.DAY_OF_MONTH);
     
+  
+    DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, year-21, month, day);
+    
+    DatePicker datePick = dialog.getDatePicker();
     
     
-    return new DatePickerDialog(getActivity(), this, year, month, day);
+    datePick.setMaxDate(cal.getTimeInMillis());
+    return dialog;
     }
 
     //on set of the date display the birthday to the text view. 
@@ -147,7 +152,7 @@ public class AgeVerification extends Activity {
      */
     public void onDateSet(DatePicker view, int year, int month, int day) {
     	
-    	if (year <= 1990) {
+    	if (year <= 1992) {
     		
     		displayDate .setText("Your birthday is " + String.valueOf(month + 1) + "/"
                     + String.valueOf(day) + "/" + String.valueOf(year));
@@ -158,13 +163,15 @@ public class AgeVerification extends Activity {
     		go.setVisibility(View.VISIBLE);
     	        	
     			
-		}else if(year > 1990 ){
+		}else if(year > 1992 ){
 			displayDate.setText("");
+		
 			Toast.makeText(getActivity(), "You must be 21 years old to access this app!", Toast.LENGTH_SHORT).show();
 		}
     	
         
     }
+    
     
     }
 

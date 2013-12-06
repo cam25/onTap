@@ -15,18 +15,14 @@
         android:layout_width="fill_parent"
         android:layout_height="325dp"
         android:contentDescription="@string/todo"
-        android:src="@drawable/logo" 
-        android:layout_centerHorizontal="true"/>
+        android:src="@drawable/logo" />
 
     <ImageView
         android:id="@+id/logotext"
         android:layout_width="match_parent"
         android:layout_height="325dp"
-        android:layout_alignLeft="@+id/logo"
-        android:layout_alignTop="@+id/logo"
         android:contentDescription="@string/todo"
-        android:src="@drawable/logotext"
-        android:layout_centerHorizontal="true" />
+        android:src="@drawable/logotext" />
 
     <TextView
         android:id="@+id/disclaimer"
@@ -34,7 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/logo"
         android:layout_alignParentBottom="true"
-        android:text="This application does not support under-age drinking so to help alleviate minors obtaining information on alcoholic beverages please vefiy your birthdate." 
+        android:layout_marginBottom="67dp"
+        android:text="This application does not support under-age drinking so to help alleviate minors obtaining information on alcoholic beverages please vefiy your birthdate."
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
