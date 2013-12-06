@@ -18,6 +18,7 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -36,8 +37,8 @@ public class AgeVerification extends Activity {
 	private static TextView displayDate;
     private static Button pickDate;
     private static Button go;
-    public static String filename = "StoredBirthdays";
-  SharedPreferences sharedData;
+    public static final String filename = "StoredBirthdays";
+    SharedPreferences sharedData;
    public static Context context;
     
     /* (non-Javadoc)
@@ -55,18 +56,25 @@ public class AgeVerification extends Activity {
         pickDate = (Button) findViewById(R.id.pickDate);
         go = (Button) findViewById(R.id.go);
         
-        //shared preference getting the preference at the filename location
-        sharedData = getSharedPreferences(filename, 0);
+     
         
         //opens date picker dialog
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
-        
-        
        
+	
+       //Users birthdate is stored to shared preferences to by pass age verification on load of application more than once
+       SharedPreferences example = getSharedPreferences(filename, 0);
+       String test = example.getString("birthdate", "Nothing Found");
+       displayDate.setText(test);
         
+       Log.i("test", test);
        
-       
+       //if prefs contain 
+       if (example.contains("birthdate")) {
+    	   startActivity(new Intent(AgeVerification.this, MainActivity.class));
+           finish();
+	}
         go.setVisibility(View.GONE);
         
         //on click of verify button 
@@ -78,19 +86,19 @@ public class AgeVerification extends Activity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			
-			 sharedData = getSharedPreferences(filename, 0);
-    		SharedPreferences.Editor editor = sharedData.edit();
-    	
-    		editor.putString("birthdate", displayDate.toString());
-    		Log.i("test",editor.toString());
-    		editor.commit();
-    		Log.i("prefs", String.valueOf(sharedData.contains(filename)));
+			//getting the text of display date
+			 String message = displayDate.getText().toString();
+				
+			//setting shareprefrences equal to my static string filename	
+			 SharedPreferences prefs = getSharedPreferences(filename, 0);
+			 
+			 Editor editor = prefs.edit();
+			 //stores the value ot the editor
+			 editor.putString("birthdate", message);
+			 editor.commit();
     	       
-    		//shared preference trials
-    	       if (sharedData.contains(filename)) {
-    	    	   startActivity(new Intent(AgeVerification.this, MainActivity.class));
-    	           finish();
-    		}
+    		
+    	    
             startActivity(new Intent(AgeVerification.this, MainActivity.class));
             finish();
 		}
