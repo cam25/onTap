@@ -9,6 +9,7 @@
  */
 package com.cmozie.ontap;
 
+
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -16,13 +17,17 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.cmozie.fragclasses.Events;
 import com.cmozie.fragclasses.FindABrew;
+import com.cmozie.fragclasses.Network;
 import com.cmozie.fragclasses.WhatToDrink;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -30,7 +35,7 @@ import com.cmozie.fragclasses.WhatToDrink;
  */
 public class MainActivity extends Activity {
 	
-	 
+	 Boolean connection = false;
 	//instatiates tabs
 	ActionBar.Tab WTD,FAB,EVNT;
 	
@@ -38,7 +43,7 @@ public class MainActivity extends Activity {
 	Fragment tabFrag1 = new WhatToDrink();
 	Fragment tabFrag2 = new FindABrew();
 	Fragment tabFrag3 = new Events();
-	
+	Context context;
 	
 	
 	/* (non-Javadoc)
@@ -48,6 +53,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		context = this;
+		
 		
 		
 		//enables action bar
