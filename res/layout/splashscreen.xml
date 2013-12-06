@@ -10,22 +10,11 @@
     tools:context=".MainActivity"
     android:background="@drawable/texturebkg" >
 
-    <TextView
-        android:id="@+id/disclaimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/logo"
-        android:layout_alignParentBottom="true"
-        android:text="This application does not support under-age drinking so to help alleviate minors obtaining information on alcholic beverages please vefiy your birthdate." 
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <ImageView
         android:id="@+id/logo"
         android:layout_width="fill_parent"
         android:layout_height="325dp"
-      
-      android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="30dp"
         android:contentDescription="@string/todo"
         android:src="@drawable/logo" />
 
@@ -36,5 +25,14 @@
          android:layout_centerHorizontal="true"
         android:contentDescription="@string/todo"
         android:src="@drawable/logotext" />
+
+    <TextView
+        android:id="@+id/disclaimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/logo"
+        android:layout_alignLeft="@+id/logo"
+        android:text="@string/this_application_does_not_support_under_age_drinking_so_to_help_alleviate_minors_obtaining_information_on_alcholic_beverages_please_vefiy_your_birthdate_"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
