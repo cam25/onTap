@@ -55,6 +55,9 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		context = this;
 		
+		connection = Network.getConnectionStatus(context);
+		
+		Log.i("Connection", Network.getConnectionType(context));
 		
 		
 		//enables action bar
@@ -63,7 +66,7 @@ public class MainActivity extends Activity {
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 	    
 	    //set title to action bar
-	    actionBar.setTitle("onTap");
+	    actionBar.setDisplayShowTitleEnabled(false);
 	    
 	    
 	    //sets text to tabs
@@ -116,6 +119,7 @@ public class TabListener implements ActionBar.TabListener {
     	@Override
 	    public void onTabSelected(Tab tab, FragmentTransaction ft) {
 	        // TODO Auto-generated method stub
+    	
 	        ft.replace(R.id.container, fragment);
 	    }
 	 
@@ -146,6 +150,8 @@ public class TabListener implements ActionBar.TabListener {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
+		
+		
 		return true;
 	}
 

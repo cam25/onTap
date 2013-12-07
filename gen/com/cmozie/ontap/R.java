@@ -40,23 +40,24 @@ public final class R {
         public static final int barcode=0x7f020002;
         public static final int biglock=0x7f020003;
         public static final int brewery=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int images=0x7f020006;
-        public static final int lock=0x7f020007;
-        public static final int logo=0x7f020008;
-        public static final int logotext=0x7f020009;
-        public static final int reader=0x7f02000a;
-        public static final int share=0x7f02000b;
-        public static final int texturebkg=0x7f02000c;
+        public static final int brewery2=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int images=0x7f020007;
+        public static final int lock=0x7f020008;
+        public static final int logo=0x7f020009;
+        public static final int logotext=0x7f02000a;
+        public static final int reader=0x7f02000b;
+        public static final int rectangle=0x7f02000c;
+        public static final int share=0x7f02000d;
+        public static final int texturebkg=0x7f02000e;
     }
     public static final class id {
         public static final int abv=0x7f09000f;
-        public static final int action_settings=0x7f090021;
-        public static final int add=0x7f090023;
+        public static final int action_settings=0x7f090020;
+        public static final int add=0x7f090022;
         public static final int available=0x7f090013;
         public static final int beerLogo=0x7f090015;
         public static final int beerName=0x7f090014;
-        public static final int beerText=0x7f090020;
         public static final int beertype=0x7f090011;
         public static final int breweryDetails=0x7f090012;
         public static final int container=0x7f09000e;
@@ -66,7 +67,7 @@ public final class R {
         public static final int enterBirthdate=0x7f090003;
         public static final int eventName=0x7f09001c;
         public static final int eventType=0x7f090019;
-        public static final int favorites=0x7f090022;
+        public static final int favorites=0x7f090021;
         public static final int go=0x7f090002;
         public static final int imageView1=0x7f090006;
         public static final int listView1=0x7f09001d;
@@ -75,8 +76,8 @@ public final class R {
         public static final int logotext=0x7f090017;
         public static final int pickDate=0x7f090001;
         public static final int scannerButn=0x7f09001e;
-        public static final int searchButn=0x7f09001f;
-        public static final int share=0x7f090024;
+        public static final int searchView1=0x7f09001f;
+        public static final int share=0x7f090023;
         public static final int textView1=0x7f090005;
         public static final int textView2=0x7f090008;
         public static final int textView3=0x7f090007;
@@ -164,12 +165,13 @@ public final class R {
         AppBaseTheme from BOTH res/values/styles.xml and
         res/values-v11/styles.xml on API 14+ devices.
     
- API 14 theme customizations can go here. 
          */
         public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f070001;
+        public static final int MyActionBar=0x7f070002;
+        public static final int Theme_MyAppTheme_ActionBar_TitleTextStyle=0x7f070003;
     }
 }

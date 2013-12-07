@@ -36,7 +36,7 @@ public class BreweryDetails extends Activity {
 		ActionBar actionBar = getActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(true);
 		TextView zipcode = (TextView)findViewById(R.id.textView5);
-		
+		actionBar.setDisplayShowTitleEnabled(false);
 		zipcode.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

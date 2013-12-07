@@ -15,8 +15,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/rectangle"
         android:layout_marginTop="14dp"
-        android:text="BreweryNameHere"
+        android:textSize="24sp"
+        android:text="CatFishBrewery"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
@@ -26,7 +28,7 @@
         android:layout_below="@+id/textView1"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/brewery" />
+        android:src="@drawable/brewery2" />
 
     <TextView
         android:id="@+id/textView3"

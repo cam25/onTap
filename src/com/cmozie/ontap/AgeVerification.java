@@ -65,7 +65,7 @@ public class AgeVerification extends Activity {
 	
        //Users birthdate is stored to shared preferences to by pass age verification on load of application more than once
        SharedPreferences example = getSharedPreferences(filename, 0);
-       String test = example.getString("birthdate", "Nothing Found");
+       String test = example.getString("birthdate", "Birthdate Not Found");
        displayDate.setText(test);
         
        Log.i("test", test);
@@ -131,7 +131,11 @@ public class AgeVerification extends Activity {
 
         public EditText editText;
         DatePicker datePicker;
-
+   
+        //ints for minimum values
+        int minimumYear,minimumMonth,minimumDay;
+        
+        
     /* (non-Javadoc)
      * @see android.app.DialogFragment#onCreateDialog(android.os.Bundle)
      */
@@ -143,12 +147,16 @@ public class AgeVerification extends Activity {
     int year = cal.get(Calendar.YEAR);
     int month = cal.get(Calendar.MONTH);
     int day = cal.get(Calendar.DAY_OF_MONTH);
-    
-  
-    DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, year-21, month, day);
+   DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, year , month, day);
     
     DatePicker datePick = dialog.getDatePicker();
+
+    //minimums set for date condition
+    minimumYear = year -21;
+    minimumMonth = month+ 1;
+    minimumDay = day;
     
+ 
     
     datePick.setMaxDate(cal.getTimeInMillis());
     return dialog;
@@ -160,22 +168,34 @@ public class AgeVerification extends Activity {
      */
     public void onDateSet(DatePicker view, int year, int month, int day) {
     	
-    	if (year <= 1992) {
-    		
-    		displayDate .setText("Your birthday is " + String.valueOf(month + 1) + "/"
-                    + String.valueOf(day) + "/" + String.valueOf(year));
     	
-    		
-    		
-    		
-    		go.setVisibility(View.VISIBLE);
-    	        	
-    			
-		}else if(year > 1992 ){
-			displayDate.setText("");
-		
+    	//if the selected year is less than the minimumYear,(validate) or the selected month is less that the minimum month 
+    	//and the selected year is the same as the minimum year,(validate) or if the selected day is less than the minimum day and year and the selected
+    	//year and month are equivilant to the minimum year and month allow access
+    	if (year < minimumYear ||month < minimumMonth && year == minimumYear||
+               day < minimumDay && year == minimumYear && month == minimumMonth) {
+    	   
+    	   
+    	   displayDate .setText("Your birthday is " + String.valueOf(month + 1) + "/"
+                   + String.valueOf(day) + "/" + String.valueOf(year));
+   	
+   		
+   		
+   		
+   		go.setVisibility(View.VISIBLE);
+        
+   	//else if the selected year is greater than the minimumYear(show toast), or the selected month is greater than the minimum month 
+    	//and the selected year is the same as the minimum year,(show toast) or if the selected day is greater than the minimum day and year and the selected
+    	//year and month are equivilant to the minimum year and month(show toast)
+      }else if (year > minimumYear ||month > minimumMonth && year == minimumYear||
+               day > minimumDay && year == minimumYear && month == minimumMonth) {
+    	  
+    	  displayDate.setText("");
+  		
 			Toast.makeText(getActivity(), "You must be 21 years old to access this app!", Toast.LENGTH_SHORT).show();
-		}
+  		
+      }
+    	
     	
         
     }

@@ -20,15 +20,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -65,12 +64,40 @@ public class FindABrew extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		
 		//UI elements 
-		 EditText ed = (EditText)getActivity().findViewById(R.id.beerText);
+		// EditText ed = (EditText)getActivity().findViewById(R.id.beerText);
 	     ListView lv = (ListView)getActivity().findViewById(R.id.listView1);
-	     Button search = (Button)getActivity().findViewById(R.id.searchButn);
+	     //Button search = (Button)getActivity().findViewById(R.id.searchButn);
 	     ImageButton scan = (ImageButton)getActivity().findViewById(R.id.scannerButn);
-	     ed.setText("Sam Adams");
+	     //ed.setText("Sam Adams");
+	    SearchView sv = (SearchView)getActivity().findViewById(R.id.searchView1);
 	    
+	sv.setOnQueryTextListener(new OnQueryTextListener() {
+		
+		@Override
+		public boolean onQueryTextSubmit(String query) {
+			// TODO Auto-generated method stub
+			AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+			alert.setTitle("Search A Beer");
+			alert.setMessage("Feature Coming Soon...");
+			alert.setCancelable(false);
+			alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
+			
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+					dialog.cancel();
+				}
+			});
+			alert.show();
+			return true;
+		}
+		
+		@Override
+		public boolean onQueryTextChange(String newText) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+	});
 	     //arraylist for listview
 	    List<String> arrayList = new ArrayList<String>();
 	    
@@ -97,7 +124,7 @@ public class FindABrew extends Fragment {
 		});
 		
 		//search button
-		search.setOnClickListener(new OnClickListener() {
+		/*search.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -116,7 +143,7 @@ public class FindABrew extends Fragment {
 				});
 				alert.show();
 			}
-		});
+		});*/
 
 		//scan button
 		scan.setOnClickListener(new View.OnClickListener() {

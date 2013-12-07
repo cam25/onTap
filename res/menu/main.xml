@@ -8,14 +8,14 @@
         android:title="@string/favorites"/>
     <item
     android:id="@+id/add"
-    android:icon="@drawable/addfavs"
+    android:icon="@android:drawable/ic_menu_add"
     android:showAsAction="always"
     android:title="@string/favorites"
     />
     
     <item
     android:id="@+id/share"
-    android:icon="@drawable/share"
+    android:icon="@android:drawable/ic_menu_share"
     android:showAsAction="always"
     android:title="@string/share"
     />

@@ -10,6 +10,7 @@
 package com.cmozie.fragclasses;
 
 import com.cmozie.ontap.R;
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -34,7 +35,24 @@ public class WhatToDrink extends Fragment {
 		return rootView;
 	}
 
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		
+		
+		
+	}
 	
+
+
+	
+
+	public void getApiResults(){
+		
+		//String baseUrl = "http://api.brewerydb.com/v2/beer/random?key=4b77a2665f85f929d4a87d30bbeae67b";
+		
+	}
 	
 	
 

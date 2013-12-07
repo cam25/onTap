@@ -41,7 +41,7 @@ public class MoreDetails extends Activity {
 		ActionBar actionBar = getActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(true);
 	    
-	    
+	    actionBar.setDisplayShowTitleEnabled(false);
 		TextView breweryDetails = (TextView)findViewById(R.id.breweryDetails);
 		
 		breweryDetails.setOnClickListener(new View.OnClickListener() {
