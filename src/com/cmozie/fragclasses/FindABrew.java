@@ -83,7 +83,19 @@ public class FindABrew extends Fragment {
 		@Override
 		public boolean onQueryTextSubmit(String query) {
 			// TODO Auto-generated method stub
-			getApiResults(query);
+			AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+			alert.setTitle("Search a Beer");
+			alert.setMessage("Feature Coming Soon...");
+			alert.setCancelable(false);
+			alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
+			
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+					dialog.cancel();
+				}
+			});
+			alert.show();
 			return true;
 		}
 		
