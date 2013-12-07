@@ -86,7 +86,7 @@ public static String URLStringResponse(URL url){
 		
 		StringBuffer bufferedResponse = new StringBuffer();
 		
-		while((readBytes = bin.read(bytes)) != 1){
+		while((readBytes = bin.read(bytes)) != -1){
 			response = new String(bytes,0,readBytes);
 			bufferedResponse.append(response);
 			

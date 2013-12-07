@@ -9,8 +9,14 @@
  */
 package com.cmozie.fragclasses;
 
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONObject;
+
+import com.cmozie.classes.AsyncRequest;
 import com.cmozie.ontap.MoreDetails;
 import com.cmozie.ontap.R;
 import android.app.AlertDialog;
@@ -18,6 +24,7 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,19 +83,7 @@ public class FindABrew extends Fragment {
 		@Override
 		public boolean onQueryTextSubmit(String query) {
 			// TODO Auto-generated method stub
-			AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-			alert.setTitle("Search A Beer");
-			alert.setMessage("Feature Coming Soon...");
-			alert.setCancelable(false);
-			alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
-			
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-
-					dialog.cancel();
-				}
-			});
-			alert.show();
+			getApiResults(query);
 			return true;
 		}
 		
@@ -169,5 +164,46 @@ public class FindABrew extends Fragment {
 		});
 		    
 	}
+public static void getApiResults(String beer){
+		
+		String baseUrl = "http://api.brewerydb.com/v2/search/?q="+ beer +"&type=brewery&key=4b77a2665f85f929d4a87d30bbeae67b&format=json";
+		String queryString;
+		try {
+			queryString = URLEncoder.encode(baseUrl,"UTF-8");
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e("ERROR-URL", "ENCODING ISSUE");
+			queryString = "";
+		}
+		URL finalURL;
+		try {
+			 finalURL = new URL(baseUrl);
+			 AsyncRequest wtdRequest = new AsyncRequest();
+			 wtdRequest.execute(finalURL);
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.i("BAD URL", "URL MALFORMED");
+		}
+		
+		
+	}
+	
+	
+	
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			
+			try {
+				//JSONObject json = new JSONObject(result);
+				//JSONObject data = json.getJSONObject("data");
+				
+				Log.i("JSON", result);
+				
+			
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
 
 }

@@ -23,10 +23,12 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import com.cmozie.fragclasses.Events;
 import com.cmozie.fragclasses.FindABrew;
 import com.cmozie.fragclasses.Network;
 import com.cmozie.fragclasses.WhatToDrink;
+
 
 
 // TODO: Auto-generated Javadoc

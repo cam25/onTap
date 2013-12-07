@@ -53,21 +53,23 @@ public final class R {
     }
     public static final class id {
         public static final int abv=0x7f09000f;
-        public static final int action_settings=0x7f090020;
-        public static final int add=0x7f090022;
+        public static final int action_settings=0x7f090022;
+        public static final int add=0x7f090024;
         public static final int available=0x7f090013;
         public static final int beerLogo=0x7f090015;
         public static final int beerName=0x7f090014;
+        public static final int beerTitle=0x7f090021;
         public static final int beertype=0x7f090011;
         public static final int breweryDetails=0x7f090012;
         public static final int container=0x7f09000e;
+        public static final int descript=0x7f090020;
         public static final int description=0x7f090010;
         public static final int disclaimer=0x7f090018;
         public static final int displayDate=0x7f090000;
         public static final int enterBirthdate=0x7f090003;
         public static final int eventName=0x7f09001c;
         public static final int eventType=0x7f090019;
-        public static final int favorites=0x7f090021;
+        public static final int favorites=0x7f090023;
         public static final int go=0x7f090002;
         public static final int imageView1=0x7f090006;
         public static final int listView1=0x7f09001d;
@@ -77,7 +79,7 @@ public final class R {
         public static final int pickDate=0x7f090001;
         public static final int scannerButn=0x7f09001e;
         public static final int searchView1=0x7f09001f;
-        public static final int share=0x7f090023;
+        public static final int share=0x7f090025;
         public static final int textView1=0x7f090005;
         public static final int textView2=0x7f090008;
         public static final int textView3=0x7f090007;
