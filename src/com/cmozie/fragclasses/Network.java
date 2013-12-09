@@ -10,10 +10,12 @@
 package com.cmozie.fragclasses;
 
 import java.io.BufferedInputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
@@ -65,6 +67,15 @@ private static void networkData(Context context){
 			connection = true;
 		}
 	}
+}
+public static Drawable LoadImageFromWebOperations(String url) {
+    try {
+        InputStream inputStream = (InputStream) new URL(url).getContent();
+        Drawable image = Drawable.createFromStream(inputStream, "src name");
+        return image;
+    } catch (Exception e) {
+        return null;
+    }
 }
 
 /**

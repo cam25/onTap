@@ -13,17 +13,20 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.cmozie.ontap.R;
 
 import android.app.Fragment;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 // TODO: Auto-generated Javadoc
@@ -38,6 +41,8 @@ public class WhatToDrink extends Fragment {
 	public static String description;
 	public static String style;
 	public static String description2;
+	public static ImageView beerImg;
+	public static URL url;
 	
 	/* (non-Javadoc)
 	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
@@ -57,7 +62,7 @@ public class WhatToDrink extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		beerName = (TextView)getActivity().findViewById(R.id.beerTitle);
 		beerDescription = (TextView)getActivity().findViewById(R.id.descript);
-		
+		beerImg = (ImageView)getActivity().findViewById(R.id.imageView1);
 		getApiResults();
 		
 		Log.i("Started", "activit");
@@ -69,7 +74,7 @@ public class WhatToDrink extends Fragment {
 
 	public void getApiResults(){
 		
-		String baseUrl = "http://api.brewerydb.com/v2/beer/random?key=4b77a2665f85f929d4a87d30bbeae67b";
+		String baseUrl = "http://api.brewerydb.com/v2/beer/random/?hasLabels=Y&key=4b77a2665f85f929d4a87d30bbeae67b";
 		String queryString;
 		try {
 			queryString = URLEncoder.encode(baseUrl,"UTF-8");
@@ -111,27 +116,69 @@ public class WhatToDrink extends Fragment {
 			try {
 				JSONObject json = new JSONObject(result);
 				JSONObject data = json.getJSONObject("data");
-				JSONObject style = data.getJSONObject("style");
+				
+				JSONObject details = data.getJSONObject("style");
+				
+				JSONObject labels = data.getJSONObject("labels");
+				 url = new URL(labels.getString("large"));
 				Log.i("WTDURL", result);
 				
 				// TODO Auto-generated method stub
 				//Log.i("URL", result);
 				beerNam = data.getString("name");
 				
-				description2 = style.getString("description");
+				description2 = details.getString("description");
+				
+				ImageRequest image = new ImageRequest();
+				image.execute(url);
 				
 				
 				beerName.setText(beerNam);
-				beerDescription.setText(description);
 				beerDescription.setText(description2);
+				//beerDescription.setText(description2);
 				Log.i("beer", beerNam);
-			} catch (Exception e) {
+			} catch (JSONException e) {
 				// TODO: handle exception
 				
 				e.printStackTrace();
+				beerName.setText(beerNam);
+				beerDescription.setText("No description");
 				
 			}
+			
+			catch (Exception e) {
+				// TODO: handle exception
+				beerName.setText("No Beer Title");
+			}
+			
+			
 		}
+		private class ImageRequest extends AsyncTask<URL, Void, Drawable>
+        {
+
+                /* (non-Javadoc)
+                 * @see android.os.AsyncTask#doInBackground(Params[])
+                 */
+                @Override
+                protected Drawable doInBackground(URL... urls)
+                {
+                        
+            Drawable draw = null;
+          
+                    draw = Network.LoadImageFromWebOperations(url.toString());
+          
+            return draw;
+                }
+                
+                /* (non-Javadoc)
+                 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+                 */
+                @Override
+                protected void onPostExecute(Drawable result) 
+                {
+                        beerImg.setImageDrawable(result);
+            }
+        }
 		
 	}
 	

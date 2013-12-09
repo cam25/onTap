@@ -2,6 +2,7 @@ package com.cmozie.classes;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +20,8 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 	 String beerNam;
 
 	 String description;
-	
-	
+	public static HashMap<String, String> map;
+	public static List<Map<String,String>> test;
 	@Override
 	protected String doInBackground(URL... urls) {
 		// TODO Auto-generated method stub
@@ -38,13 +39,22 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 		try {
 			JSONObject json = new JSONObject(result);
 			JSONArray data = json.getJSONArray("data");
+			 test = new ArrayList<Map<String,String>>();
+			for (int i = 0; i < data.length(); i++) {
+				JSONObject one = data.getJSONObject(i);
+				map = new HashMap<String, String>();
+				 map.put("name", one.getString("name"));
+				
 			
-			List<Map<String,String>> test = new ArrayList<Map<String,String>>();
+				 test.add(map);
+				Log.i("array", test.toString());
+				// TODO Auto-generated method stub
+				
+				
+			}
 			
-			Log.i("Description", description);
-			Log.i("beerName", beerNam);
-			// TODO Auto-generated method stub
-			Log.i("ASYNC", result);
+			
+			
 			
 		} catch (Exception e) {
 			// TODO: handle exception
