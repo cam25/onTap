@@ -117,7 +117,7 @@ public class WhatToDrink extends Fragment {
 				JSONObject json = new JSONObject(result);
 				JSONObject data = json.getJSONObject("data");
 				
-				JSONObject details = data.getJSONObject("style");
+				//JSONObject details = data.getJSONObject("style");
 				
 				JSONObject labels = data.getJSONObject("labels");
 				 url = new URL(labels.getString("large"));
@@ -127,14 +127,14 @@ public class WhatToDrink extends Fragment {
 				//Log.i("URL", result);
 				beerNam = data.getString("name");
 				
-				description2 = details.getString("description");
+				description = data.getString("description");
 				
 				ImageRequest image = new ImageRequest();
 				image.execute(url);
 				
 				
 				beerName.setText(beerNam);
-				beerDescription.setText(description2);
+				beerDescription.setText(description);
 				//beerDescription.setText(description2);
 				Log.i("beer", beerNam);
 			} catch (JSONException e) {

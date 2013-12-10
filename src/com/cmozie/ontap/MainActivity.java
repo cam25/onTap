@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import com.cmozie.fragclasses.Events;
 import com.cmozie.fragclasses.FindABrew;
@@ -104,6 +105,7 @@ public class MainActivity extends Activity {
 public class TabListener implements ActionBar.TabListener {
 		 
 	    Fragment fragment;
+	   
 	 
 	    /**
     	 * Instantiates a new tab listener.
@@ -122,7 +124,7 @@ public class TabListener implements ActionBar.TabListener {
 	    public void onTabSelected(Tab tab, FragmentTransaction ft) {
 	        // TODO Auto-generated method stub
     	
-	        ft.replace(R.id.container, fragment);
+    	ft.replace(R.id.container, fragment);
 	    }
 	 
 	    /* (non-Javadoc)

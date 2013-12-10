@@ -25,9 +25,11 @@ import com.cmozie.ontap.MoreDetails;
 import com.cmozie.ontap.R;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.net.rtp.RtpStream;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -111,36 +113,16 @@ public class FindABrew extends Fragment {
 	    arrayList.add("Beer2");
 	    arrayList.add("Beer3");
 	    
-	    //array adapter for listview
-	    
-		
-		//search button
-		/*search.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-				alert.setTitle("Search a Beer");
-				alert.setMessage("Feature Coming Soon...");
-				alert.setCancelable(false);
-				alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
-				
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-
-						dialog.cancel();
-					}
-				});
-				alert.show();
-			}
-		});*/
+	   
 
 		//scan button
 		scan.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
+				try {
+					
+				
 				Intent intent = new Intent("com.google.zxing.client.android.SCAN"); 
 				
 				
@@ -150,31 +132,62 @@ public class FindABrew extends Fragment {
 			    
 				 startActivityForResult(intent, 0);
 				
+			}catch (ActivityNotFoundException e) {
+				// TODO: handle exception
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+			    builder.setTitle("Confirm");
+			    builder.setMessage("You must install the barcode scanner application to utilize this feature do you want to download it?");
+
+			    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+			        public void onClick(DialogInterface dialog, int which) {
+			            // Do nothing but close the dialog
+
+			        	 Uri uri = Uri.parse("market://search?q=pname:com.google.zxing.client.android");
+					        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+					        startActivity(intent);
+			            dialog.dismiss();
+			        }
+
+			    });
+
+			    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+			        @Override
+			        public void onClick(DialogInterface dialog, int which) {
+			            // Do nothing
+			            dialog.dismiss();
+			        }
+			    });
+
+			    AlertDialog alert = builder.create();
+			    alert.show();
+			
+			}
 			}
 		});
 		    
 	}
 	
+	@SuppressWarnings("unused")
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 	        
-		
+		String contents = null;
 	        if (requestCode == 0) {
-	        	
-	           
-	            	Log.i("RESULTCODE", String.valueOf(resultCode));
-	                    String contents = intent.getStringExtra("SCAN_RESULT"); //this is the result
-	                    
-	                    String beer = contents;
-	                    Log.i("beer", beer);
-	                    String query = "http://api.brewerydb.com/v2/search/?q="+ beer +"&type=brewery&key=4b77a2665f85f929d4a87d30bbeae67b&format=json";
-	                    
-	                   
-	            } else 
-	            if (resultCode == RESULT_CANCELED) {
-	              Log.i("Test", "Test");
-	            }
-	          
-	        
+	
+	       
+			}
+	        if (resultCode == -1) {
+            	Log.i("RESULTCODE", String.valueOf(resultCode));
+           	 contents = intent.getStringExtra("SCAN_RESULT"); //this is the result
+           	 String beer = contents;
+           	  Log.i("beer", beer);
+           	  String query = "http://api.brewerydb.com/v2/search/?q="+ beer +"&type=brewery&key=4b77a2665f85f929d4a87d30bbeae67b&format=json";
+                 
+                 Intent myIntent = new Intent(Intent.ACTION_VIEW,Uri.parse(query));
+                 startActivity(myIntent);
+			}
 	       
 	    }
 public  void getApiResults(String beer){
