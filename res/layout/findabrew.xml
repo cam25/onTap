@@ -21,16 +21,19 @@
                          android:layout_alignParentTop="true"
                          android:src="@drawable/reader" android:contentDescription="@string/todo"/>
 
-                     <SearchView
-                         android:id="@+id/searchView1"
+                     <EditText
+                         android:id="@+id/searchField"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:layout_alignParentLeft="true"
                          android:layout_alignParentTop="true"
-                         android:layout_toLeftOf="@+id/scannerButn"
-                          >
-                         
+                         android:layout_marginTop="17dp"
+                         android:ems="10" 
+                         android:hint="Enter Search Here"
+    					android:inputType="text"
+    					android:imeOptions="actionSend">
 
-                     </SearchView>
+                         <requestFocus />
+                     </EditText>
 
 </RelativeLayout>

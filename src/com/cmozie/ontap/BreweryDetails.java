@@ -35,8 +35,25 @@ public class BreweryDetails extends Activity {
 		setContentView(R.layout.activity_brewery_details);
 		ActionBar actionBar = getActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(true);
-		TextView zipcode = (TextView)findViewById(R.id.textView5);
+		TextView zipcode = (TextView)findViewById(R.id.zipcode);
 		actionBar.setDisplayShowTitleEnabled(false);
+		TextView breweryName = (TextView)findViewById(R.id.breweryName);
+		TextView addy = (TextView)findViewById(R.id.address);
+		TextView city = (TextView)findViewById(R.id.city);
+		TextView state = (TextView)findViewById(R.id.state);
+		TextView open = (TextView)findViewById(R.id.open);
+		TextView phone = (TextView)findViewById(R.id.phone);
+		TextView website = (TextView)findViewById(R.id.website);
+		
+		
+		breweryName.setText(getIntent().getExtras().getString("name"));
+		addy.setText(getIntent().getExtras().getString("streetAddress"));
+		city.setText(getIntent().getExtras().getString("locality"));
+		state.setText(getIntent().getExtras().getString("region"));
+		zipcode.setText(getIntent().getExtras().getString("postalCode"));
+		open.setText(getIntent().getExtras().getString("openToPublic"));
+		phone.setText(getIntent().getExtras().getString("phone"));
+		website.setText(getIntent().getExtras().getString("website"));
 		zipcode.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

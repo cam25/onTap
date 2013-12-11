@@ -153,7 +153,7 @@ public class WhatToDrink extends Fragment {
 			
 			
 		}
-		private class ImageRequest extends AsyncTask<URL, Void, Drawable>
+		public class ImageRequest extends AsyncTask<URL, Void, Drawable>
         {
 
                 /* (non-Javadoc)
