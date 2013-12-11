@@ -385,6 +385,15 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 					map.put("id", one.getString("id"));
 				}
 				
+				if (one.has("type")) {
+					map.put("type", one.getString("type"));
+				}
+				
+				if (one.has("available")) {
+					JSONObject available = one.getJSONObject("available");
+					map.put("available", available.getString("name"));
+				}
+				
 				 test.add(map);
 				 
 				 ListView lv = (ListView)getActivity().findViewById(R.id.listView1);
@@ -404,13 +413,17 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 							String descriptionText = test.get(+arg2).get("description");
 							String styleDescript = test.get(+arg2).get("labels");
 							String id = test.get(+arg2).get("id");
-							
+							String type = test.get(+arg2).get("type");
+							String availability = test.get(+arg2).get("available");
 						
+							
 							intent.putExtra("id", id);
 							intent.putExtra("name", name);
 							intent.putExtra("abv", abv);
 							intent.putExtra("description", descriptionText);
 							intent.putExtra("styleDescription", styleDescript);
+							intent.putExtra("type", type);
+							intent.putExtra("available", availability);
 				         	Toast.makeText(getActivity(), "You Clicked at "+test.get(+arg2).get("name"), Toast.LENGTH_SHORT).show();
 							
 			                startActivity(intent);

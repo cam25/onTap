@@ -9,10 +9,13 @@
  */
 package com.cmozie.ontap;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import com.cmozie.fragclasses.Network;
+import com.cmozie.ontap.MoreDetails.getImage;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ActionBar;
@@ -37,6 +40,8 @@ public class BreweryDetails extends Activity {
 	
 	public static String imageURL;
 	public static ImageView brewImg;
+	public static URL url;
+	public static TextView zipcode;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -46,7 +51,7 @@ public class BreweryDetails extends Activity {
 		setContentView(R.layout.activity_brewery_details);
 		ActionBar actionBar = getActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(true);
-		TextView zipcode = (TextView)findViewById(R.id.zipcode);
+		zipcode = (TextView)findViewById(R.id.zipcode);
 		actionBar.setDisplayShowTitleEnabled(false);
 		TextView breweryName = (TextView)findViewById(R.id.breweryName);
 		TextView addy = (TextView)findViewById(R.id.address);
@@ -58,14 +63,27 @@ public class BreweryDetails extends Activity {
 		 brewImg = (ImageView)findViewById(R.id.brewImage);
 		
 		
-		 imageURL = getIntent().getExtras().getString("image");
+		 imageURL = getIntent().getExtras().getString("images");
 		 
-		
+	
+		 
+		 try {
+				url = new URL(imageURL);
+				
+
+				getBreweryImage al = new getBreweryImage(); 
+				al.execute(url);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		breweryName.setText(getIntent().getExtras().getString("name"));
 		addy.setText(getIntent().getExtras().getString("streetAddress"));
 		city.setText(getIntent().getExtras().getString("locality"));
 		state.setText(getIntent().getExtras().getString("region"));
+		zipcode.setText(getIntent().getExtras().getString("numberCode"));
 		zipcode.setText(getIntent().getExtras().getString("postalCode"));
+		
 		open.setText(getIntent().getExtras().getString("openToPublic"));
 		phone.setText(getIntent().getExtras().getString("phone"));
 		website.setText(getIntent().getExtras().getString("website"));
@@ -74,21 +92,20 @@ public class BreweryDetails extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				AlertDialog.Builder alert = new AlertDialog.Builder(BreweryDetails.this);
-				alert.setTitle("GPS Feature");
-				alert.setMessage("Feature Coming Soon...");
-				alert.setCancelable(false);
-				alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
-				
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-
-						dialog.cancel();
-					}
-				});
-				alert.show();
+			Log.i("textView", zipcode.getText().toString());
+				getGPS(zipcode.getText().toString());
 			}
 		});
+	}
+	
+	public void getGPS(String locationCode){
+		Intent mapIntent = new Intent(Intent.ACTION_VIEW,
+    			
+    			
+				//updated map action. Removed gps and implemented map to show location via passed zipcode from intent
+				Uri.parse("http://maps.google.com/maps?q="+ locationCode +"&zoom=14&size=512x512&maptype=roadmap&sensor=false"));
+		
+		startActivity(mapIntent);
 	}
 	public class getBreweryImage extends AsyncTask<URL, Void, Drawable>
     {

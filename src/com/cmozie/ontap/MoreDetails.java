@@ -58,6 +58,10 @@ public class MoreDetails extends Activity {
 	public static ImageView beerImage;
 	public static URL url;
 	public static String imagURL;
+	public TextView type;
+	public TextView availble;
+	public TextView beersName;
+	public TextView  abv;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -73,8 +77,10 @@ public class MoreDetails extends Activity {
 	    actionBar.setDisplayShowTitleEnabled(false);
 		TextView breweryDetails = (TextView)findViewById(R.id.breweryDetails);
 		
-		TextView beersName = (TextView) findViewById(R.id.beerName);
-		TextView abv = (TextView) findViewById(R.id.abv);
+		beersName = (TextView) findViewById(R.id.beerName);
+		 abv = (TextView) findViewById(R.id.abv);
+		type = (TextView)findViewById(R.id.beertype);
+		 availble = (TextView)findViewById(R.id.available);
 		descriptionTitle = (TextView) findViewById(R.id.description);
 		beerImage = (ImageView)findViewById(R.id.beerLogo);
 		imagURL = getIntent().getExtras().getString("styleDescription");
@@ -83,13 +89,16 @@ public class MoreDetails extends Activity {
 		
 		 
 		
-		
+		//receiving intent data
 		beersName.setText(getIntent().getExtras().getString("name"));
 		abv.setText(getIntent().getExtras().getString("abv"));
 		descriptionTitle.setText(getIntent().getExtras().getString("description"));
 		 beerId = getIntent().getExtras().getString("id");
-		 
+		 type.setText(getIntent().getExtras().getString("type"));
+		 availble.setText(getIntent().getExtras().getString("available"));
 		 loadDoc();
+		 
+		 //parsing image
 		 try {
 				url = new URL(imagURL);
 				
@@ -228,59 +237,69 @@ public class MoreDetails extends Activity {
 						intent.putExtra("name", name);
 						
 					}
+					if (one.has("images")) {
+						JSONObject image = one.getJSONObject("images");
+						intent.putExtra("images", image.getString("large"));
+						Log.i("intent", intent.toString());
+					}
 					for (int j = 0; j < two.length(); j++) {
 						JSONObject locationInfo = two.getJSONObject(0);
 						
-						String address = locationInfo.getString("streetAddress");
+						
 						if (locationInfo.has("streetAddress")) {
+							String address = locationInfo.getString("streetAddress");
 							intent.putExtra("streetAddress", address);
 						}
 						
-						String city = locationInfo.getString("locality");
+						
 						if (locationInfo.has("locality")) {
-							
+							String city = locationInfo.getString("locality");
 							intent.putExtra("locality", city);
 						}
 						
-						String state = locationInfo.getString("region");
+						
 						
 						if (locationInfo.has("region")) {
+							String state = locationInfo.getString("region");
 							intent.putExtra("region", state);
 						}
 						
-						String zipcode = locationInfo.getString("postalCode");
+						
+						//String numbercode = locationInfo.getString("numberCode");
 						if (locationInfo.has("postalCode")) {
-							
+							String zipcode = locationInfo.getString("postalCode");
 							intent.putExtra("postalCode", zipcode);
 							
 						}
-						String open = locationInfo.getString("openToPublic");
-						if (locationInfo.has("openToPublic")) {
+						if (locationInfo.has("country")) {
 							
+							JSONObject numCode = locationInfo.getJSONObject("country");
+							
+							intent.putExtra("numberCode", numCode.getString("numberCode"));
+						}
+						
+						if (locationInfo.has("openToPublic")) {
+							String open = locationInfo.getString("openToPublic");
 							intent.putExtra("openToPublic", open);
 							
 						}
 						
-						String phone = locationInfo.getString("phone");
+						
 						if (locationInfo.has("phone")) {
-							
+							String phone = locationInfo.getString("phone");
 							intent.putExtra("phone", phone);
 							
 						}
 						
-						String website = locationInfo.getString("website");
+						
 						if (locationInfo.has("website")) {
-							
+							String website = locationInfo.getString("website");
 							intent.putExtra("website", website);
 							
 						}
 						
 						
-						if (locationInfo.has("images")) {
-							JSONObject image = locationInfo.getJSONObject("images");
-							intent.putExtra("image", image.getString("large"));
-							Log.i("intent", intent.toString());
-						}
+						
 						
 					}
 					
@@ -297,6 +316,7 @@ public class MoreDetails extends Activity {
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
+				
 				
 			}
 		}
