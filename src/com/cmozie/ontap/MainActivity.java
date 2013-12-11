@@ -47,7 +47,8 @@ public class MainActivity extends Activity {
 	Fragment tabFrag2 = new FindABrew();
 	Fragment tabFrag3 = new Events();
 	Context context;
-	
+	public MenuItem add;
+	public MenuItem share;
 	
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -123,6 +124,15 @@ public class TabListener implements ActionBar.TabListener {
     	@Override
 	    public void onTabSelected(Tab tab, FragmentTransaction ft) {
 	        // TODO Auto-generated method stub
+    	Log.i("Selected Tab is ",String.valueOf(tab.getPosition()));
+    	
+    	if (tab.getPosition() == 1) {
+			add.setVisible(false);
+			share.setVisible(false);
+		}
+    	if (tab.getPosition() == 2) {
+			add.setVisible(false);
+		}
     	
     	ft.replace(R.id.container, fragment);
 	    }
@@ -133,6 +143,9 @@ public class TabListener implements ActionBar.TabListener {
     	@Override
 	    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 	        // TODO Auto-generated method stub
+    		add.setVisible(true);
+    		share.setVisible(true);
+    		
 	        ft.remove(fragment);
 	    }
 	 
@@ -143,7 +156,24 @@ public class TabListener implements ActionBar.TabListener {
 	    public void onTabReselected(Tab tab, FragmentTransaction ft) {
 	        // TODO Auto-generated method stub
 	 
+    		
+    		if (tab.getPosition() == 0) {
+        		add.setVisible(true);
+        		share.setVisible(true);
+    		}
+    		else if (tab.getPosition() == 1) {
+    			add.setVisible(false);
+    			share.setVisible(false);
+			}
+    		
+    		else if (tab.getPosition() == 2) {
+    			add.setVisible(false);
+        		share.setVisible(true);
+			}
+			
+    		
 	    }
+    	
 	}
 	    
 	  
@@ -155,6 +185,8 @@ public class TabListener implements ActionBar.TabListener {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		
+		add = menu.findItem(R.id.add);
+		share = menu.findItem(R.id.share);
 		
 		return true;
 	}

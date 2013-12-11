@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import com.cmozie.ontap.R;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -98,6 +99,17 @@ public class WhatToDrink extends Fragment {
 	
 	
 	private class WhatToDrinkRequest extends AsyncTask<URL, Void, String>{
+		ProgressDialog progressIndicator;
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			progressIndicator = new ProgressDialog(getActivity());
+			progressIndicator.setMessage("Image Loading...");
+			progressIndicator.setIndeterminate(false);
+			progressIndicator.setCancelable(true);
+			progressIndicator.show();
+		}
 
 		@Override
 		protected String doInBackground(URL... urls) {
@@ -123,18 +135,32 @@ public class WhatToDrink extends Fragment {
 				 url = new URL(labels.getString("large"));
 				Log.i("WTDURL", result);
 				
+				if (data.has("name")) {
+					beerNam = data.getString("name");
+					beerName.setText(beerNam);
+				}
 				// TODO Auto-generated method stub
 				//Log.i("URL", result);
-				beerNam = data.getString("name");
 				
-				description = data.getString("description");
+				if (data.has("description")) {
+					description = data.getString("description");
+					beerDescription.setText(description);
+				}else {
+					beerDescription.setText("No Description Available");
+				}
 				
-				ImageRequest image = new ImageRequest();
-				image.execute(url);
 				
 				
-				beerName.setText(beerNam);
-				beerDescription.setText(description);
+				if (labels.has("large")) {
+					ImageRequest image = new ImageRequest();
+					image.execute(url);
+					
+				}
+				
+				
+				
+				
+				
 				//beerDescription.setText(description2);
 				Log.i("beer", beerNam);
 			} catch (JSONException e) {
@@ -176,6 +202,7 @@ public class WhatToDrink extends Fragment {
                 @Override
                 protected void onPostExecute(Drawable result) 
                 {
+                	progressIndicator.dismiss();
                         beerImg.setImageDrawable(result);
             }
         }

@@ -36,6 +36,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -79,6 +82,8 @@ public class FindABrew extends Fragment {
 	public static ImageButton scan;
 	public String labels;
 	public static EditText searchField;
+	
+	public URL url;
 	/* (non-Javadoc)
 	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
 	 */
@@ -230,27 +235,29 @@ public  void getApiResults(String beer){
 		try {
 			
 
-			queryString2 = URLEncoder.encode(query,"UTF-8");
 			queryString = URLEncoder.encode(beer,"UTF-8");
+			//queryString = URLEncoder.encode(beer,"UTF-8");
 		} catch (Exception e) {
 			// TODO: handle exception
 			Log.e("ERROR-URL", "ENCODING ISSUE");
 			queryString = "";
 		}
 		
-		 baseUrl = "http://api.brewerydb.com/v2/search/?q="+ queryString +"/?hasLabels=Y/&type=beer&key=4b77a2665f85f929d4a87d30bbeae67b&format=json";
-		 query = "http://api.brewerydb.com/v2/search/upc?code="+ beer +"&key=4b77a2665f85f929d4a87d30bbeae67b&format=json";
+		 baseUrl = "http://api.brewerydb.com/v2/search/?q="+ queryString +"/?hasLabels=Y&type=beer&key=4b77a2665f85f929d4a87d30bbeae67b&format=json";
+		 //query = "http://api.brewerydb.com/v2/search/upc?code="+ beer +"&key=4b77a2665f85f929d4a87d30bbeae67b&format=json";
 		URL finalURL;
-		URL finalURL2;
+		//URL finalURL2;
 		try {
 			
 			 finalURL = new URL(baseUrl);
-			 finalURL2 = new URL(query);
+			 //finalURL2 = new URL(query);
 			 SearchAsyncTask wtdRequest = new SearchAsyncTask();
 			
-			 	wtdRequest.execute(finalURL);
-				 wtdRequest.execute(finalURL2);
+			 	
+			 	Log.i("FinalURL", finalURL.toString());
+				// wtdRequest.execute(finalURL2);
 			
+				 wtdRequest.execute(finalURL);
 			
 				
 			
@@ -341,6 +348,9 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 			 test = new ArrayList<Map<String,String>>();
 			for (int i = 0; i < data.length(); i++) {
 				JSONObject one = data.getJSONObject(i);
+				//JSONObject label = one.getJSONObject("labels");
+				
+				 //url = new URL(label.getString("large"));
 				map = new HashMap<String, String>();
 				if (one.has("name")) {
 					 map.put("name", one.getString("name"));
@@ -350,7 +360,7 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 					map.put("description", one.getString("description"));
 				}
 				
-				 
+				
 				
 				 
 				if (one.has("abv")) {
@@ -378,14 +388,15 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 							String name = test.get(+arg2).get("name");
 							String abv = test.get(+arg2).get("abv");
 							String descriptionText = test.get(+arg2).get("description");
-							String styleDescript = test.get(+arg2).get(labels);
+							//String styleDescript = test.get(+arg2).get("large");
 							String id = test.get(+arg2).get("id");
 							
-							intent.putExtra("styleDescription", styleDescript);
+						
 							intent.putExtra("id", id);
 							intent.putExtra("name", name);
 							intent.putExtra("abv", abv);
 							intent.putExtra("description", descriptionText);
+							//intent.putExtra("styleDescription", styleDescript);
 				         	Toast.makeText(getActivity(), "You Clicked at "+test.get(+arg2).get("name"), Toast.LENGTH_SHORT).show();
 							
 			                startActivity(intent);
@@ -408,5 +419,6 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 		}
 	}
 }
+
 
 }

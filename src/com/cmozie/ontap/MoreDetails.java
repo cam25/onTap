@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import com.cmozie.fragclasses.Network;
 import com.cmozie.fragclasses.FindABrew.SearchAsyncTask;
+import com.cmozie.ontap.MoreDetails.brewDetails.getImage;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -29,11 +30,14 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -49,7 +53,9 @@ public class MoreDetails extends Activity {
 
 	
 	public static String beerId;
-	
+	public static TextView descriptionTitle;
+	public static ImageView beerImage;
+	public static URL url;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -67,12 +73,19 @@ public class MoreDetails extends Activity {
 		
 		TextView beersName = (TextView) findViewById(R.id.beerName);
 		TextView abv = (TextView) findViewById(R.id.abv);
-		TextView descriptionTitle = (TextView) findViewById(R.id.description);
+		descriptionTitle = (TextView) findViewById(R.id.description);
+		beerImage = (ImageView)findViewById(R.id.beerLogo);
+		String imagURL = getIntent().getExtras().getString("styleDescription");
 		
+		
+	
 		beersName.setText(getIntent().getExtras().getString("name"));
 		abv.setText(getIntent().getExtras().getString("abv"));
 		descriptionTitle.setText(getIntent().getExtras().getString("description"));
 		 beerId = getIntent().getExtras().getString("id");
+		 
+		 loadDoc();
+		
 		breweryDetails.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -86,6 +99,18 @@ public class MoreDetails extends Activity {
 			}
 		});
 	}
+	
+	private void loadDoc(){
+
+        
+
+       
+
+        descriptionTitle.setMovementMethod(new ScrollingMovementMethod());
+
+       
+
+    }
 	public  void getBreweryDetails(String beerId){
 
 		
@@ -230,6 +255,33 @@ public class MoreDetails extends Activity {
 				
 			}
 		}
+		public class getImage extends AsyncTask<URL, Void, Drawable>
+	    {
+
+	            /* (non-Javadoc)
+	             * @see android.os.AsyncTask#doInBackground(Params[])
+	             */
+	            @Override
+	            protected Drawable doInBackground(URL... urls)
+	            {
+	                    
+	        Drawable draw = null;
+	      
+	                draw = Network.LoadImageFromWebOperations(url.toString());
+	      
+	        return draw;
+	            }
+	            
+	            /* (non-Javadoc)
+	             * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+	             */
+	            @Override
+	            protected void onPostExecute(Drawable result) 
+	            {
+	            
+	                    beerImage.setImageDrawable(result);
+	        }
+	    }
 	}
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
