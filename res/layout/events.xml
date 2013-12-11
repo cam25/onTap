@@ -1,55 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+     android:layout_height="fill_parent">
+
+<RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/eventType"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/venue"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="32dp"
-                        android:text="@string/event_type_"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                    <TextView
-                        android:id="@+id/webSite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="170dp"
-                        android:text="@string/website_"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                    <TextView
-                        android:id="@+id/venue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:text="@string/venue_"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                    <TextView
-                        android:id="@+id/description"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/eventType"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="36dp"
-                        android:text="@string/description_of_event_here_" />
+    android:layout_height="450dp" >
 
                     <TextView
                         android:id="@+id/eventName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-                        android:layout_alignRight="@+id/eventType"
-                        android:layout_marginTop="22dp"
-                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="16dp"
                         android:text="@string/eventname_"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+                    <TextView
+                        android:id="@+id/eventDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/eventName"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="40dp"
+                        android:text="Description Goes HERE" />
+
+                    <TextView
+                        android:id="@+id/eventType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/placeHolder"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="Event HERE"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/placeHolder2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/eventType"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="44dp"
+                        android:text="Venue:"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/venue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/placeHolder2"
+                        android:layout_centerHorizontal="true"
+                        android:text="VenueHERE"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/placeHolder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/eventDescription"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="50dp"
+                        android:text="Event:"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/placeholder3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/venue"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="21dp"
+                        android:text="Website:"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/eventWebsite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/placeholder3"
+                        android:layout_centerHorizontal="true"
+                        android:text="Website HERE"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/scheduleEvent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/eventWebsite"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:text="Schedule this event?"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/sysBlue" />
+
 </RelativeLayout>
+</ScrollView>
