@@ -22,7 +22,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/brewImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/breweryName"
@@ -89,7 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/city"
-        android:layout_below="@+id/imageView1"
+        android:layout_below="@+id/brewImage"
         android:layout_marginTop="20dp"
         android:text="Address:"
         android:textAppearance="?android:attr/textAppearanceMedium" />

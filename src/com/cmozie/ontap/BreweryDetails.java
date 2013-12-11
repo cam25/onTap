@@ -9,15 +9,23 @@
  */
 package com.cmozie.ontap;
 
+import java.net.URL;
+
+import com.cmozie.fragclasses.Network;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 // TODO: Auto-generated Javadoc
@@ -26,6 +34,9 @@ import android.widget.TextView;
  */
 public class BreweryDetails extends Activity {
 
+	
+	public static String imageURL;
+	public static ImageView brewImg;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -44,7 +55,11 @@ public class BreweryDetails extends Activity {
 		TextView open = (TextView)findViewById(R.id.open);
 		TextView phone = (TextView)findViewById(R.id.phone);
 		TextView website = (TextView)findViewById(R.id.website);
+		 brewImg = (ImageView)findViewById(R.id.brewImage);
 		
+		
+		 imageURL = getIntent().getExtras().getString("image");
+		 
 		
 		breweryName.setText(getIntent().getExtras().getString("name"));
 		addy.setText(getIntent().getExtras().getString("streetAddress"));
@@ -75,6 +90,33 @@ public class BreweryDetails extends Activity {
 			}
 		});
 	}
+	public class getBreweryImage extends AsyncTask<URL, Void, Drawable>
+    {
+
+            /* (non-Javadoc)
+             * @see android.os.AsyncTask#doInBackground(Params[])
+             */
+            @Override
+            protected Drawable doInBackground(URL... urls)
+            {
+                    
+        Drawable draw = null;
+      
+                draw = Network.LoadImageFromWebOperations(imageURL);
+      
+        return draw;
+            }
+            
+            /* (non-Javadoc)
+             * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+             */
+            @Override
+            protected void onPostExecute(Drawable result) 
+            {
+            
+                    brewImg.setImageDrawable(result);
+        }
+    }
 
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)

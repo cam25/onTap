@@ -9,6 +9,7 @@
  */
 package com.cmozie.ontap;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -20,8 +21,8 @@ import org.json.JSONObject;
 
 import com.cmozie.fragclasses.Network;
 import com.cmozie.fragclasses.FindABrew.SearchAsyncTask;
-import com.cmozie.ontap.MoreDetails.brewDetails.getImage;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ActionBar;
@@ -56,6 +57,7 @@ public class MoreDetails extends Activity {
 	public static TextView descriptionTitle;
 	public static ImageView beerImage;
 	public static URL url;
+	public static String imagURL;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -75,17 +77,29 @@ public class MoreDetails extends Activity {
 		TextView abv = (TextView) findViewById(R.id.abv);
 		descriptionTitle = (TextView) findViewById(R.id.description);
 		beerImage = (ImageView)findViewById(R.id.beerLogo);
-		String imagURL = getIntent().getExtras().getString("styleDescription");
+		imagURL = getIntent().getExtras().getString("styleDescription");
 		
 		
-	
+		
+		 
+		
+		
 		beersName.setText(getIntent().getExtras().getString("name"));
 		abv.setText(getIntent().getExtras().getString("abv"));
 		descriptionTitle.setText(getIntent().getExtras().getString("description"));
 		 beerId = getIntent().getExtras().getString("id");
 		 
 		 loadDoc();
-		
+		 try {
+				url = new URL(imagURL);
+				
+
+				getImage al = new getImage(); 
+				al.execute(url);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		breweryDetails.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -102,10 +116,7 @@ public class MoreDetails extends Activity {
 	
 	private void loadDoc(){
 
-        
-
-       
-
+		
         descriptionTitle.setMovementMethod(new ScrollingMovementMethod());
 
        
@@ -153,6 +164,33 @@ public class MoreDetails extends Activity {
 			
 			
 		}
+	public class getImage extends AsyncTask<URL, Void, Drawable>
+    {
+
+            /* (non-Javadoc)
+             * @see android.os.AsyncTask#doInBackground(Params[])
+             */
+            @Override
+            protected Drawable doInBackground(URL... urls)
+            {
+                    
+        Drawable draw = null;
+      
+                draw = Network.LoadImageFromWebOperations(imagURL);
+      
+        return draw;
+            }
+            
+            /* (non-Javadoc)
+             * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+             */
+            @Override
+            protected void onPostExecute(Drawable result) 
+            {
+            
+                    beerImage.setImageDrawable(result);
+        }
+    }
 	public class brewDetails extends AsyncTask<URL, Void, String>{
 		
 		
@@ -237,6 +275,13 @@ public class MoreDetails extends Activity {
 							
 						}
 						
+						
+						if (locationInfo.has("images")) {
+							JSONObject image = locationInfo.getJSONObject("images");
+							intent.putExtra("image", image.getString("large"));
+							Log.i("intent", intent.toString());
+						}
+						
 					}
 					
 				/*for (int j = 0; j < locationDetails.length(); j++) {
@@ -255,33 +300,7 @@ public class MoreDetails extends Activity {
 				
 			}
 		}
-		public class getImage extends AsyncTask<URL, Void, Drawable>
-	    {
-
-	            /* (non-Javadoc)
-	             * @see android.os.AsyncTask#doInBackground(Params[])
-	             */
-	            @Override
-	            protected Drawable doInBackground(URL... urls)
-	            {
-	                    
-	        Drawable draw = null;
-	      
-	                draw = Network.LoadImageFromWebOperations(url.toString());
-	      
-	        return draw;
-	            }
-	            
-	            /* (non-Javadoc)
-	             * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
-	             */
-	            @Override
-	            protected void onPostExecute(Drawable result) 
-	            {
-	            
-	                    beerImage.setImageDrawable(result);
-	        }
-	    }
+		
 	}
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)

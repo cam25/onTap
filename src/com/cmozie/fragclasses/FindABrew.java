@@ -344,14 +344,21 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 		try {
 			JSONObject json = new JSONObject(result);
 			JSONArray data = json.getJSONArray("data");
+			//JSONObject label =;
+			test = new ArrayList<Map<String,String>>();
 			
-			 test = new ArrayList<Map<String,String>>();
 			for (int i = 0; i < data.length(); i++) {
-				JSONObject one = data.getJSONObject(i);
-				//JSONObject label = one.getJSONObject("labels");
 				
-				 //url = new URL(label.getString("large"));
+				
+				
+				JSONObject one = data.getJSONObject(i);
 				map = new HashMap<String, String>();
+				
+				
+				
+				//Log.i("TAG", data.toString());
+				 //url = new URL(label.getString("large"));
+				
 				if (one.has("name")) {
 					 map.put("name", one.getString("name"));
 				}
@@ -360,7 +367,14 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 					map.put("description", one.getString("description"));
 				}
 				
-				
+				if (one.has("labels")) {
+					JSONObject image = one.getJSONObject("labels");
+					
+					map.put("labels", image.getString("large"));
+					Log.i("map", map.toString());
+					
+					
+				}
 				
 				 
 				if (one.has("abv")) {
@@ -388,7 +402,7 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 							String name = test.get(+arg2).get("name");
 							String abv = test.get(+arg2).get("abv");
 							String descriptionText = test.get(+arg2).get("description");
-							//String styleDescript = test.get(+arg2).get("large");
+							String styleDescript = test.get(+arg2).get("labels");
 							String id = test.get(+arg2).get("id");
 							
 						
@@ -396,7 +410,7 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 							intent.putExtra("name", name);
 							intent.putExtra("abv", abv);
 							intent.putExtra("description", descriptionText);
-							//intent.putExtra("styleDescription", styleDescript);
+							intent.putExtra("styleDescription", styleDescript);
 				         	Toast.makeText(getActivity(), "You Clicked at "+test.get(+arg2).get("name"), Toast.LENGTH_SHORT).show();
 							
 			                startActivity(intent);
@@ -405,11 +419,14 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 					});
 					
 					
+					
 				Log.i("array",String.valueOf(test));
 				// TODO Auto-generated method stub
 				
 				
 			}
+			
+			
 			
 			
 			
