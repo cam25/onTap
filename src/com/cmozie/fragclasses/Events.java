@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -27,11 +28,14 @@ import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.cmozie.ontap.Favorites;
+import com.cmozie.ontap.MainActivity;
 import com.cmozie.ontap.R;
 
 // TODO: Auto-generated Javadoc
@@ -43,15 +47,15 @@ public class Events extends Fragment {
 	
 	
 	protected static final String TITLE = null;
-	public TextView eventName;
-	public TextView eventType;
-	public TextView eventDescription;
-	public TextView eventVenue;
-	public TextView eventsWebsite;
-	public TextView eventSchedule;
+	public static TextView eventName;
+	public static TextView eventType;
+	public static TextView eventDescription;
+	public static TextView eventVenue;
+	public static TextView eventsWebsite;
+	public static TextView eventSchedule;
 	public static HashMap<String, String> myMap;
 	public static List<Map<String,String>> arrayList;
-	
+	ShareEvent callBack;
 	
 	/* (non-Javadoc)
 	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
@@ -98,6 +102,25 @@ public class Events extends Fragment {
 		 
 		 
 	}
+	
+	
+	public interface ShareEvent {
+        public void eventShare();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            callBack = (ShareEvent) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnHeadlineSelectedListener");
+        }
+    }
 public void getApiResults(){
 		
 		String baseUrl = "http://api.brewerydb.com/v2/events?key=4b77a2665f85f929d4a87d30bbeae67b";
@@ -218,16 +241,6 @@ public void getApiResults(){
 						}
 					}
 				}
-				
-				
-				
-				
-				
-			
-				
-				
-				
-				
 				//beerDescription.setText(description2);
 				//Log.i("beer", beerNam);
 			} catch (JSONException e) {
@@ -242,6 +255,33 @@ public void getApiResults(){
 		}
 			
 	}
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		
+		
+	switch (item.getItemId()) {
+		
+		
+		case R.id.share:
+			
+			
+			  break;
+			  //opens favorites activity
+		case R.id.favorites:
+			
+			startActivity(new Intent(getActivity(), Favorites.class));
+
+			break;
+		default:
+			break;
+		}
+	return super.onOptionsItemSelected(item);
+	}
+	
+	
 }
 		
 	

@@ -9,6 +9,7 @@
  */
 package com.cmozie.ontap;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -40,6 +41,7 @@ import android.widget.TextView;
 public class Favorites extends Activity {
 	HashMap<String, String> _history;
 	public static List<Map<String,String>> favs;
+	static Context context;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -60,7 +62,7 @@ public class Favorites extends Activity {
 		_history = getHistory();
 		
 		favs.add(_history);
-		
+		//getString();
 		String setBeerName = favs.get(0).get("beerName");
 		String setBeerDescription = favs.get(0).get("description");
 		String setBeerType = favs.get(0).get("type");
@@ -110,6 +112,52 @@ private HashMap<String, String> getHistory(){
 		return history;
 		
 	}
+
+public static void getString(){
+	
+	readStringFile(context, "favorites", false);
+	
+	
+	
+	
+}
+
+@SuppressWarnings("resource")
+public static String readStringFile(Context context, String filename, Boolean external){
+	
+	String content = "";
+	try {
+		File file;
+		FileInputStream fin;
+		if (external) {
+			file = new File(context.getExternalFilesDir(null), filename);
+			fin = new FileInputStream(file);
+		}else{
+			file = new File(filename);
+			fin = context.openFileInput(filename);
+			
+		}
+		BufferedInputStream bin = new BufferedInputStream(fin);
+		byte[] contentBytes = new byte[1024];
+		int bytesRead = 0;
+		StringBuffer contentBuffer = new StringBuffer();
+		
+		while((bytesRead = bin.read(contentBytes))!= -1){
+			
+			content = new String(contentBytes,0,bytesRead);
+			contentBuffer.append(content);
+			
+		}
+		content = contentBuffer.toString();
+		fin.close();
+	} catch (FileNotFoundException e) {
+		Log.e("READ ERROR","FILE NOT FOUND" + filename);
+	}catch (IOException e) {
+		Log.e("READ ERROR","I/O ERROR");
+	}
+	return content;
+	
+}
 
 @SuppressWarnings("resource")
 public static Object readObjectFile(Context context, String filename, Boolean external){

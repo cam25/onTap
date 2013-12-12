@@ -10,6 +10,8 @@
 package com.cmozie.ontap;
 
 
+import java.util.HashMap;
+
 import org.json.JSONArray;
 
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
 import android.content.Context;
@@ -34,6 +37,10 @@ import com.cmozie.fragclasses.Events;
 import com.cmozie.fragclasses.FindABrew;
 import com.cmozie.fragclasses.Network;
 import com.cmozie.fragclasses.WhatToDrink;
+import com.cmozie.fragclasses.Events.ShareEvent;
+import com.cmozie.fragclasses.WhatToDrink.OnFragmentVisibleListener;
+import com.cmozie.fragclasses.WhatToDrink.PassTheData;
+import com.cmozie.fragclasses.WhatToDrink.shareData;
 
 
 
@@ -41,7 +48,7 @@ import com.cmozie.fragclasses.WhatToDrink;
 /**
  * The Class MainActivity.
  */
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements PassTheData, shareData, ShareEvent {
 	
 	 Boolean connection = false;
 	//instatiates tabs
@@ -54,6 +61,7 @@ public class MainActivity extends Activity {
 	Context context;
 	public MenuItem add;
 	public MenuItem share;
+	 public static HashMap<String, String> map;
 	
 	
 	/* (non-Javadoc)
@@ -68,6 +76,7 @@ public class MainActivity extends Activity {
 		connection = Network.getConnectionStatus(context);
 		
 		Log.i("Connection", Network.getConnectionType(context));
+		
 		
 		
 		//enables action bar
@@ -94,6 +103,7 @@ public class MainActivity extends Activity {
 	    actionBar.addTab(FAB);
 	    actionBar.addTab(EVNT);
 	
+	    
 		
 	}
 	
@@ -166,6 +176,7 @@ public class TabListener implements ActionBar.TabListener {
     		if (tab.getPosition() == 0) {
         		add.setVisible(true);
         		share.setVisible(true);
+        		
     		}
     		else if (tab.getPosition() == 1) {
     			add.setVisible(false);
@@ -175,6 +186,7 @@ public class TabListener implements ActionBar.TabListener {
     		else if (tab.getPosition() == 2) {
     			add.setVisible(false);
         		share.setVisible(true);
+        		
 			}
 			
     		
@@ -207,6 +219,9 @@ public class TabListener implements ActionBar.TabListener {
 		
 		//opens alert for add
 		case R.id.add:
+			if (tabFrag1.isVisible()) {
+				passTheData();
+			}
 			
 			//WhatToDrink.storeFile(this, "favorites", WhatToDrink.map, true);
 			break;
@@ -214,6 +229,12 @@ public class TabListener implements ActionBar.TabListener {
 			//opens alert for share
 		case R.id.share:
 			
+			if (tabFrag3.isVisible()) {
+				eventShare();
+			}
+			if (tabFrag1.isVisible()) {
+				shareIntent();
+			}
 			  break;
 			  //opens favorites activity
 		case R.id.favorites:
@@ -227,6 +248,48 @@ public class TabListener implements ActionBar.TabListener {
 		return super.onOptionsItemSelected(item);
 		
 	}
+
+
+	@Override
+	public void passTheData() {
+		// TODO Auto-generated method stub
+		map = new HashMap<String, String>();
+		String test = WhatToDrink.beerName.getText().toString();
+		String description = WhatToDrink.beerDescription.getText().toString();
+		
+		map.put("description", description);
+		map.put("beerName", test);
+		WhatToDrink.storeFile(context, "favorites", map, true);
+		Log.i("test", test);
+	}
+
+
+	@Override
+	public void shareIntent() {
+		// TODO Auto-generated method stub
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setType("text/plain");
+		intent.putExtra(android.content.Intent.EXTRA_TEXT,"Beer's Name:" + WhatToDrink.beerNam + "\n" + "Beer Description" + "\n " + WhatToDrink.description);
+		startActivity(intent); 
+		
+	}
+
+
+	@Override
+	public void eventShare() {
+		// TODO Auto-generated method stub
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setType("text/plain");
+		intent.putExtra(android.content.Intent.EXTRA_TEXT,"Event:" + Events.eventName.getText().toString() + "\n" +"Event Type:"+  Events.eventType.getText().toString());
+		startActivity(intent);
+		
+	}
+
+
+	
+
+
+	
 }
 	
 

@@ -17,11 +17,13 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.cmozie.ontap.Favorites;
+import com.cmozie.ontap.MainActivity;
 import com.cmozie.ontap.MoreDetails;
 import com.cmozie.ontap.R;
 
@@ -34,7 +36,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,8 +64,9 @@ public class WhatToDrink extends Fragment  {
 	public static ImageView beerImg;
 	public static URL url;
 	public static HashMap<String, String> map;
-
+	public static MainActivity activity;
 	
+	PassTheData dataReciever;
 	
 	/* (non-Javadoc)
 	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
@@ -91,9 +96,27 @@ public class WhatToDrink extends Fragment  {
 		
 		Log.i("Started", "activit");
 	}
+	public interface PassTheData{
+		public void passTheData();
+	}
+
+	@Override
+	public void onAttach(Activity a) {
+	    super.onAttach(a);
+
+	    try {
+	        dataReciever = (PassTheData) a;
+	    } catch (ClassCastException e) {
+	        throw new ClassCastException(a.toString()
+	                + " must implement OnHeadlineSelectedListener");
+	    }
+	}
 	
-
-
+	public interface shareData {
+		public void shareIntent();
+	}
+	
+	
 	public void getApiResults(){
 		
 		String baseUrl = "http://api.brewerydb.com/v2/beer/random/?hasLabels=Y&key=4b77a2665f85f929d4a87d30bbeae67b";
@@ -229,6 +252,7 @@ public class WhatToDrink extends Fragment  {
         }
 		
 	}
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()) {
@@ -250,19 +274,7 @@ public class WhatToDrink extends Fragment  {
 			break;
 			//share icon
 		case R.id.share:
-			AlertDialog.Builder alert2 = new AlertDialog.Builder(getActivity());
-			alert2.setTitle("Share Feature");
-			alert2.setMessage("Feature Coming Soon...");
-			alert2.setCancelable(false);
-			alert2.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
 			
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-
-					dialog.cancel();
-				}
-			});
-			alert2.show();
 			  break;
 			  
 			  //favorites activity
@@ -277,6 +289,42 @@ public class WhatToDrink extends Fragment  {
 		return super.onOptionsItemSelected(item);
 		
 	}
+	@SuppressWarnings("resource")
+	public static Boolean storeStringFile(Context context, String filename, String content, Boolean external){
+		
+		try {
+			File file;
+			FileOutputStream fos;
+			if (external) {
+				file = new File(context.getExternalFilesDir(null),filename);
+				fos = new FileOutputStream(file);
+				
+			}else {
+				
+				fos = context.openFileOutput(filename, Context.MODE_PRIVATE);
+			}
+			fos.write(content.getBytes());
+			fos.close();
+		} catch (IOException e) {
+			
+			Log.i("WRITE ERROR",filename);
+		}
+			return true;
+	}
+	
+	public static void initShareIntent() {
+	   
+	    Intent share = new Intent(android.content.Intent.ACTION_SEND);
+	 
+	                share.putExtra(Intent.EXTRA_SUBJECT,  "subject");
+	                share.putExtra(Intent.EXTRA_TEXT,     "your text");
+	               // share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(myPath)) ); // Optional, just if you wanna share an image.
+	              
+	               
+	       
+	    
+	}
+	
 	
 	@SuppressWarnings("resource")
 	public static Boolean storeFile(Context context, String favorite, Object favs, Boolean external){
@@ -321,5 +369,7 @@ public class WhatToDrink extends Fragment  {
 		}
 		return true;
 	}
-	
+	public interface OnFragmentVisibleListener{
+	    public void fragmentVisible(boolean test, String tag);
+	}
 }
