@@ -9,11 +9,16 @@
  */
 package com.cmozie.ontap;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -29,8 +34,11 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.drawable.Drawable;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -62,6 +70,11 @@ public class MoreDetails extends Activity {
 	public TextView availble;
 	public TextView beersName;
 	public TextView  abv;
+    //public static final String filename = "favorites";
+    public static HashMap<String, String> map;
+	public static List<Map<String,String>> favs;
+	Context context;
+
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -341,19 +354,21 @@ public class MoreDetails extends Activity {
 		
 	//favorites icon
 		case R.id.add:
-			AlertDialog.Builder alert = new AlertDialog.Builder(this);
-				alert.setTitle("Add Favs");
-				alert.setMessage("Feature Coming Soon...");
-				alert.setCancelable(false);
-				alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
-				
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-
-						dialog.cancel();
-					}
-				});
-				alert.show();
+			
+			map = new HashMap<String, String>();
+			String nameOfBeer = beersName.getText().toString();
+			String descriptionOfbeer = descriptionTitle.getText().toString();
+			String typeOfBeer = type.getText().toString();
+			String abvOfBeer = abv.getText().toString();
+			String availablilityOfBeer = availble.getText().toString();
+			
+			map.put("beerName", nameOfBeer);
+			map.put("description", descriptionOfbeer);
+			map.put("type", typeOfBeer);
+			map.put("abv", abvOfBeer);
+			map.put("available", availablilityOfBeer);
+			storeFile(this, "favorites", map, true);
+			
 
 			break;
 			//share icon
@@ -384,6 +399,50 @@ public class MoreDetails extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 		
+	}
+	
+	@SuppressWarnings("resource")
+	public static Boolean storeFile(Context context, String favorite, Object favs, Boolean external){
+		try {
+			File file;
+			FileOutputStream fos;
+			ObjectOutputStream oos;
+			if (external) {
+				file = new File(context.getExternalFilesDir(null),favorite);
+				
+				
+				fos = new FileOutputStream(file);
+				Log.i("file", file.toString());
+			}else {
+				
+				fos = context.openFileOutput(favorite, Context.MODE_PRIVATE);
+				Log.i("fos", fos.toString());
+			}
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(favs);
+			oos.close();
+			
+			fos.close();
+			
+			Log.i("File ","Saved");
+			AlertDialog.Builder alert = new AlertDialog.Builder(context);
+			alert.setTitle("Saved Files");
+			alert.setMessage("File Saved!");
+			alert.setCancelable(false);
+			alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+					dialog.cancel();
+				}
+			});
+			alert.show();
+		} catch (IOException e) {
+			
+			Log.i("WRITE ERROR",favorite);
+		}
+		return true;
 	}
 
 }

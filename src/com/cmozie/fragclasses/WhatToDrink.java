@@ -9,22 +9,37 @@
  */
 package com.cmozie.fragclasses;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.cmozie.ontap.Favorites;
+import com.cmozie.ontap.MoreDetails;
 import com.cmozie.ontap.R;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -34,7 +49,7 @@ import android.widget.TextView;
 /**
  * The Class WhatToDrink.
  */
-public class WhatToDrink extends Fragment {
+public class WhatToDrink extends Fragment  {
 
 	public static TextView beerName;
 	public static String beerNam;
@@ -44,6 +59,9 @@ public class WhatToDrink extends Fragment {
 	public static String description2;
 	public static ImageView beerImg;
 	public static URL url;
+	public static HashMap<String, String> map;
+
+	
 	
 	/* (non-Javadoc)
 	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
@@ -57,6 +75,7 @@ public class WhatToDrink extends Fragment {
 		return rootView;
 	}
 
+	@SuppressLint("NewApi")
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -66,12 +85,14 @@ public class WhatToDrink extends Fragment {
 		beerImg = (ImageView)getActivity().findViewById(R.id.imageView1);
 		getApiResults();
 		
+		//Fragment fm = getChildFragmentManager().findFragmentByTag("What To Drink");
+		
+		//Log.i("fragment?", fm.toString());
+		
 		Log.i("Started", "activit");
 	}
 	
 
-
-	
 
 	public void getApiResults(){
 		
@@ -207,6 +228,98 @@ public class WhatToDrink extends Fragment {
             }
         }
 		
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+		switch (item.getItemId()) {
+		
+	//favorites icon
+		case R.id.add:
+			
+			map = new HashMap<String, String>();
+			String nameOfBeer = beerName.getText().toString();
+			String descriptionOfbeer = beerDescription.getText().toString();
+		
+			
+			map.put("beerName", nameOfBeer);
+			map.put("description", descriptionOfbeer);
+			
+			storeFile(getActivity(), "favorite", map, true);
+			
+
+			break;
+			//share icon
+		case R.id.share:
+			AlertDialog.Builder alert2 = new AlertDialog.Builder(getActivity());
+			alert2.setTitle("Share Feature");
+			alert2.setMessage("Feature Coming Soon...");
+			alert2.setCancelable(false);
+			alert2.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
+			
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+					dialog.cancel();
+				}
+			});
+			alert2.show();
+			  break;
+			  
+			  //favorites activity
+		case R.id.favorites:
+			
+			
+
+			break;
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+		
+	}
+	
+	@SuppressWarnings("resource")
+	public static Boolean storeFile(Context context, String favorite, Object favs, Boolean external){
+		try {
+			File file;
+			FileOutputStream fos;
+			ObjectOutputStream oos;
+			if (external) {
+				file = new File(context.getExternalFilesDir(null),favorite);
+				
+				
+				fos = new FileOutputStream(file);
+				Log.i("file", file.toString());
+			}else {
+				
+				fos = context.openFileOutput(favorite, Context.MODE_PRIVATE);
+				Log.i("fos", fos.toString());
+			}
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(favs);
+			oos.close();
+			
+			fos.close();
+			
+			Log.i("File ","Saved");
+			AlertDialog.Builder alert = new AlertDialog.Builder(context);
+			alert.setTitle("Saved Files");
+			alert.setMessage("File Saved!");
+			alert.setCancelable(false);
+			alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+					dialog.cancel();
+				}
+			});
+			alert.show();
+		} catch (IOException e) {
+			
+			Log.i("WRITE ERROR",favorite);
+		}
+		return true;
 	}
 	
 }

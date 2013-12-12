@@ -62,7 +62,7 @@
                         android:layout_below="@+id/eventDescription"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="50dp"
-                        android:text="Event:"
+                        android:text="Event Type:"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <TextView

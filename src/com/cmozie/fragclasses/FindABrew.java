@@ -224,7 +224,7 @@ public  void getApiResults(String beer){
 	
 	String baseUrl = "http://api.brewerydb.com/v2/search/?q="+ beer +"/?description/?hasLabels=Y/&type=beer&key=4b77a2665f85f929d4a87d30bbeae67b&format=json";
 	
-	String query = "http://api.brewerydb.com/v2/search/upc?code="+ beer +"&key=4b77a2665f85f929d4a87d30bbeae67b&format=json";
+	//String query = "http://api.brewerydb.com/v2/search/upc?code="+ beer +"&key=4b77a2665f85f929d4a87d30bbeae67b&format=json";
 
 
 		

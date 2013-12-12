@@ -19,13 +19,45 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/favBeerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="128dp"
-        android:text="@string/the_favorite_beers_will_be_loaded_inside_here"
+        android:layout_marginTop="16dp"
+        android:text="beerName"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/favDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/favBeerName"
+        android:layout_centerHorizontal="true"
+        android:text="Favorite beer description" />
+
+    <TextView
+        android:id="@+id/aBV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/favDescription"
+        android:layout_below="@+id/favDescription"
+        android:text="ABV" />
+
+    <TextView
+        android:id="@+id/typeOfBeer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/favDescription"
+        android:layout_centerHorizontal="true"
+        android:text="Type" />
+
+    <TextView
+        android:id="@+id/availbleBeer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView1"
+        android:layout_below="@+id/favDescription"
+        android:text="Available" />
 
 </RelativeLayout>

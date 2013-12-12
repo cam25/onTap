@@ -10,7 +10,10 @@
 package com.cmozie.ontap;
 
 
+import org.json.JSONArray;
+
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,6 +23,8 @@ import android.app.ActionBar.Tab;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,12 +48,13 @@ public class MainActivity extends Activity {
 	ActionBar.Tab WTD,FAB,EVNT;
 	
 	//sets tab fragments to each  custom class
-	Fragment tabFrag1 = new WhatToDrink();
-	Fragment tabFrag2 = new FindABrew();
-	Fragment tabFrag3 = new Events();
+	public static Fragment tabFrag1 = new WhatToDrink();
+	public static Fragment tabFrag2 = new FindABrew();
+	public static Fragment tabFrag3 = new Events();
 	Context context;
 	public MenuItem add;
 	public MenuItem share;
+	
 	
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -201,37 +207,13 @@ public class TabListener implements ActionBar.TabListener {
 		
 		//opens alert for add
 		case R.id.add:
-			AlertDialog.Builder alert = new AlertDialog.Builder(this);
-				alert.setTitle("Add Favs");
-				alert.setMessage("Feature Coming Soon...");
-				alert.setCancelable(false);
-				alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
-				
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-
-						dialog.cancel();
-					}
-				});
-				alert.show();
-
+			
+			//WhatToDrink.storeFile(this, "favorites", WhatToDrink.map, true);
 			break;
 			
 			//opens alert for share
 		case R.id.share:
-			AlertDialog.Builder alert2 = new AlertDialog.Builder(this);
-			alert2.setTitle("Share Feature");
-			alert2.setMessage("Feature Coming Soon...");
-			alert2.setCancelable(false);
-			alert2.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
 			
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-
-					dialog.cancel();
-				}
-			});
-			alert2.show();
 			  break;
 			  //opens favorites activity
 		case R.id.favorites:

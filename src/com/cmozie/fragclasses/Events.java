@@ -165,7 +165,6 @@ public void getApiResults(){
 					if (allEvents.has("name")) {
 						String name = allEvents.getString("name");
 						myMap.put("name", name);
-						Log.i("map", myMap.toString());
 						//eventName.setText(name);
 					}
 						
