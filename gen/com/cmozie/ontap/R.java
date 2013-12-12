@@ -43,13 +43,15 @@ public final class R {
         public static final int brewery2=0x7f020005;
         public static final int ic_launcher=0x7f020006;
         public static final int images=0x7f020007;
-        public static final int lock=0x7f020008;
-        public static final int logo=0x7f020009;
-        public static final int logotext=0x7f02000a;
-        public static final int reader=0x7f02000b;
-        public static final int rectangle=0x7f02000c;
-        public static final int share=0x7f02000d;
-        public static final int texturebkg=0x7f02000e;
+        public static final int loadbeerimage=0x7f020008;
+        public static final int lock=0x7f020009;
+        public static final int logo=0x7f02000a;
+        public static final int logotext=0x7f02000b;
+        public static final int notavailable=0x7f02000c;
+        public static final int reader=0x7f02000d;
+        public static final int rectangle=0x7f02000e;
+        public static final int share=0x7f02000f;
+        public static final int texturebkg=0x7f020010;
     }
     public static final class id {
         public static final int aBV=0x7f090011;

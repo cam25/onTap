@@ -38,7 +38,7 @@ import com.cmozie.fragclasses.FindABrew;
 import com.cmozie.fragclasses.Network;
 import com.cmozie.fragclasses.WhatToDrink;
 import com.cmozie.fragclasses.Events.ShareEvent;
-import com.cmozie.fragclasses.WhatToDrink.OnFragmentVisibleListener;
+
 import com.cmozie.fragclasses.WhatToDrink.PassTheData;
 import com.cmozie.fragclasses.WhatToDrink.shareData;
 

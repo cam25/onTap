@@ -99,6 +99,8 @@ public class WhatToDrink extends Fragment  {
 	public interface PassTheData{
 		public void passTheData();
 	}
+	
+	
 
 	@Override
 	public void onAttach(Activity a) {
@@ -369,7 +371,5 @@ public class WhatToDrink extends Fragment  {
 		}
 		return true;
 	}
-	public interface OnFragmentVisibleListener{
-	    public void fragmentVisible(boolean test, String tag);
-	}
+	
 }

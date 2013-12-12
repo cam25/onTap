@@ -361,10 +361,14 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 				
 				if (one.has("name")) {
 					 map.put("name", one.getString("name"));
+				}else{
+					map.put("name", "N/A");
 				}
 			
 				if (one.has("description")) {
 					map.put("description", one.getString("description"));
+				}else {
+					map.put("description", "No Description Available");
 				}
 				
 				if (one.has("labels")) {
@@ -379,6 +383,8 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 				 
 				if (one.has("abv")) {
 					 map.put("abv", one.getString("abv"));
+				}else {
+					map.put("abv", "N/A");
 				}
 				
 				if (one.has("id")) {
@@ -387,11 +393,15 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 				
 				if (one.has("type")) {
 					map.put("type", one.getString("type"));
+				}else {
+					map.put("type", "N/A");
 				}
 				
 				if (one.has("available")) {
 					JSONObject available = one.getJSONObject("available");
 					map.put("available", available.getString("name"));
+				}else {
+					map.put("available", "N/A");
 				}
 				
 				 test.add(map);

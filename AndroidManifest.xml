@@ -52,17 +52,19 @@
         </activity>
         <activity
             android:name="com.cmozie.ontap.MoreDetails"
-           
+            android:configChanges="orientation|keyboardHidden"
            >
         </activity>
         <activity
             android:name="com.cmozie.ontap.BreweryDetails"
+             android:configChanges="orientation|keyboardHidden"
            
            >
         </activity>
         <activity
             android:name="com.cmozie.ontap.Favorites"
-            android:label="@string/title_activity_favorites" >
+            android:label="@string/title_activity_favorites"
+             android:configChanges="orientation|keyboardHidden" >
         </activity>
     </application>
 

@@ -25,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.cmozie.fragclasses.Network;
+import com.cmozie.fragclasses.WhatToDrink;
 import com.cmozie.fragclasses.FindABrew.SearchAsyncTask;
 
 import android.net.Uri;
@@ -120,6 +121,9 @@ public class MoreDetails extends Activity {
 				al.execute(url);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
+				if (url == null) {
+					Log.i("null", "null");
+				}
 				e.printStackTrace();
 			}
 		breweryDetails.setOnClickListener(new View.OnClickListener() {
@@ -373,19 +377,10 @@ public class MoreDetails extends Activity {
 			break;
 			//share icon
 		case R.id.share:
-			AlertDialog.Builder alert2 = new AlertDialog.Builder(this);
-			alert2.setTitle("Share Feature");
-			alert2.setMessage("Feature Coming Soon...");
-			alert2.setCancelable(false);
-			alert2.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
-			
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-
-					dialog.cancel();
-				}
-			});
-			alert2.show();
+			Intent intent = new Intent(Intent.ACTION_SEND);
+			intent.setType("text/plain");
+			intent.putExtra(android.content.Intent.EXTRA_TEXT,"Beer's Name:" + beersName.getText().toString() + "\n" + "Beer Description" + "\n " + descriptionTitle.getText().toString());
+			startActivity(intent); 
 			  break;
 			  
 			  //favorites activity

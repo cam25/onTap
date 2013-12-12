@@ -40,7 +40,7 @@
         android:layout_below="@+id/beerName"
         android:contentDescription="@string/todo"
         android:scaleType="fitXY"
-        android:src="@drawable/images" />
+        android:src="@drawable/loadbeerimage" />
 
     <TextView
         android:id="@+id/available"
