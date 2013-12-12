@@ -150,11 +150,7 @@ public class WhatToDrink extends Fragment  {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			progressIndicator = new ProgressDialog(getActivity());
-			progressIndicator.setMessage("Image Loading...");
-			progressIndicator.setIndeterminate(false);
-			progressIndicator.setCancelable(true);
-			progressIndicator.show();
+			
 		}
 
 		@Override
@@ -248,7 +244,7 @@ public class WhatToDrink extends Fragment  {
                 @Override
                 protected void onPostExecute(Drawable result) 
                 {
-                	progressIndicator.dismiss();
+                	
                         beerImg.setImageDrawable(result);
             }
         }

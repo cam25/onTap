@@ -15,6 +15,7 @@ import java.net.URL;
 import com.cmozie.fragclasses.Network;
 import com.cmozie.ontap.MoreDetails.getImage;
 
+
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -45,6 +46,7 @@ public class BreweryDetails extends Activity {
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
+	@SuppressWarnings("unused")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,13 +79,16 @@ public class BreweryDetails extends Activity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		 
 		breweryName.setText(getIntent().getExtras().getString("name"));
 		addy.setText(getIntent().getExtras().getString("streetAddress"));
 		city.setText(getIntent().getExtras().getString("locality"));
 		state.setText(getIntent().getExtras().getString("region"));
-		zipcode.setText(getIntent().getExtras().getString("numberCode"));
-		zipcode.setText(getIntent().getExtras().getString("postalCode"));
 		
+		zipcode.setText(getIntent().getExtras().getString("postalCode"));
+		if (city.getText().toString() == "N/A") {
+			city.setText(getIntent().getExtras().getString("countryName"));
+		}
 		open.setText(getIntent().getExtras().getString("openToPublic"));
 		phone.setText(getIntent().getExtras().getString("phone"));
 		website.setText(getIntent().getExtras().getString("website"));
@@ -148,7 +153,11 @@ public class BreweryDetails extends Activity {
 		public boolean onOptionsItemSelected(MenuItem item){
 			switch (item.getItemId()) {
 			
-			
+			case android.R.id.home:
+				Intent homeIntent = new Intent(this, MoreDetails.class);
+				  homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				  startActivity(homeIntent);
+				break;
 			case R.id.favorites:
 				
 				startActivity(new Intent(BreweryDetails.this, Favorites.class));

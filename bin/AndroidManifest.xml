@@ -25,12 +25,16 @@
         <activity
             android:name="com.cmozie.ontap.SplashPage"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
              >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.cmozie.ontap.MainActivity" />
             
         </activity>
         <activity
@@ -42,29 +46,31 @@
         <activity
             android:name="com.cmozie.fragclasses.FindABrew"
             android:label="@string/title_activity_find_abeer" 
-            android:configChanges="orientation|keyboardHidden">
+           android:configChanges="orientation|keyboardHidden">
         </activity>
         <activity
             android:name="com.cmozie.fragclasses.Events"
             android:label="@string/title_activity_events" 
-            android:configChanges="orientation|keyboardHidden"
+            android:configChanges="orientation|keyboardHidden|screenSize"
            >
         </activity>
         <activity
             android:name="com.cmozie.ontap.MoreDetails"
             android:configChanges="orientation|keyboardHidden"
            >
+            
         </activity>
         <activity
             android:name="com.cmozie.ontap.BreweryDetails"
              android:configChanges="orientation|keyboardHidden"
-           
            >
+             
         </activity>
         <activity
             android:name="com.cmozie.ontap.Favorites"
             android:label="@string/title_activity_favorites"
              android:configChanges="orientation|keyboardHidden" >
+            
         </activity>
     </application>
 

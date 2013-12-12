@@ -28,6 +28,7 @@ import com.cmozie.fragclasses.Network;
 import com.cmozie.fragclasses.WhatToDrink;
 import com.cmozie.fragclasses.FindABrew.SearchAsyncTask;
 
+
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.NavUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
@@ -97,14 +99,15 @@ public class MoreDetails extends Activity {
 		 availble = (TextView)findViewById(R.id.available);
 		descriptionTitle = (TextView) findViewById(R.id.description);
 		beerImage = (ImageView)findViewById(R.id.beerLogo);
-		imagURL = getIntent().getExtras().getString("styleDescription");
+		
 		
 		
 		
 		 
 		
 		//receiving intent data
-		beersName.setText(getIntent().getExtras().getString("name"));
+		imagURL = this.getIntent().getExtras().getString("styleDescription");
+		beersName.setText(this.getIntent().getExtras().getString("name"));
 		abv.setText(getIntent().getExtras().getString("abv"));
 		descriptionTitle.setText(getIntent().getExtras().getString("description"));
 		 beerId = getIntent().getExtras().getString("id");
@@ -114,16 +117,16 @@ public class MoreDetails extends Activity {
 		 
 		 //parsing image
 		 try {
-				url = new URL(imagURL);
 				
+				if (url != null) {
+					url = new URL(imagURL);
+				}
 
 				getImage al = new getImage(); 
 				al.execute(url);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
-				if (url == null) {
-					Log.i("null", "null");
-				}
+				
 				e.printStackTrace();
 			}
 		breweryDetails.setOnClickListener(new View.OnClickListener() {
@@ -262,7 +265,9 @@ public class MoreDetails extends Activity {
 					for (int j = 0; j < two.length(); j++) {
 						JSONObject locationInfo = two.getJSONObject(0);
 						
+						JSONObject country = locationInfo.getJSONObject("country");
 						
+						Log.i("country", country.toString());
 						if (locationInfo.has("streetAddress")) {
 							String address = locationInfo.getString("streetAddress");
 							intent.putExtra("streetAddress", address);
@@ -272,6 +277,8 @@ public class MoreDetails extends Activity {
 						if (locationInfo.has("locality")) {
 							String city = locationInfo.getString("locality");
 							intent.putExtra("locality", city);
+						}else{
+							intent.putExtra("locality", "N/A");
 						}
 						
 						
@@ -279,6 +286,8 @@ public class MoreDetails extends Activity {
 						if (locationInfo.has("region")) {
 							String state = locationInfo.getString("region");
 							intent.putExtra("region", state);
+						}else{
+							intent.putExtra("region", "N/A");
 						}
 						
 						
@@ -287,18 +296,30 @@ public class MoreDetails extends Activity {
 							String zipcode = locationInfo.getString("postalCode");
 							intent.putExtra("postalCode", zipcode);
 							
+						}else{
+							intent.putExtra("postalCode", "N/A");
 						}
-						if (locationInfo.has("country")) {
+						if (country.has("name")) {
 							
-							JSONObject numCode = locationInfo.getJSONObject("country");
 							
-							intent.putExtra("numberCode", numCode.getString("numberCode"));
+							String countryName = country.getString("name");
+							intent.putExtra("countryName", countryName);
 						}
+						
+						if (country.has("numberCode")) {
+							
+							
+							String numberCode = country.getString("numberCode");
+							intent.putExtra("countryName", numberCode);
+						}
+						
 						
 						if (locationInfo.has("openToPublic")) {
 							String open = locationInfo.getString("openToPublic");
 							intent.putExtra("openToPublic", open);
 							
+						}else{
+							intent.putExtra("openToPublic", "N/A");
 						}
 						
 						
@@ -306,6 +327,8 @@ public class MoreDetails extends Activity {
 							String phone = locationInfo.getString("phone");
 							intent.putExtra("phone", phone);
 							
+						}else{
+							intent.putExtra("phone", "N/A");
 						}
 						
 						
@@ -313,6 +336,8 @@ public class MoreDetails extends Activity {
 							String website = locationInfo.getString("website");
 							intent.putExtra("website", website);
 							
+						}else{
+							intent.putExtra("website", "N/A");
 						}
 						
 						
@@ -355,6 +380,12 @@ public class MoreDetails extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()) {
+		case android.R.id.home:
+			Intent homeIntent = new Intent(this, MainActivity.class);
+			  homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			  startActivity(homeIntent);
+	    break;
+		
 		
 	//favorites icon
 		case R.id.add:

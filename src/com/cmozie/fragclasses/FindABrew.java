@@ -210,7 +210,7 @@ public class FindABrew extends Fragment {
   
            getScanResults(beer);
            	  
-                
+                searchField.setText("");
                  Log.i("Query",query);
                  
               

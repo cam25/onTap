@@ -30,8 +30,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 // TODO: Auto-generated Javadoc
@@ -201,5 +203,26 @@ public static Object readObjectFile(Context context, String filename, Boolean ex
 		getMenuInflater().inflate(R.menu.favorites, menu);
 		return true;
 	}
+	
+	 @Override
+		public boolean onOptionsItemSelected(MenuItem item){
+			switch (item.getItemId()) {
+			
+			case android.R.id.home:
+				Intent homeIntent = new Intent(this, MainActivity.class);
+				  homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				  startActivity(homeIntent);
+				break;
+			case R.id.favorites:
+				
+				startActivity(new Intent(Favorites.this, Favorites.class));
+
+				break;
+			default:
+				break;
+			}
+			return super.onOptionsItemSelected(item);
+			
+		}
 
 }

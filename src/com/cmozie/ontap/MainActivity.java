@@ -132,6 +132,11 @@ public class TabListener implements ActionBar.TabListener {
     	public TabListener(Fragment fragment) {
 	        // TODO Auto-generated constructor stub
 	        this.fragment = fragment;
+	        
+	        FragmentManager fm= getFragmentManager();
+	        if(fm.getBackStackEntryCount()>0){
+	          fm.popBackStack();
+	       }
 	    }
 	 
 	    /* (non-Javadoc)
