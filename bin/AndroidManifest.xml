@@ -63,8 +63,11 @@
         <activity
             android:name="com.cmozie.ontap.BreweryDetails"
              android:configChanges="orientation|keyboardHidden"
-           >
              
+           >
+             <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.cmozie.ontap.MoreDetails" />
         </activity>
         <activity
             android:name="com.cmozie.ontap.Favorites"

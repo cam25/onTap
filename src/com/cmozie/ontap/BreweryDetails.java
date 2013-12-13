@@ -12,6 +12,7 @@ package com.cmozie.ontap;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import com.cmozie.fragclasses.FindABrew;
 import com.cmozie.fragclasses.Network;
 import com.cmozie.ontap.MoreDetails.getImage;
 
@@ -25,6 +26,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -152,12 +154,9 @@ public class BreweryDetails extends Activity {
 	 @Override
 		public boolean onOptionsItemSelected(MenuItem item){
 			switch (item.getItemId()) {
-			
 			case android.R.id.home:
-				Intent homeIntent = new Intent(this, MoreDetails.class);
-				  homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				  startActivity(homeIntent);
-				break;
+				 NavUtils.navigateUpFromSameTask(this);
+		    break;
 			case R.id.favorites:
 				
 				startActivity(new Intent(BreweryDetails.this, Favorites.class));

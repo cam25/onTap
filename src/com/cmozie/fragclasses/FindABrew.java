@@ -434,7 +434,7 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 							intent.putExtra("styleDescription", styleDescript);
 							intent.putExtra("type", type);
 							intent.putExtra("available", availability);
-				         	Toast.makeText(getActivity(), "You Clicked at "+test.get(+arg2).get("name"), Toast.LENGTH_SHORT).show();
+				         	//Toast.makeText(getActivity(), "You Clicked at "+test.get(+arg2).get("name"), Toast.LENGTH_SHORT).show();
 							
 			                startActivity(intent);
 							

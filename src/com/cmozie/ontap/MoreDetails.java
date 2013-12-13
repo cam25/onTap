@@ -76,6 +76,7 @@ public class MoreDetails extends Activity {
     //public static final String filename = "favorites";
     public static HashMap<String, String> map;
 	public static List<Map<String,String>> favs;
+	 public static final String filename = "storedContents";
 	Context context;
 
 	/* (non-Javadoc)
@@ -114,9 +115,13 @@ public class MoreDetails extends Activity {
 		 type.setText(getIntent().getExtras().getString("type"));
 		 availble.setText(getIntent().getExtras().getString("available"));
 		 loadDoc();
-		 
+		
+			
+			
 		 //parsing image
 		 try {
+			//setting shareprefrences equal to my static string filename	
+		
 				
 				if (url != null) {
 					url = new URL(imagURL);
@@ -352,7 +357,8 @@ public class MoreDetails extends Activity {
 				}
 				
 				}*/
-					startActivity(intent);
+					startActivityForResult(intent, 0);
+					
 				}
 				
 			} catch (Exception e) {
