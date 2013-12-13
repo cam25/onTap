@@ -10,14 +10,26 @@
 package com.cmozie.fragclasses;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -25,6 +37,7 @@ import android.net.NetworkInfo;
  */
 public class Network {
 	
+	private static final int IO_BUFFER_SIZE = 0;
 	static Boolean connection = false;
 	static String connectionType = "NotReady";
 	
@@ -77,6 +90,7 @@ public static Drawable LoadImageFromWebOperations(String url) {
         return null;
     }
 }
+
 
 /**
  * URL string response.

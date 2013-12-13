@@ -7,7 +7,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".BreweryDetails" 
-    android:background="@drawable/texturebkg">
+    android:background="@drawable/texturebkg"
+    android:scrollbars="horizontal">
 
     <TextView
         android:id="@+id/breweryName"
@@ -23,12 +24,13 @@
 
     <ImageView
         android:id="@+id/brewImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
         android:layout_below="@+id/breweryName"
         android:layout_marginTop="20dp"
+        android:scaleType="fitCenter"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/brewery" />
+       />
 
     <TextView
         android:id="@+id/city"

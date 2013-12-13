@@ -32,10 +32,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
+import com.cmozie.ontap.EventDetails;
 import com.cmozie.ontap.Favorites;
 import com.cmozie.ontap.MainActivity;
+import com.cmozie.ontap.MoreDetails;
 import com.cmozie.ontap.R;
 
 // TODO: Auto-generated Javadoc
@@ -72,33 +79,11 @@ public class Events extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		 eventName = (TextView)getActivity().findViewById(R.id.eventName);
-		 eventType = (TextView)getActivity().findViewById(R.id.eventType);
-		 eventDescription = (TextView)getActivity().findViewById(R.id.eventDescription);
-		 eventVenue = (TextView)getActivity().findViewById(R.id.venue);
-		 eventsWebsite = (TextView)getActivity().findViewById(R.id.eventWebsite);
-		eventSchedule = (TextView)getActivity().findViewById(R.id.scheduleEvent);
+		 
 		 getApiResults();
 		
 		 
-		 eventSchedule.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-				
-				  Intent intent = new Intent(Intent.ACTION_EDIT);
-				  intent.setType("vnd.android.cursor.item/event");
-				  
-				  intent.putExtra("title", eventName.getText().toString());
-				  intent.putExtra("description", eventDescription.getText().toString());
-				  intent.putExtra("availability", 1);
-				  startActivity(intent);
-
-				
-			}
-		});
+		 
 		 
 		 
 	}
@@ -215,32 +200,63 @@ public void getApiResults(){
 					
 					arrayList.add(myMap);
 					
-					for (int j = 0; j <  arrayList.size(); j++) {
+					ListView lv = (ListView)getActivity().findViewById(R.id.eventsList);
+					ListAdapter adapter = new SimpleAdapter(getActivity(), arrayList, R.layout.listitems, new String[]{"name","type" },new int[]{R.id.listBeerType, R.id.listBeerCompany});
+					
+					lv.setAdapter(adapter);
+					
+					lv.setOnItemClickListener(new OnItemClickListener() {
+
+						@Override
+						public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+								long arg3) {
+							// TODO Auto-generated method stub
+							Intent intent = new Intent(getActivity(), EventDetails.class);
+							String name = arrayList.get(+arg2).get("name");
+							String description = arrayList.get(+arg2).get("description");
+							String type = arrayList.get(+arg2).get("type");
+							String venue = arrayList.get(+arg2).get("venueName");
+							String website = arrayList.get(+arg2).get("website");
+							
+							intent.putExtra("name", name);
+							intent.putExtra("description", description);						
+							intent.putExtra("venueName", venue);
+							intent.putExtra("type", type);
+							intent.putExtra("website", website);
+				         	//Toast.makeText(getActivity(), "You Clicked at "+test.get(+arg2).get("name"), Toast.LENGTH_SHORT).show();
+							
+			                startActivity(intent);
+							
+						}
+					});
+					
+					/*for (int j = 0; j <  arrayList.size(); j++) {
 						
 						if (allEvents.has("name")) {
 							String name = allEvents.getString("name");
-							eventName.setText(name);
+							//eventName.setText(name);
 						}
 							
 						if (allEvents.has("description")) {
 							String descript = allEvents.getString("description");
-							eventDescription.setText(descript);
+							//eventDescription.setText(descript);
 						}
 						if (allEvents.has("type")) {
 							String typeEvent = allEvents.getString("type");
-							eventType.setText(typeEvent);
+							//eventType.setText(typeEvent);
 						}
 						if (allEvents.has("venueName")) {
 							String venueEvent = allEvents.getString("venueName");
-							eventVenue.setText(venueEvent);
+							//eventVenue.setText(venueEvent);
 						}
 						
 						if (allEvents.has("website")) {
 							String eventWebsite = allEvents.getString("website");
-							eventsWebsite.setText(eventWebsite);
+							//eventsWebsite.setText(eventWebsite);
 						}
 					}
-				}
+				*/
+					}
 				//beerDescription.setText(description2);
 				//Log.i("beer", beerNam);
 			} catch (JSONException e) {

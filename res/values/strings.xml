@@ -36,5 +36,6 @@
     <string name="sam_adams">Sam Adams</string>
     <string name="favorites">Favorites</string>
     <string name="share">Share</string>
+    <string name="title_activity_event_details">EventDetails</string>
 
 </resources>

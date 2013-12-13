@@ -12,7 +12,10 @@ package com.cmozie.fragclasses;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -37,6 +40,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -182,6 +188,11 @@ public class WhatToDrink extends Fragment  {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
+			progressIndicator = new ProgressDialog(getActivity());
+			progressIndicator.setMessage("Getting Info...");
+			progressIndicator.setIndeterminate(false);
+			progressIndicator.setCancelable(true);
+			progressIndicator.show();
 			
 		}
 
@@ -259,6 +270,7 @@ public class WhatToDrink extends Fragment  {
 		/**
 		 * The Class ImageRequest.
 		 */
+		@SuppressLint("NewApi")
 		public class ImageRequest extends AsyncTask<URL, Void, Drawable>
         {
 
@@ -282,12 +294,17 @@ public class WhatToDrink extends Fragment  {
                 @Override
                 protected void onPostExecute(Drawable result) 
                 {
-                	
-                        beerImg.setImageDrawable(result);
+                	progressIndicator.dismiss();
+                	Bitmap original = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.loadbeerimage);
+                	Bitmap b = Bitmap.createScaledBitmap(original, 300, 50, true);
+                	Drawable d = new BitmapDrawable(getResources(), b);
+                	beerImg.setBackground(result);
+                        
             }
         }
 		
 	}
+	
 	
 	/* (non-Javadoc)
 	 * @see android.app.Fragment#onOptionsItemSelected(android.view.MenuItem)

@@ -7,9 +7,10 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="18" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -18,62 +19,58 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.cmozie.ontap.MainActivity"
-            android:label="@string/app_name"
             android:configChanges="orientation|keyboardHidden|screenSize"
-             >
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="com.cmozie.ontap.SplashPage"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-             >
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.cmozie.ontap.MainActivity" />
-            
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cmozie.ontap.MainActivity" />
         </activity>
         <activity
             android:name="com.cmozie.ontap.AgeVerification"
-            android:label="@string/title_activity_age_verification" 
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden">
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_age_verification"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.cmozie.fragclasses.FindABrew"
-            android:label="@string/title_activity_find_abeer" 
-           android:configChanges="orientation|keyboardHidden">
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_find_abeer" >
         </activity>
         <activity
             android:name="com.cmozie.fragclasses.Events"
-            android:label="@string/title_activity_events" 
             android:configChanges="orientation|keyboardHidden|screenSize"
-           >
+            android:label="@string/title_activity_events" >
         </activity>
         <activity
             android:name="com.cmozie.ontap.MoreDetails"
-            android:configChanges="orientation|keyboardHidden"
-           >
-            
+            android:configChanges="orientation|keyboardHidden" >
         </activity>
         <activity
             android:name="com.cmozie.ontap.BreweryDetails"
-             android:configChanges="orientation|keyboardHidden"
-             
-           >
-             <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.cmozie.ontap.MoreDetails" />
+            android:configChanges="orientation|keyboardHidden" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cmozie.ontap.MoreDetails" />
         </activity>
         <activity
             android:name="com.cmozie.ontap.Favorites"
-            android:label="@string/title_activity_favorites"
-             android:configChanges="orientation|keyboardHidden" >
-            
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_favorites" >
+        </activity>
+        <activity
+            android:name="com.cmozie.ontap.EventDetails"
+            android:label="@string/title_activity_event_details" >
         </activity>
     </application>
 

@@ -32,6 +32,7 @@ import com.cmozie.fragclasses.FindABrew.SearchAsyncTask;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -41,6 +42,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.NavUtils;
 import android.text.method.ScrollingMovementMethod;
@@ -77,7 +81,7 @@ public class MoreDetails extends Activity {
     public static HashMap<String, String> map;
 	public static List<Map<String,String>> favs;
 	 public static final String filename = "storedContents";
-	Context context;
+	public static Context context;
 
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -102,24 +106,14 @@ public class MoreDetails extends Activity {
 		beerImage = (ImageView)findViewById(R.id.beerLogo);
 		
 		
+		imagURL = this.getIntent().getExtras().getString("styleDescription");
+		 beersName.setText(this.getIntent().getExtras().getString("name"));
+		 abv.setText(getIntent().getExtras().getString("abv"));
+		 descriptionTitle.setText(getIntent().getExtras().getString("description"));
+		 beerId = getIntent().getExtras().getString("id");
+		 type.setText(getIntent().getExtras().getString("type"));
+		 availble.setText(getIntent().getExtras().getString("available"));
 		
-		
-		if ( getIntent() != null )
-		{
-		Bundle extras = getIntent().getExtras();
-		 if (extras != null)
-		{
-		 imagURL = extras.getString("styleDescription");
-		 beersName.setText(extras.getString("name"));
-		 abv.setText(extras.getString("abv"));
-		 descriptionTitle.setText(extras.getString("description"));
-		 beerId = extras.getString("id");
-		 type.setText(extras.getString("type"));
-		 availble.setText(extras.getString("available"));
-		loadDoc();
-		}
-
-		}
 		 loadDoc();
 		
 			
@@ -165,6 +159,8 @@ public class MoreDetails extends Activity {
        
 
     }
+	
+	
 	
 	/**
 	 * Gets the brewery details.
@@ -218,6 +214,7 @@ public class MoreDetails extends Activity {
 	/**
 	 * The Class getImage.
 	 */
+	@SuppressLint("NewApi")
 	public class getImage extends AsyncTask<URL, Void, Drawable>
     {
 
@@ -238,11 +235,15 @@ public class MoreDetails extends Activity {
             /* (non-Javadoc)
              * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
              */
-            @Override
+           
             protected void onPostExecute(Drawable result) 
             {
+            	Bitmap imageResource = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.loadbeerimage);
+            	Bitmap b = Bitmap.createScaledBitmap(imageResource, 300, 50, false);
+            	Drawable d = new BitmapDrawable(getResources(), b);
+            	beerImage.setBackground(result);
             
-                    beerImage.setImageDrawable(result);
+                   // beerImage.setImageDrawable(result);
         }
     }
 	

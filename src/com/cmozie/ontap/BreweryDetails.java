@@ -20,11 +20,15 @@ import com.cmozie.ontap.MoreDetails.getImage;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
@@ -38,6 +42,7 @@ import android.widget.TextView;
 /**
  * The Class BreweryDetails.
  */
+@SuppressLint("NewApi")
 public class BreweryDetails extends Activity {
 
 	
@@ -45,6 +50,7 @@ public class BreweryDetails extends Activity {
 	public static ImageView brewImg;
 	public static URL url;
 	public static TextView zipcode;
+	public static TextView addy;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -58,7 +64,7 @@ public class BreweryDetails extends Activity {
 		zipcode = (TextView)findViewById(R.id.zipcode);
 		actionBar.setDisplayShowTitleEnabled(false);
 		TextView breweryName = (TextView)findViewById(R.id.breweryName);
-		TextView addy = (TextView)findViewById(R.id.address);
+		addy = (TextView)findViewById(R.id.address);
 		TextView city = (TextView)findViewById(R.id.city);
 		TextView state = (TextView)findViewById(R.id.state);
 		TextView open = (TextView)findViewById(R.id.open);
@@ -100,17 +106,17 @@ public class BreweryDetails extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 			Log.i("textView", zipcode.getText().toString());
-				getGPS(zipcode.getText().toString());
+				getGPS(addy.getText().toString(),zipcode.getText().toString());
 			}
 		});
 	}
 	
-	public void getGPS(String locationCode){
+	public void getGPS(String address,String locationCode){
 		Intent mapIntent = new Intent(Intent.ACTION_VIEW,
     			
     			
 				//updated map action. Removed gps and implemented map to show location via passed zipcode from intent
-				Uri.parse("http://maps.google.com/maps?q="+ locationCode +"&zoom=14&size=512x512&maptype=roadmap&sensor=false"));
+				Uri.parse("http://maps.google.com/maps?q="+ address + "" + locationCode +"&zoom=14&size=512x512&maptype=roadmap&sensor=false"));
 		
 		startActivity(mapIntent);
 	}
@@ -137,8 +143,11 @@ public class BreweryDetails extends Activity {
             @Override
             protected void onPostExecute(Drawable result) 
             {
-            
-                    brewImg.setImageDrawable(result);
+            /*	Bitmap original = BitmapFactory.decodeResource(getApplicationContext().getResources(), result);
+            	Bitmap b = Bitmap.createScaledBitmap(original, 300, 50, false);
+            	Drawable d = new BitmapDrawable(getResources(), b);*/
+            	brewImg.setBackground(result);
+                   // brewImg.setImageDrawable(result);
         }
     }
 
