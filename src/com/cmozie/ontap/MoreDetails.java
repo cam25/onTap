@@ -5,7 +5,7 @@
  * 
  * name				cameronmozie
  * 
- * date				Dec 4, 2013
+ * date				Dec 12, 2013
  */
 package com.cmozie.ontap;
 
@@ -104,20 +104,26 @@ public class MoreDetails extends Activity {
 		
 		
 		
-		 
-		
-		//receiving intent data
-		imagURL = this.getIntent().getExtras().getString("styleDescription");
-		beersName.setText(this.getIntent().getExtras().getString("name"));
-		abv.setText(getIntent().getExtras().getString("abv"));
-		descriptionTitle.setText(getIntent().getExtras().getString("description"));
-		 beerId = getIntent().getExtras().getString("id");
-		 type.setText(getIntent().getExtras().getString("type"));
-		 availble.setText(getIntent().getExtras().getString("available"));
+		if ( getIntent() != null )
+		{
+		Bundle extras = getIntent().getExtras();
+		 if (extras != null)
+		{
+		 imagURL = extras.getString("styleDescription");
+		 beersName.setText(extras.getString("name"));
+		 abv.setText(extras.getString("abv"));
+		 descriptionTitle.setText(extras.getString("description"));
+		 beerId = extras.getString("id");
+		 type.setText(extras.getString("type"));
+		 availble.setText(extras.getString("available"));
+		loadDoc();
+		}
+
+		}
 		 loadDoc();
 		
 			
-			
+		 
 		 //parsing image
 		 try {
 			//setting shareprefrences equal to my static string filename	
@@ -148,6 +154,9 @@ public class MoreDetails extends Activity {
 		});
 	}
 	
+	/**
+	 * Load doc.
+	 */
 	private void loadDoc(){
 
 		
@@ -156,6 +165,13 @@ public class MoreDetails extends Activity {
        
 
     }
+	
+	/**
+	 * Gets the brewery details.
+	 *
+	 * @param beerId the beer id
+	 * @return the brewery details
+	 */
 	public  void getBreweryDetails(String beerId){
 
 		
@@ -198,6 +214,10 @@ public class MoreDetails extends Activity {
 			
 			
 		}
+	
+	/**
+	 * The Class getImage.
+	 */
 	public class getImage extends AsyncTask<URL, Void, Drawable>
     {
 
@@ -225,10 +245,17 @@ public class MoreDetails extends Activity {
                     beerImage.setImageDrawable(result);
         }
     }
+	
+	/**
+	 * The Class brewDetails.
+	 */
 	public class brewDetails extends AsyncTask<URL, Void, String>{
 		
 		
 
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#doInBackground(Params[])
+		 */
 		@Override
 		protected String doInBackground(URL... urls) {
 			// TODO Auto-generated method stub
@@ -239,6 +266,9 @@ public class MoreDetails extends Activity {
 			return reply;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+		 */
 		@Override
 		protected void onPostExecute(String result) {
 			// TODO Auto-generated method stub
@@ -433,6 +463,15 @@ public class MoreDetails extends Activity {
 		
 	}
 	
+	/**
+	 * Store file.
+	 *
+	 * @param context the context
+	 * @param favorite the favorite
+	 * @param favs the favs
+	 * @param external the external
+	 * @return the boolean
+	 */
 	@SuppressWarnings("resource")
 	public static Boolean storeFile(Context context, String favorite, Object favs, Boolean external){
 		try {
@@ -458,8 +497,8 @@ public class MoreDetails extends Activity {
 			
 			Log.i("File ","Saved");
 			AlertDialog.Builder alert = new AlertDialog.Builder(context);
-			alert.setTitle("Saved Files");
-			alert.setMessage("File Saved!");
+			alert.setTitle("Saved");
+			alert.setMessage("File Saved To Favorites!");
 			alert.setCancelable(false);
 			alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
 				

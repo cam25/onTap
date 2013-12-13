@@ -5,7 +5,7 @@
  * 
  * name				cameronmozie
  * 
- * date				Dec 5, 2013
+ * date				Dec 12, 2013
  */
 package com.cmozie.fragclasses;
 
@@ -193,6 +193,9 @@ public class FindABrew extends Fragment {
 		    
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onActivityResult(int, int, android.content.Intent)
+	 */
 	@SuppressWarnings("unused")
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 	        
@@ -217,18 +220,18 @@ public class FindABrew extends Fragment {
 			}
 	       
 	    }
+
+/**
+ * Gets the api results.
+ *
+ * @param beer the beer
+ * @return the api results
+ */
 public  void getApiResults(String beer){
-		
-	//String capitol = Character.toString(beer.charAt(0)).toUpperCase();
-	
-	
+
 	String baseUrl = "http://api.brewerydb.com/v2/search/?q="+ beer +"/?description/?hasLabels=Y/&type=beer&key=4b77a2665f85f929d4a87d30bbeae67b&format=json";
 	
-	//String query = "http://api.brewerydb.com/v2/search/upc?code="+ beer +"&key=4b77a2665f85f929d4a87d30bbeae67b&format=json";
 
-
-		
-		
 		
 		String queryString;
 		String queryString2;
@@ -268,20 +271,21 @@ public  void getApiResults(String beer){
 		
 		
 	}
+
+/**
+ * Gets the scan results.
+ *
+ * @param beer the beer
+ * @return the scan results
+ */
 public  void getScanResults(String beer){
 
 	
 	String query = "http://api.brewerydb.com/v2/search/upc?code="+ beer +"&key=4b77a2665f85f929d4a87d30bbeae67b&format=json";
 
-
-		
-		
-		
 		String queryString;
 		String queryString2;
 		try {
-			
-
 			queryString2 = URLEncoder.encode(query,"UTF-8");
 			queryString = URLEncoder.encode(beer,"UTF-8");
 		} catch (Exception e) {
@@ -309,9 +313,17 @@ public  void getScanResults(String beer){
 		
 		
 	}
+
+/**
+ * The Class SearchAsyncTask.
+ */
 public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 	
 	ProgressDialog progressIndicator;
+	
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#onPreExecute()
+	 */
 	@Override
 	protected void onPreExecute() {
 		// TODO Auto-generated method stub
@@ -327,6 +339,9 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 		progressIndicator.show();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#doInBackground(Params[])
+	 */
 	@Override
 	protected String doInBackground(URL... urls) {
 		// TODO Auto-generated method stub
@@ -337,6 +352,9 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 		return reply;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+	 */
 	@Override
 	protected void onPostExecute(String result) {
 		// TODO Auto-generated method stub

@@ -5,7 +5,7 @@
  * 
  * name				cameronmozie
  * 
- * date				Dec 5, 2013
+ * date				Dec 12, 2013
  */
 package com.cmozie.fragclasses;
 
@@ -80,6 +80,9 @@ public class WhatToDrink extends Fragment  {
 		return rootView;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onActivityCreated(android.os.Bundle)
+	 */
 	@SuppressLint("NewApi")
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -96,12 +99,23 @@ public class WhatToDrink extends Fragment  {
 		
 		Log.i("Started", "activit");
 	}
+	
+	/**
+	 * The Interface PassTheData.
+	 */
 	public interface PassTheData{
+		
+		/**
+		 * Pass the data.
+		 */
 		public void passTheData();
 	}
 	
 	
 
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onAttach(android.app.Activity)
+	 */
 	@Override
 	public void onAttach(Activity a) {
 	    super.onAttach(a);
@@ -114,11 +128,22 @@ public class WhatToDrink extends Fragment  {
 	    }
 	}
 	
+	/**
+	 * The Interface shareData.
+	 */
 	public interface shareData {
+		
+		/**
+		 * Share intent.
+		 */
 		public void shareIntent();
 	}
 	
-	
+	/**
+	 * Gets the api results.
+	 *
+	 * @return the api results
+	 */
 	public void getApiResults(){
 		
 		String baseUrl = "http://api.brewerydb.com/v2/beer/random/?hasLabels=Y&key=4b77a2665f85f929d4a87d30bbeae67b";
@@ -144,8 +169,15 @@ public class WhatToDrink extends Fragment  {
 	}
 	
 	
+	/**
+	 * The Class WhatToDrinkRequest.
+	 */
 	private class WhatToDrinkRequest extends AsyncTask<URL, Void, String>{
 		ProgressDialog progressIndicator;
+		
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#onPreExecute()
+		 */
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
@@ -153,6 +185,9 @@ public class WhatToDrink extends Fragment  {
 			
 		}
 
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#doInBackground(Params[])
+		 */
 		@Override
 		protected String doInBackground(URL... urls) {
 			// TODO Auto-generated method stub
@@ -163,6 +198,9 @@ public class WhatToDrink extends Fragment  {
 			return reply;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+		 */
 		@Override
 		protected void onPostExecute(String result) {
 			// TODO Auto-generated method stub
@@ -198,11 +236,7 @@ public class WhatToDrink extends Fragment  {
 					image.execute(url);
 					
 				}
-				
-				
-				
-				
-				
+
 				//beerDescription.setText(description2);
 				Log.i("beer", beerNam);
 			} catch (JSONException e) {
@@ -221,6 +255,10 @@ public class WhatToDrink extends Fragment  {
 			
 			
 		}
+		
+		/**
+		 * The Class ImageRequest.
+		 */
 		public class ImageRequest extends AsyncTask<URL, Void, Drawable>
         {
 
@@ -251,6 +289,9 @@ public class WhatToDrink extends Fragment  {
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()) {
@@ -287,6 +328,16 @@ public class WhatToDrink extends Fragment  {
 		return super.onOptionsItemSelected(item);
 		
 	}
+	
+	/**
+	 * Store string file.
+	 *
+	 * @param context the context
+	 * @param filename the filename
+	 * @param content the content
+	 * @param external the external
+	 * @return the boolean
+	 */
 	@SuppressWarnings("resource")
 	public static Boolean storeStringFile(Context context, String filename, String content, Boolean external){
 		
@@ -310,6 +361,9 @@ public class WhatToDrink extends Fragment  {
 			return true;
 	}
 	
+	/**
+	 * Inits the share intent.
+	 */
 	public static void initShareIntent() {
 	   
 	    Intent share = new Intent(android.content.Intent.ACTION_SEND);
@@ -324,6 +378,15 @@ public class WhatToDrink extends Fragment  {
 	}
 	
 	
+	/**
+	 * Store file.
+	 *
+	 * @param context the context
+	 * @param favorite the favorite
+	 * @param favs the favs
+	 * @param external the external
+	 * @return the boolean
+	 */
 	@SuppressWarnings("resource")
 	public static Boolean storeFile(Context context, String favorite, Object favs, Boolean external){
 		try {

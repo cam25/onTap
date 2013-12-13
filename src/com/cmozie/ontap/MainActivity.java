@@ -5,7 +5,7 @@
  * 
  * name				cameronmozie
  * 
- * date				Dec 5, 2013
+ * date				Dec 12, 2013
  */
 package com.cmozie.ontap;
 
@@ -255,6 +255,9 @@ public class TabListener implements ActionBar.TabListener {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see com.cmozie.fragclasses.WhatToDrink.PassTheData#passTheData()
+	 */
 	@Override
 	public void passTheData() {
 		// TODO Auto-generated method stub
@@ -269,6 +272,9 @@ public class TabListener implements ActionBar.TabListener {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see com.cmozie.fragclasses.WhatToDrink.shareData#shareIntent()
+	 */
 	@Override
 	public void shareIntent() {
 		// TODO Auto-generated method stub
@@ -280,6 +286,9 @@ public class TabListener implements ActionBar.TabListener {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see com.cmozie.fragclasses.Events.ShareEvent#eventShare()
+	 */
 	@Override
 	public void eventShare() {
 		// TODO Auto-generated method stub

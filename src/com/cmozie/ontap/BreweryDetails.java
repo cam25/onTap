@@ -154,9 +154,7 @@ public class BreweryDetails extends Activity {
 	 @Override
 		public boolean onOptionsItemSelected(MenuItem item){
 			switch (item.getItemId()) {
-			case android.R.id.home:
-				 NavUtils.navigateUpFromSameTask(this);
-		    break;
+		
 			case R.id.favorites:
 				
 				startActivity(new Intent(BreweryDetails.this, Favorites.class));
