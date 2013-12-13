@@ -143,9 +143,7 @@ public class BreweryDetails extends Activity {
             @Override
             protected void onPostExecute(Drawable result) 
             {
-            /*	Bitmap original = BitmapFactory.decodeResource(getApplicationContext().getResources(), result);
-            	Bitmap b = Bitmap.createScaledBitmap(original, 300, 50, false);
-            	Drawable d = new BitmapDrawable(getResources(), b);*/
+           
             	brewImg.setBackground(result);
                    // brewImg.setImageDrawable(result);
         }

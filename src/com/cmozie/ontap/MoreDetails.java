@@ -238,9 +238,7 @@ public class MoreDetails extends Activity {
            
             protected void onPostExecute(Drawable result) 
             {
-            	Bitmap imageResource = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.loadbeerimage);
-            	Bitmap b = Bitmap.createScaledBitmap(imageResource, 300, 50, false);
-            	Drawable d = new BitmapDrawable(getResources(), b);
+            	
             	beerImage.setBackground(result);
             
                    // beerImage.setImageDrawable(result);

@@ -295,9 +295,7 @@ public class WhatToDrink extends Fragment  {
                 protected void onPostExecute(Drawable result) 
                 {
                 	progressIndicator.dismiss();
-                	Bitmap original = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.loadbeerimage);
-                	Bitmap b = Bitmap.createScaledBitmap(original, 300, 50, true);
-                	Drawable d = new BitmapDrawable(getResources(), b);
+                	//set background
                 	beerImg.setBackground(result);
                         
             }
