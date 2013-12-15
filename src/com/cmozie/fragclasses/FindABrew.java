@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.cmozie.classes.AsyncRequest;
+import com.cmozie.classes.Network;
 import com.cmozie.classes.SearchAsyncTask;
 import com.cmozie.ontap.MoreDetails;
 import com.cmozie.ontap.R;
@@ -63,9 +64,7 @@ import android.widget.Toast;
  * The Class FindABrew.
  */
 public class FindABrew extends Fragment {
-	
-	private static final int RESULT_OK = 0;
-	private static final int RESULT_CANCELED = 0;
+
 	TextView listBeerName;
 	TextView listBeerCompany;
 	
@@ -84,7 +83,7 @@ public class FindABrew extends Fragment {
 	public static ImageButton scan;
 	public String labels;
 	public static EditText searchField;
-	
+	public static  ListView lv;	
 	public URL url;
 	/* (non-Javadoc)
 	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
@@ -109,8 +108,10 @@ public class FindABrew extends Fragment {
 		
 		//UI elements 
 		// EditText ed = (EditText)getActivity().findViewById(R.id.beerText);
-	    // ListView lv = (ListView)getActivity().findViewById(R.id.listView1);
+	    lv = (ListView)getActivity().findViewById(R.id.listView1);
 	     //Button search = (Button)getActivity().findViewById(R.id.searchButn);
+	     
+	    // lv.setVisibility(View.GONE);
 	     scan = (ImageButton)getActivity().findViewById(R.id.scannerButn);
 	     //ed.setText("Sam Adams");
 	     searchField = (EditText)getActivity().findViewById(R.id.searchField);
@@ -123,7 +124,7 @@ public class FindABrew extends Fragment {
 	    		 if (actionId == EditorInfo.IME_ACTION_SEND) {
 					
 	    			 String search = searchField.getText().toString();
-	    			
+	    			 //lv.setVisibility(View.VISIBLE);
 	    			 Log.i("search", search);
 	    			 getApiResults(search);
 	    			 getActivity();
@@ -138,12 +139,7 @@ public class FindABrew extends Fragment {
 				return false;
 			}
 		});
-	     //arraylist for listview
-	    List<String> arrayList = new ArrayList<String>();
-	    
-	    arrayList.add("Beer1");
-	    arrayList.add("Beer2");
-	    arrayList.add("Beer3");
+	   
 	    
 	   
 
@@ -436,10 +432,12 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 					JSONObject category = style.getJSONObject("category");
 					
 					map.put("style", category.getString("name"));
+				}else {
+					map.put("style", "N/A");
 				}
 				 test.add(map);
 				 
-				 ListView lv = (ListView)getActivity().findViewById(R.id.listView1);
+				//lv = (ListView)getActivity().findViewById(R.id.listView1);
 					ListAdapter adapter = new SimpleAdapter(getActivity(), test, R.layout.listitems, new String[]{"name","company" },new int[]{R.id.listBeerType, R.id.listBeerCompany});
 					
 					lv.setAdapter(adapter);

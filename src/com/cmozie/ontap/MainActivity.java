@@ -29,13 +29,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.cmozie.classes.Network;
 import com.cmozie.fragclasses.Events;
 import com.cmozie.fragclasses.FindABrew;
-import com.cmozie.fragclasses.Network;
 import com.cmozie.fragclasses.WhatToDrink;
 import com.cmozie.fragclasses.Events.ShareEvent;
 
@@ -109,6 +111,36 @@ public class MainActivity extends Activity implements PassTheData, shareData, Sh
 		transactions.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 		transactions.commit();
 	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+	    if (keyCode == KeyEvent.KEYCODE_BACK)
+	    {
+	        if (getFragmentManager().getBackStackEntryCount() == 0)
+	        {
+	        	Log.i("back", "stack");
+	        	
+	        
+	            this.finish();
+	            return false;
+	        }
+	        else
+	        {
+	            getFragmentManager().popBackStack();
+	            Log.i("back", "Has Stack");
+
+	            return false;
+	        }
+
+
+
+	    }
+
+	    return super.onKeyDown(keyCode, event);
+	}
+
+
+	
 	
 //TabListener class 
 	/**

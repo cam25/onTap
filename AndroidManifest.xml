@@ -45,7 +45,8 @@
         <activity
             android:name="com.cmozie.fragclasses.FindABrew"
             android:configChanges="orientation|keyboardHidden"
-            android:label="@string/title_activity_find_abeer" >
+            android:label="@string/title_activity_find_abeer"
+            >
         </activity>
         <activity
             android:name="com.cmozie.fragclasses.Events"

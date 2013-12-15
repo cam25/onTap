@@ -9,7 +9,9 @@
                          android:layout_width="match_parent"
                          android:layout_height="wrap_content"
                          android:layout_marginTop="100dp"
-                         android:background="@color/sysWhite" >
+                         
+                         android:fadingEdge="vertical" 
+                         android:background="@color/sysLtGray">
 
                      </ListView>
 
@@ -29,7 +31,7 @@
                          android:layout_alignParentTop="true"
                          android:layout_marginTop="17dp"
                          android:ems="10" 
-                         android:hint="Enter Search Here"
+                         android:hint="Enter Beer Here"
     					android:inputType="text"
     					android:imeOptions="actionSend">
 

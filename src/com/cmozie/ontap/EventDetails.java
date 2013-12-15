@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,10 +39,13 @@ public class EventDetails extends Activity {
 		 eventsWebsite = (TextView)findViewById(R.id.eventWebsite);
 		eventSchedule = (TextView)findViewById(R.id.scheduleEvent);
 		
+		
 		eventName.setText(getIntent().getExtras().getString("name"));
 		eventType.setText(getIntent().getExtras().getString("type"));
 		eventDescription.setText(getIntent().getExtras().getString("description"));
-		eventVenue.setText(getIntent().getExtras().getString("venuName"));
+		eventVenue.setText(getIntent().getExtras().getString("venueName"));
+		
+		
 		eventsWebsite.setText(getIntent().getExtras().getString("website"));
 		
 eventSchedule.setOnClickListener(new OnClickListener() {

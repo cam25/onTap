@@ -43,6 +43,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.cmozie.classes.Network;
 import com.cmozie.ontap.EventDetails;
 import com.cmozie.ontap.Favorites;
 import com.cmozie.ontap.MainActivity;
@@ -192,6 +193,7 @@ public void getApiResults(){
 					}
 					if (allEvents.has("venueName")) {
 						String venueEvent = allEvents.getString("venueName");
+						Log.i("Venue Is", venueEvent);
 						myMap.put("venueName", venueEvent);
 						//eventVenue.setText(venueEvent);
 					}
@@ -227,6 +229,8 @@ public void getApiResults(){
 							intent.putExtra("venueName", venue);
 							intent.putExtra("type", type);
 							intent.putExtra("website", website);
+							
+							Log.i("venue", venue);
 				         	//Toast.makeText(getActivity(), "You Clicked at "+test.get(+arg2).get("name"), Toast.LENGTH_SHORT).show();
 							
 							

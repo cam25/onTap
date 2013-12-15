@@ -13,7 +13,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.cmozie.fragclasses.Network;
 
 public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 	 TextView beerName;

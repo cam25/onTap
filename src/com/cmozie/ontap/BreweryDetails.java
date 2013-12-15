@@ -12,8 +12,8 @@ package com.cmozie.ontap;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import com.cmozie.classes.Network;
 import com.cmozie.fragclasses.FindABrew;
-import com.cmozie.fragclasses.Network;
 import com.cmozie.ontap.MoreDetails.getImage;
 
 

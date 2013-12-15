@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.cmozie.fragclasses.Network;
 import com.cmozie.fragclasses.WhatToDrink;
 
 

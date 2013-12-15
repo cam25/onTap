@@ -24,7 +24,7 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.cmozie.fragclasses.Network;
+import com.cmozie.classes.Network;
 import com.cmozie.fragclasses.WhatToDrink;
 import com.cmozie.fragclasses.FindABrew.SearchAsyncTask;
 
@@ -93,7 +93,7 @@ public class MoreDetails extends Activity {
 		
 		//actionbar
 		ActionBar actionBar = getActionBar();
-	    actionBar.setDisplayHomeAsUpEnabled(true);
+	    actionBar.setDisplayHomeAsUpEnabled(false);
 	    
 	    actionBar.setDisplayShowTitleEnabled(false);
 		TextView breweryDetails = (TextView)findViewById(R.id.breweryDetails);
@@ -190,10 +190,6 @@ public class MoreDetails extends Activity {
 		
 		String query = "http://api.brewerydb.com/v2/beer/"+beerId+"/?withBreweries=Y&key=4b77a2665f85f929d4a87d30bbeae67b";
 
-
-			
-			
-			
 			String queryString;
 			String queryString2;
 			try {
@@ -257,6 +253,13 @@ public class MoreDetails extends Activity {
             {
             	
             	beerImage.setBackground(result);
+           
+
+            	if (result == null) {
+					Log.i("Results", "Null");
+					
+					beerImage.setImageDrawable(getResources().getDrawable(R.drawable.loadbeerimage));
+				}
             
                    // beerImage.setImageDrawable(result);
         }
@@ -514,8 +517,8 @@ public class MoreDetails extends Activity {
 			
 			Log.i("File ","Saved");
 			AlertDialog.Builder alert = new AlertDialog.Builder(context);
-			alert.setTitle("Saved");
-			alert.setMessage("File Saved To Favorites!");
+			alert.setTitle("Favorites");
+			alert.setMessage("Beer Saved To Favorites!");
 			alert.setCancelable(false);
 			alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
 				

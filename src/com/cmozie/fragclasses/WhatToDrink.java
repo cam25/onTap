@@ -25,6 +25,7 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.cmozie.classes.Network;
 import com.cmozie.ontap.Favorites;
 import com.cmozie.ontap.MainActivity;
 import com.cmozie.ontap.MoreDetails;

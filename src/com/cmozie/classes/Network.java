@@ -7,7 +7,7 @@
  * 
  * date				Dec 6, 2013
  */
-package com.cmozie.fragclasses;
+package com.cmozie.classes;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
