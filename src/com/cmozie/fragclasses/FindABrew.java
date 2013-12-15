@@ -27,6 +27,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -42,6 +43,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -107,7 +109,7 @@ public class FindABrew extends Fragment {
 		
 		//UI elements 
 		// EditText ed = (EditText)getActivity().findViewById(R.id.beerText);
-	     ListView lv = (ListView)getActivity().findViewById(R.id.listView1);
+	    // ListView lv = (ListView)getActivity().findViewById(R.id.listView1);
 	     //Button search = (Button)getActivity().findViewById(R.id.searchButn);
 	     scan = (ImageButton)getActivity().findViewById(R.id.scannerButn);
 	     //ed.setText("Sam Adams");
@@ -124,6 +126,13 @@ public class FindABrew extends Fragment {
 	    			
 	    			 Log.i("search", search);
 	    			 getApiResults(search);
+	    			 getActivity();
+	    			 
+	    			 //hide keyboard
+					InputMethodManager inputManager = (InputMethodManager)            
+	    					  getActivity().getSystemService(Context.INPUT_METHOD_SERVICE); 
+	    					    inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),      
+	    					    InputMethodManager.HIDE_NOT_ALWAYS);
 				}
 	    		 
 				return false;
@@ -215,7 +224,7 @@ public class FindABrew extends Fragment {
            	  
                 searchField.setText("");
                  Log.i("Query",query);
-                 
+                
               
 			}
 	       
@@ -370,6 +379,7 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 				
 				
 				JSONObject one = data.getJSONObject(i);
+				
 				map = new HashMap<String, String>();
 				
 				
@@ -421,14 +431,19 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 				}else {
 					map.put("available", "N/A");
 				}
-				
+				if (one.has("style")) {
+					JSONObject style = one.getJSONObject("style");
+					JSONObject category = style.getJSONObject("category");
+					
+					map.put("style", category.getString("name"));
+				}
 				 test.add(map);
 				 
 				 ListView lv = (ListView)getActivity().findViewById(R.id.listView1);
 					ListAdapter adapter = new SimpleAdapter(getActivity(), test, R.layout.listitems, new String[]{"name","company" },new int[]{R.id.listBeerType, R.id.listBeerCompany});
 					
 					lv.setAdapter(adapter);
-					
+				
 					lv.setOnItemClickListener(new OnItemClickListener() {
 
 						@Override
@@ -443,7 +458,9 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 							String id = test.get(+arg2).get("id");
 							String type = test.get(+arg2).get("type");
 							String availability = test.get(+arg2).get("available");
+							String style = test.get(+arg2).get("style");
 						
+							
 							
 							intent.putExtra("id", id);
 							intent.putExtra("name", name);
@@ -451,6 +468,7 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 							intent.putExtra("description", descriptionText);
 							intent.putExtra("styleDescription", styleDescript);
 							intent.putExtra("type", type);
+							intent.putExtra("style", style);
 							intent.putExtra("available", availability);
 				         	//Toast.makeText(getActivity(), "You Clicked at "+test.get(+arg2).get("name"), Toast.LENGTH_SHORT).show();
 							

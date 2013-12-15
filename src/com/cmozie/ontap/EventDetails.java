@@ -1,9 +1,15 @@
 package com.cmozie.ontap;
 
+import java.util.HashMap;
+
+import com.cmozie.fragclasses.Events;
+
 import android.os.Bundle;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -19,6 +25,11 @@ public class EventDetails extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		ActionBar actionBar = getActionBar();
+	    actionBar.setDisplayHomeAsUpEnabled(true);
+	    actionBar.setDisplayShowTitleEnabled(false);
+	    
 		setContentView(R.layout.activity_event_details);
 		eventName = (TextView)findViewById(R.id.eventName);
 		 eventType = (TextView)findViewById(R.id.eventType);
@@ -59,5 +70,26 @@ eventSchedule.setOnClickListener(new OnClickListener() {
 		getMenuInflater().inflate(R.menu.event_details, menu);
 		return true;
 	}
+	public boolean onOptionsItemSelected(MenuItem item){
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			Intent homeIntent = new Intent(this, MainActivity.class);
+			  homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			  getApplicationContext().startActivity(homeIntent);
+	    break;
+		
+		
+	
+			  //favorites activity
+		case R.id.favorites:
+			
+			startActivity(new Intent(this, Favorites.class));
 
+			break;
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+		
+	}
 }

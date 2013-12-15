@@ -22,10 +22,14 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.support.v4.*;
+import android.app.FragmentManager;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -62,6 +66,7 @@ public class Events extends Fragment {
 	public static TextView eventSchedule;
 	public static HashMap<String, String> myMap;
 	public static List<Map<String,String>> arrayList;
+	
 	ShareEvent callBack;
 	
 	/* (non-Javadoc)
@@ -82,10 +87,7 @@ public class Events extends Fragment {
 		 
 		 getApiResults();
 		
-		 
-		 
-		 
-		 
+		
 	}
 	
 	
@@ -153,6 +155,8 @@ public void getApiResults(){
 		@Override
 		protected void onPostExecute(String result) {
 			// TODO Auto-generated method stub
+			
+			final Fragment newFragment = null;
 			arrayList = new ArrayList<Map<String,String>>();
 			try {
 				JSONObject json = new JSONObject(result);
@@ -225,8 +229,12 @@ public void getApiResults(){
 							intent.putExtra("website", website);
 				         	//Toast.makeText(getActivity(), "You Clicked at "+test.get(+arg2).get("name"), Toast.LENGTH_SHORT).show();
 							
+							
+							
 			                startActivity(intent);
 							
+			                
+			                
 						}
 					});
 					

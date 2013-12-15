@@ -104,7 +104,10 @@ public class MainActivity extends Activity implements PassTheData, shareData, Sh
 	    actionBar.addTab(EVNT);
 	
 	    
-		
+	  FragmentTransaction transactions = getFragmentManager().beginTransaction();
+		transactions.addToBackStack(null);
+		transactions.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+		transactions.commit();
 	}
 	
 //TabListener class 
@@ -133,10 +136,7 @@ public class TabListener implements ActionBar.TabListener {
 	        // TODO Auto-generated constructor stub
 	        this.fragment = fragment;
 	        
-	        FragmentManager fm= getFragmentManager();
-	        if(fm.getBackStackEntryCount()>0){
-	          fm.popBackStack();
-	       }
+	      
 	    }
 	 
 	    /* (non-Javadoc)

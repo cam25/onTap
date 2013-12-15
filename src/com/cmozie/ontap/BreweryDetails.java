@@ -24,6 +24,7 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.TaskStackBuilder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -51,6 +52,7 @@ public class BreweryDetails extends Activity {
 	public static URL url;
 	public static TextView zipcode;
 	public static TextView addy;
+	public TextView city;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -60,12 +62,12 @@ public class BreweryDetails extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_brewery_details);
 		ActionBar actionBar = getActionBar();
-	    actionBar.setDisplayHomeAsUpEnabled(true);
+	    actionBar.setDisplayHomeAsUpEnabled(false);
 		zipcode = (TextView)findViewById(R.id.zipcode);
 		actionBar.setDisplayShowTitleEnabled(false);
 		TextView breweryName = (TextView)findViewById(R.id.breweryName);
 		addy = (TextView)findViewById(R.id.address);
-		TextView city = (TextView)findViewById(R.id.city);
+		city = (TextView)findViewById(R.id.city);
 		TextView state = (TextView)findViewById(R.id.state);
 		TextView open = (TextView)findViewById(R.id.open);
 		TextView phone = (TextView)findViewById(R.id.phone);
@@ -100,23 +102,23 @@ public class BreweryDetails extends Activity {
 		open.setText(getIntent().getExtras().getString("openToPublic"));
 		phone.setText(getIntent().getExtras().getString("phone"));
 		website.setText(getIntent().getExtras().getString("website"));
-		zipcode.setOnClickListener(new View.OnClickListener() {
+		addy.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 			Log.i("textView", zipcode.getText().toString());
-				getGPS(addy.getText().toString(),zipcode.getText().toString());
+				getGPS(addy.getText().toString(), city.getText().toString(),zipcode.getText().toString());
 			}
 		});
 	}
 	
-	public void getGPS(String address,String locationCode){
+	public void getGPS(String address,String locality,String locationCode){
 		Intent mapIntent = new Intent(Intent.ACTION_VIEW,
     			
     			
 				//updated map action. Removed gps and implemented map to show location via passed zipcode from intent
-				Uri.parse("http://maps.google.com/maps?q="+ address + "" + locationCode +"&zoom=14&size=512x512&maptype=roadmap&sensor=false"));
+				Uri.parse("http://maps.google.com/maps?q="+ address + "" + locality +  "" + locationCode +"&zoom=14&size=512x512&maptype=roadmap&sensor=false"));
 		
 		startActivity(mapIntent);
 	}
@@ -161,7 +163,7 @@ public class BreweryDetails extends Activity {
 	 @Override
 		public boolean onOptionsItemSelected(MenuItem item){
 			switch (item.getItemId()) {
-		
+			
 			case R.id.favorites:
 				
 				startActivity(new Intent(BreweryDetails.this, Favorites.class));

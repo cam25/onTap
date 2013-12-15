@@ -106,7 +106,7 @@ public class MoreDetails extends Activity {
 		beerImage = (ImageView)findViewById(R.id.beerLogo);
 		
 		
-		imagURL = this.getIntent().getExtras().getString("styleDescription");
+		/*imagURL = this.getIntent().getExtras().getString("styleDescription");
 		 beersName.setText(this.getIntent().getExtras().getString("name"));
 		 abv.setText(getIntent().getExtras().getString("abv"));
 		 descriptionTitle.setText(getIntent().getExtras().getString("description"));
@@ -115,8 +115,25 @@ public class MoreDetails extends Activity {
 		 availble.setText(getIntent().getExtras().getString("available"));
 		
 		 loadDoc();
-		
-			
+		*/
+		 if ( getIntent() != null )
+		 {
+		 Bundle extras = getIntent().getExtras();
+		  if (extras != null)
+		 {
+		  imagURL = extras.getString("styleDescription");
+		  beersName.setText(extras.getString("name"));
+		  abv.setText(extras.getString("abv") + "%");
+		  descriptionTitle.setText(extras.getString("description"));
+		  beerId = extras.getString("id");
+		  type.setText(extras.getString("style"));
+		  availble.setText(extras.getString("available"));
+		 loadDoc();
+		 }
+
+		 }if (getIntent() == null) {
+			Log.i("Intent", "Is Null");
+		}
 		 
 		 //parsing image
 		 try {
@@ -252,6 +269,7 @@ public class MoreDetails extends Activity {
 		
 		
 
+		
 		/* (non-Javadoc)
 		 * @see android.os.AsyncTask#doInBackground(Params[])
 		 */
