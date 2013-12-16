@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:text="@string/abv_4_5_" />
+        android:text="" />
 
     <TextView
         android:id="@+id/beertype"
@@ -23,7 +23,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:textSize="15sp"
-        android:text="@string/type_beer" />
+        android:text="" />
 
     <TextView
         android:id="@+id/beerName"
@@ -32,7 +32,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         
-        android:text="@string/beer_name_here_"
+        android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -43,7 +43,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="15dp"
         android:textSize="15sp"
-        android:text="Available?"
+        android:text=""
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="BreweryDetails?"
+        android:text="Brewery Details?"
         android:textColor="@color/sysBlue"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -65,7 +65,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/abv"
         android:layout_marginTop="18dp"
-        android:text="Description Goes here"
+        android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView

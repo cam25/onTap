@@ -94,8 +94,7 @@ public class FindABrew extends Fragment {
 		// TODO Auto-generated method stub
 		View rootView = inflater.inflate(R.layout.findabrew, container,false);
 		return rootView;
-		
-		
+	
 	}
 	
 	/* (non-Javadoc)

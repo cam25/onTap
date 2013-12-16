@@ -5,7 +5,7 @@
  * 
  * name				cameronmozie
  * 
- * date				Dec 12, 2013
+ * date				Dec 15, 2013
  */
 package com.cmozie.ontap;
 
@@ -32,6 +32,9 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -105,12 +108,19 @@ public class MainActivity extends Activity implements PassTheData, shareData, Sh
 	    actionBar.addTab(FAB);
 	    actionBar.addTab(EVNT);
 	
-	    
+	    //adds frags to backstack on transaction
 	  FragmentTransaction transactions = getFragmentManager().beginTransaction();
 		transactions.addToBackStack(null);
 		transactions.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 		transactions.commit();
+		
+		
 	}
+	
+	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
@@ -119,8 +129,8 @@ public class MainActivity extends Activity implements PassTheData, shareData, Sh
 	        if (getFragmentManager().getBackStackEntryCount() == 0)
 	        {
 	        	Log.i("back", "stack");
-	        	
-	        
+	
+	        	//finishs the app on back 
 	            this.finish();
 	            return false;
 	        }
@@ -178,16 +188,19 @@ public class TabListener implements ActionBar.TabListener {
 	    public void onTabSelected(Tab tab, FragmentTransaction ft) {
 	        // TODO Auto-generated method stub
     	Log.i("Selected Tab is ",String.valueOf(tab.getPosition()));
-    	
+    	ft.replace(R.id.container, fragment);
     	if (tab.getPosition() == 1) {
 			add.setVisible(false);
 			share.setVisible(false);
+
 		}
     	if (tab.getPosition() == 2) {
 			add.setVisible(false);
+			
 		}
     	
-    	ft.replace(R.id.container, fragment);
+    	
+    	
 	    }
 	 
 	    /* (non-Javadoc)
@@ -200,7 +213,16 @@ public class TabListener implements ActionBar.TabListener {
     		share.setVisible(true);
     		
 	        ft.remove(fragment);
+	        
+	        if (tabFrag2.isVisible()) {
+    			InputMethodManager hideKeyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+       		 hideKeyboard.hideSoftInputFromWindow(FindABrew.searchField.getWindowToken(), 0);
+       		 //clears textview
+       		 FindABrew.searchField.setText("");
+			}
+    		
 	    }
+    	
 	 
 	    /* (non-Javadoc)
     	 * @see android.app.ActionBar.TabListener#onTabReselected(android.app.ActionBar.Tab, android.app.FragmentTransaction)
@@ -208,16 +230,17 @@ public class TabListener implements ActionBar.TabListener {
     	@Override
 	    public void onTabReselected(Tab tab, FragmentTransaction ft) {
 	        // TODO Auto-generated method stub
-	 
-    		
+
     		if (tab.getPosition() == 0) {
         		add.setVisible(true);
         		share.setVisible(true);
+        		 
         		
     		}
     		else if (tab.getPosition() == 1) {
     			add.setVisible(false);
     			share.setVisible(false);
+    			
 			}
     		
     		else if (tab.getPosition() == 2) {
@@ -226,6 +249,7 @@ public class TabListener implements ActionBar.TabListener {
         		
 			}
 			
+    		
     		
 	    }
     	

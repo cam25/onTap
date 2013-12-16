@@ -10,11 +10,13 @@
     <ListView
         android:id="@+id/eventsList"
         android:layout_width="match_parent"
-        android:layout_height="269dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:background="@color/sysLtGray"
-        android:layout_marginTop="86dp" >
+        android:layout_marginTop="50dp"
+        
+         >
     </ListView>
 
 </RelativeLayout>

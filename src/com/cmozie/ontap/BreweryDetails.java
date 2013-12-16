@@ -24,18 +24,24 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.app.TaskStackBuilder;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -53,6 +59,12 @@ public class BreweryDetails extends Activity {
 	public static TextView zipcode;
 	public static TextView addy;
 	public TextView city;
+	 public static final String filename = "alert";
+	 public static SharedPreferences prefs;
+	 public static Boolean isOkay;
+	 public TextView phone;
+	 public TextView website;
+
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -61,6 +73,9 @@ public class BreweryDetails extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_brewery_details);
+		
+		
+		
 		ActionBar actionBar = getActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(false);
 		zipcode = (TextView)findViewById(R.id.zipcode);
@@ -70,8 +85,8 @@ public class BreweryDetails extends Activity {
 		city = (TextView)findViewById(R.id.city);
 		TextView state = (TextView)findViewById(R.id.state);
 		TextView open = (TextView)findViewById(R.id.open);
-		TextView phone = (TextView)findViewById(R.id.phone);
-		TextView website = (TextView)findViewById(R.id.website);
+		 phone = (TextView)findViewById(R.id.phone);
+		website = (TextView)findViewById(R.id.website);
 		 brewImg = (ImageView)findViewById(R.id.brewImage);
 		
 		
@@ -81,12 +96,13 @@ public class BreweryDetails extends Activity {
 		 
 		 try {
 				url = new URL(imageURL);
-				
+				Log.i("URL", url.toString());
 
 				getBreweryImage al = new getBreweryImage(); 
 				al.execute(url);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
+				brewImg.setImageDrawable(getResources().getDrawable(R.drawable.brewery));
 				e.printStackTrace();
 			}
 		 
@@ -102,16 +118,62 @@ public class BreweryDetails extends Activity {
 		open.setText(getIntent().getExtras().getString("openToPublic"));
 		phone.setText(getIntent().getExtras().getString("phone"));
 		website.setText(getIntent().getExtras().getString("website"));
+		
+		
 		addy.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 			Log.i("textView", zipcode.getText().toString());
+			try {
+				
 				getGPS(addy.getText().toString(), city.getText().toString(),zipcode.getText().toString());
+			} catch (ActivityNotFoundException e) {
+				// TODO: handle exception
+				
+				addy.setClickable(false);
+			}
+				
 			}
 		});
+		
+		website.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+		        try {
+		        	String web =  website.getText().toString();
+			        Intent callIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(web)); 
+			        startActivity(callIntent);
+				} catch (ActivityNotFoundException e) {
+					// TODO: handle exception
+					
+					website.setClickable(false);
+				}
+			}
+		});
+		
+		
 	}
+	@Override
+	   public boolean onKeyDown(int keyCode, KeyEvent event) {
+	if (keyCode == KeyEvent.KEYCODE_BACK) {
+	    onBackPressed();
+
+	}
+
+	return super.onKeyDown(keyCode, event);
+	}
+
+	public void onBackPressed() {
+	MoreDetails.breweryDetails.setClickable(true);
+	Log.i("back", "press");
+	finish();
+	return;
+	    }
 	
 	public void getGPS(String address,String locality,String locationCode){
 		Intent mapIntent = new Intent(Intent.ACTION_VIEW,
@@ -145,8 +207,15 @@ public class BreweryDetails extends Activity {
             @Override
             protected void onPostExecute(Drawable result) 
             {
-           
+            	if (result == null) {
+					Log.i("Results", "Null");
+					
+					brewImg.setImageDrawable(getResources().getDrawable(R.drawable.brewery));
+				}
+            	
+            	//progressIndicator.dismiss();
             	brewImg.setBackground(result);
+            	
                    // brewImg.setImageDrawable(result);
         }
     }

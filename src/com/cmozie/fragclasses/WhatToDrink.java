@@ -53,6 +53,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -95,6 +96,7 @@ public class WhatToDrink extends Fragment  {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
+		
 		beerName = (TextView)getActivity().findViewById(R.id.beerTitle);
 		beerDescription = (TextView)getActivity().findViewById(R.id.descript);
 		beerImg = (ImageView)getActivity().findViewById(R.id.imageView1);

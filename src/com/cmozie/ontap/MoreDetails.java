@@ -49,6 +49,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.app.NavUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -83,6 +84,8 @@ public class MoreDetails extends Activity {
 	 public static final String filename = "storedContents";
 	public static Context context;
 
+	public static TextView breweryDetails;
+	ProgressDialog progressIndicator;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -96,7 +99,7 @@ public class MoreDetails extends Activity {
 	    actionBar.setDisplayHomeAsUpEnabled(false);
 	    
 	    actionBar.setDisplayShowTitleEnabled(false);
-		TextView breweryDetails = (TextView)findViewById(R.id.breweryDetails);
+		 breweryDetails = (TextView)findViewById(R.id.breweryDetails);
 		
 		beersName = (TextView) findViewById(R.id.beerName);
 		 abv = (TextView) findViewById(R.id.abv);
@@ -134,7 +137,11 @@ public class MoreDetails extends Activity {
 		 }if (getIntent() == null) {
 			Log.i("Intent", "Is Null");
 		}
-		 
+		 progressIndicator = new ProgressDialog(this);
+			progressIndicator.setMessage("Getting Info...");
+			progressIndicator.setIndeterminate(false);
+			progressIndicator.setCancelable(true);
+			progressIndicator.show();
 		 //parsing image
 		 try {
 			//setting shareprefrences equal to my static string filename	
@@ -142,6 +149,7 @@ public class MoreDetails extends Activity {
 				
 				if (url != null) {
 					url = new URL(imagURL);
+					
 				}
 
 				getImage al = new getImage(); 
@@ -156,8 +164,8 @@ public class MoreDetails extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				
+				//sets textview to
+				breweryDetails.setClickable(false);
 				Log.i("beerid", beerId);
 				getBreweryDetails(beerId);
 				
@@ -165,6 +173,9 @@ public class MoreDetails extends Activity {
 		});
 	}
 	
+	
+	
+
 	/**
 	 * Load doc.
 	 */
@@ -251,6 +262,7 @@ public class MoreDetails extends Activity {
            
             protected void onPostExecute(Drawable result) 
             {
+            	progressIndicator.dismiss();
             	
             	beerImage.setBackground(result);
            
@@ -326,6 +338,8 @@ public class MoreDetails extends Activity {
 						if (locationInfo.has("streetAddress")) {
 							String address = locationInfo.getString("streetAddress");
 							intent.putExtra("streetAddress", address);
+						}else {
+							intent.putExtra("streetAddress", "N/A");
 						}
 						
 						
@@ -366,6 +380,8 @@ public class MoreDetails extends Activity {
 							
 							String numberCode = country.getString("numberCode");
 							intent.putExtra("countryName", numberCode);
+						}else {
+							intent.putExtra("countryName", "N/A");
 						}
 						
 						

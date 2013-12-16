@@ -209,7 +209,7 @@ public static Object readObjectFile(Context context, String filename, Boolean ex
 			switch (item.getItemId()) {
 			
 			case android.R.id.home:
-				Intent homeIntent = new Intent(this, MainActivity.class);
+				Intent homeIntent = new Intent(this, MoreDetails.class);
 				  homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				  startActivity(homeIntent);
 				break;

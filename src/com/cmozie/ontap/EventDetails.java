@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.cmozie.fragclasses.Events;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -28,7 +29,7 @@ public class EventDetails extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		ActionBar actionBar = getActionBar();
-	    actionBar.setDisplayHomeAsUpEnabled(true);
+	    actionBar.setDisplayHomeAsUpEnabled(false);
 	    actionBar.setDisplayShowTitleEnabled(false);
 	    
 		setContentView(R.layout.activity_event_details);
@@ -66,7 +67,19 @@ eventSchedule.setOnClickListener(new OnClickListener() {
 				
 			}
 		});
+eventsWebsite.setOnClickListener(new OnClickListener() {
+	
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		String web =  eventsWebsite.getText().toString();
+        Intent callIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(web)); 
+        startActivity(callIntent);
 	}
+});
+
+	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

@@ -25,7 +25,8 @@
                         android:layout_below="@+id/eventName"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="40dp"
-                        android:text="Description Goes HERE" />
+                        android:text="Description Goes HERE"
+                        android:fontFamily="sans-serif"  />
 
                     <TextView
                         android:id="@+id/eventType"
