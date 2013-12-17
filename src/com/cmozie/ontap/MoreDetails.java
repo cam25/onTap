@@ -131,7 +131,7 @@ public class MoreDetails extends Activity {
 		  beerId = extras.getString("id");
 		  type.setText(extras.getString("style"));
 		  availble.setText(extras.getString("available"));
-		 loadDoc();
+		 //loadDoc();
 		 }
 
 		 }if (getIntent() == null) {
