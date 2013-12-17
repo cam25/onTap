@@ -1,4 +1,4 @@
-package com.cmozie.classes;
+package com.cmozie.utils;
 
 import java.net.URL;
 import java.net.URLEncoder;
@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.cmozie.fragclasses.WhatToDrink;
 
 
-public class JSONParser {
+public class RefreshJSON {
 	
 	 TextView beerName;
 	 String beerNam;

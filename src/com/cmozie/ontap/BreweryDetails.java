@@ -12,9 +12,9 @@ package com.cmozie.ontap;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.cmozie.classes.Network;
 import com.cmozie.fragclasses.FindABrew;
 import com.cmozie.ontap.MoreDetails.getImage;
+import com.cmozie.utils.Network;
 
 
 import android.net.Uri;
@@ -78,16 +78,17 @@ public class BreweryDetails extends Activity {
 		
 		ActionBar actionBar = getActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(false);
-		zipcode = (TextView)findViewById(R.id.zipcode);
+		
 		actionBar.setDisplayShowTitleEnabled(false);
 		TextView breweryName = (TextView)findViewById(R.id.breweryName);
-		addy = (TextView)findViewById(R.id.address);
-		city = (TextView)findViewById(R.id.city);
 		TextView state = (TextView)findViewById(R.id.state);
 		TextView open = (TextView)findViewById(R.id.open);
-		 phone = (TextView)findViewById(R.id.phone);
+		addy = (TextView)findViewById(R.id.address);
+		city = (TextView)findViewById(R.id.city);
+		zipcode = (TextView)findViewById(R.id.zipcode);
+		phone = (TextView)findViewById(R.id.phone);
 		website = (TextView)findViewById(R.id.website);
-		 brewImg = (ImageView)findViewById(R.id.brewImage);
+		brewImg = (ImageView)findViewById(R.id.brewImage);
 		
 		
 		 imageURL = getIntent().getExtras().getString("images");
@@ -180,8 +181,10 @@ public class BreweryDetails extends Activity {
     			
     			
 				//updated map action. Removed gps and implemented map to show location via passed zipcode from intent
-				Uri.parse("http://maps.google.com/maps?q="+ address + "" + locality +  "" + locationCode +"&zoom=14&size=512x512&maptype=roadmap&sensor=false"));
+				Uri.parse("http://maps.google.com/maps?q="+ address + " " + locality +  " " + locationCode +"&zoom=14&size=512x512&maptype=roadmap&sensor=false"));
 		
+		Log.i("URI", Uri.parse("http://maps.google.com/maps?q="+ address + " " + locality +  " " + locationCode +"&zoom=14&size=512x512&maptype=roadmap&sensor=false").toString());
+
 		startActivity(mapIntent);
 	}
 	public class getBreweryImage extends AsyncTask<URL, Void, Drawable>

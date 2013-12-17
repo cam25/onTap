@@ -96,7 +96,12 @@ eventsWebsite.setOnClickListener(new OnClickListener() {
 	    break;
 		
 		
-	
+		case R.id.shareEvent:
+			Intent intent = new Intent(Intent.ACTION_SEND);
+			intent.setType("text/plain");
+			intent.putExtra(android.content.Intent.EXTRA_TEXT,"Event:" + eventName.getText().toString() + "\n" +"Event Type:"+  eventType.getText().toString());
+			startActivity(intent);
+	    break;
 			  //favorites activity
 		case R.id.favorites:
 			

@@ -56,23 +56,23 @@ public final class R {
     }
     public static final class id {
         public static final int aBV=0x7f09001d;
-        public static final int abv=0x7f090023;
+        public static final int abv=0x7f090025;
         public static final int action_settings=0x7f090032;
-        public static final int add=0x7f090034;
+        public static final int add=0x7f090035;
         public static final int address=0x7f090008;
         public static final int available=0x7f090024;
         public static final int availbleBeer=0x7f09001c;
         public static final int beerLogo=0x7f090020;
         public static final int beerName=0x7f09001f;
         public static final int beerTitle=0x7f090031;
-        public static final int beertype=0x7f090025;
+        public static final int beertype=0x7f090023;
         public static final int brewImage=0x7f090006;
-        public static final int breweryDetails=0x7f090021;
+        public static final int breweryDetails=0x7f090022;
         public static final int breweryName=0x7f090005;
         public static final int city=0x7f090007;
         public static final int container=0x7f09001e;
         public static final int descript=0x7f09002f;
-        public static final int description=0x7f090022;
+        public static final int description=0x7f090021;
         public static final int disclaimer=0x7f090028;
         public static final int displayDate=0x7f090000;
         public static final int enterBirthdate=0x7f090003;
@@ -100,11 +100,13 @@ public final class R {
         public static final int placeHolder=0x7f090011;
         public static final int placeHolder2=0x7f090012;
         public static final int placeholder3=0x7f090014;
-        public static final int refresh=0x7f090036;
+        public static final int refresh=0x7f090037;
         public static final int scannerButn=0x7f09002b;
         public static final int scheduleEvent=0x7f090016;
         public static final int searchField=0x7f09002c;
-        public static final int share=0x7f090035;
+        public static final int share=0x7f090036;
+        public static final int shareDetails=0x7f090038;
+        public static final int shareEvent=0x7f090034;
         public static final int state=0x7f090009;
         public static final int typeOfBeer=0x7f09001b;
         public static final int venue=0x7f090013;

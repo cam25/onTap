@@ -41,8 +41,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.cmozie.classes.JSONParser;
-import com.cmozie.classes.Network;
 import com.cmozie.fragclasses.Events;
 import com.cmozie.fragclasses.FindABrew;
 import com.cmozie.fragclasses.WhatToDrink;
@@ -51,6 +49,8 @@ import com.cmozie.fragclasses.Events.ShareEvent;
 
 import com.cmozie.fragclasses.WhatToDrink.PassTheData;
 import com.cmozie.fragclasses.WhatToDrink.shareData;
+import com.cmozie.utils.Network;
+import com.cmozie.utils.RefreshJSON;
 
 
 
@@ -196,7 +196,7 @@ public class TabListener implements ActionBar.TabListener {
     	if (tab.getPosition() == 2) {
 			add.setVisible(false);
 			refresh.setVisible(false);
-			
+			share.setVisible(false);
 		}
     	
 	    }
@@ -229,22 +229,22 @@ public class TabListener implements ActionBar.TabListener {
 	    public void onTabReselected(Tab tab, FragmentTransaction ft) {
 	        // TODO Auto-generated method stub
 
-    		if (tab.getPosition() == 0) {
+    		if (tabFrag1.isVisible()) {
         		add.setVisible(true);
         		share.setVisible(true);
         		refresh.setVisible(true);
         		
     		}
-    		else if (tab.getPosition() == 1) {
+    		else if (tabFrag2.isVisible()) {
     			add.setVisible(false);
     			share.setVisible(false);
     			refresh.setVisible(false);
     			
 			}
     		
-    		else if (tab.getPosition() == 2) {
+    		else if (tabFrag3.isVisible()) {
     			add.setVisible(false);
-        		share.setVisible(true);
+        		share.setVisible(false);
         		refresh.setVisible(false);
         		
 			}
@@ -276,7 +276,7 @@ public class TabListener implements ActionBar.TabListener {
 		switch (item.getItemId()) {
 		case R.id.refresh:
 			if (tabFrag1.isVisible()) {
-				JSONParser.getApiResults();
+				RefreshJSON.getApiResults();
 			}
 			
 			break;

@@ -1,4 +1,4 @@
-package com.cmozie.classes;
+package com.cmozie.utils;
 
 import java.net.URL;
 import java.util.ArrayList;

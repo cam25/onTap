@@ -24,9 +24,10 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.cmozie.classes.Network;
 import com.cmozie.fragclasses.WhatToDrink;
 import com.cmozie.fragclasses.FindABrew.SearchAsyncTask;
+import com.cmozie.utils.BreweryNameJSON;
+import com.cmozie.utils.Network;
 
 
 import android.net.Uri;
@@ -44,11 +45,13 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.NavUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -83,9 +86,10 @@ public class MoreDetails extends Activity {
 	public static List<Map<String,String>> favs;
 	 public static final String filename = "storedContents";
 	public static Context context;
-
+	public static AlertDialog.Builder alert;
 	public static TextView breweryDetails;
 	ProgressDialog progressIndicator;
+	public static Activity activity;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -108,6 +112,9 @@ public class MoreDetails extends Activity {
 		descriptionTitle = (TextView) findViewById(R.id.description);
 		beerImage = (ImageView)findViewById(R.id.beerLogo);
 		
+		//getBreweryDetails(beerId);
+		
+		
 		
 		/*imagURL = this.getIntent().getExtras().getString("styleDescription");
 		 beersName.setText(this.getIntent().getExtras().getString("name"));
@@ -119,6 +126,8 @@ public class MoreDetails extends Activity {
 		
 		 loadDoc();
 		*/
+		
+		
 		 if ( getIntent() != null )
 		 {
 		 Bundle extras = getIntent().getExtras();
@@ -137,6 +146,8 @@ public class MoreDetails extends Activity {
 		 }if (getIntent() == null) {
 			Log.i("Intent", "Is Null");
 		}
+		 
+		BreweryNameJSON.getBreweryDetails(beerId);
 		 progressIndicator = new ProgressDialog(this);
 			progressIndicator.setMessage("Getting Info...");
 			progressIndicator.setIndeterminate(false);
@@ -311,15 +322,20 @@ public class MoreDetails extends Activity {
 				
 				JSONArray breweryDetails = data.getJSONArray("breweries");
 				JSONObject locationDetails = breweryDetails.getJSONObject(0);
+				
+				
+			
 				for (int i = 0; i < breweryDetails.length(); i++) {
 					JSONObject one = breweryDetails.getJSONObject(0);
 					JSONArray two = locationDetails.getJSONArray("locations");
+					
 					
 					Log.i("two", two.toString());
 					Intent intent = new Intent(MoreDetails.this, BreweryDetails.class);
 					
 					
 					String name = one.getString("name");
+					
 					if (one.has("name")) {
 						intent.putExtra("name", name);
 						
@@ -429,6 +445,19 @@ public class MoreDetails extends Activity {
 				
 			} catch (Exception e) {
 				// TODO: handle exception
+				AlertDialog.Builder alert = new AlertDialog.Builder(MoreDetails.this);
+				alert.setTitle("Not Available");
+				alert.setMessage("Brewery details not available for this beer.");
+				alert.setCancelable(false);
+				alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+						dialog.cancel();
+					}
+				});
+				alert.show();
 				e.printStackTrace();
 				
 				
@@ -436,6 +465,7 @@ public class MoreDetails extends Activity {
 		}
 		
 	}
+	
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
 	 */
@@ -479,7 +509,7 @@ public class MoreDetails extends Activity {
 
 			break;
 			//share icon
-		case R.id.share:
+		case R.id.shareDetails:
 			Intent intent = new Intent(Intent.ACTION_SEND);
 			intent.setType("text/plain");
 			intent.putExtra(android.content.Intent.EXTRA_TEXT,"Beer's Name:" + beersName.getText().toString() + "\n" + "Beer Description" + "\n " + descriptionTitle.getText().toString());
@@ -532,11 +562,11 @@ public class MoreDetails extends Activity {
 			fos.close();
 			
 			Log.i("File ","Saved");
-			AlertDialog.Builder alert = new AlertDialog.Builder(context);
-			alert.setTitle("Favorites");
-			alert.setMessage("Beer Saved To Favorites!");
-			alert.setCancelable(false);
-			alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
+			AlertDialog.Builder alert2 = new AlertDialog.Builder(context);
+			alert2.setTitle("Favorites");
+			alert2.setMessage("Beer Saved To Favorites!");
+			alert2.setCancelable(false);
+			alert2.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -544,7 +574,7 @@ public class MoreDetails extends Activity {
 					dialog.cancel();
 				}
 			});
-			alert.show();
+			alert2.show();
 		} catch (IOException e) {
 			
 			Log.i("WRITE ERROR",favorite);

@@ -28,12 +28,12 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.cmozie.classes.Network;
 
 import com.cmozie.ontap.Favorites;
 import com.cmozie.ontap.MainActivity;
 import com.cmozie.ontap.MoreDetails;
 import com.cmozie.ontap.R;
+import com.cmozie.utils.Network;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

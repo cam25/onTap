@@ -19,11 +19,12 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.cmozie.classes.AsyncRequest;
-import com.cmozie.classes.Network;
-import com.cmozie.classes.SearchAsyncTask;
 import com.cmozie.ontap.MoreDetails;
 import com.cmozie.ontap.R;
+import com.cmozie.utils.AsyncRequest;
+import com.cmozie.utils.Network;
+import com.cmozie.utils.SearchAsyncTask;
+
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;

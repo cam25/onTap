@@ -45,12 +45,12 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import com.cmozie.classes.Network;
 import com.cmozie.ontap.EventDetails;
 import com.cmozie.ontap.Favorites;
 import com.cmozie.ontap.MainActivity;
 import com.cmozie.ontap.MoreDetails;
 import com.cmozie.ontap.R;
+import com.cmozie.utils.Network;
 
 // TODO: Auto-generated Javadoc
 /**
