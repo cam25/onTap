@@ -10,7 +10,10 @@
 package com.cmozie.ontap;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 
@@ -38,11 +41,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.cmozie.classes.JSONParser;
 import com.cmozie.classes.Network;
 import com.cmozie.fragclasses.Events;
 import com.cmozie.fragclasses.FindABrew;
 import com.cmozie.fragclasses.WhatToDrink;
 import com.cmozie.fragclasses.Events.ShareEvent;
+
 
 import com.cmozie.fragclasses.WhatToDrink.PassTheData;
 import com.cmozie.fragclasses.WhatToDrink.shareData;
@@ -66,7 +71,9 @@ public class MainActivity extends Activity implements PassTheData, shareData, Sh
 	Context context;
 	public MenuItem add;
 	public MenuItem share;
-	 public static HashMap<String, String> map;
+	public MenuItem refresh;
+	public static HashMap<String, String> map;
+	public static List<Map<String,String>> favs;
 	
 	
 	/* (non-Javadoc)
@@ -113,8 +120,7 @@ public class MainActivity extends Activity implements PassTheData, shareData, Sh
 		transactions.addToBackStack(null);
 		transactions.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 		transactions.commit();
-		
-		
+
 	}
 	
 	
@@ -141,17 +147,10 @@ public class MainActivity extends Activity implements PassTheData, shareData, Sh
 
 	            return false;
 	        }
-
-
-
 	    }
-
 	    return super.onKeyDown(keyCode, event);
 	}
 
-
-	
-	
 //TabListener class 
 	/**
  * The listener interface for receiving tab events.
@@ -177,7 +176,6 @@ public class TabListener implements ActionBar.TabListener {
     	public TabListener(Fragment fragment) {
 	        // TODO Auto-generated constructor stub
 	        this.fragment = fragment;
-	        
 	      
 	    }
 	 
@@ -192,14 +190,14 @@ public class TabListener implements ActionBar.TabListener {
     	if (tab.getPosition() == 1) {
 			add.setVisible(false);
 			share.setVisible(false);
+			refresh.setVisible(false);
 
 		}
     	if (tab.getPosition() == 2) {
 			add.setVisible(false);
+			refresh.setVisible(false);
 			
 		}
-    	
-    	
     	
 	    }
 	 
@@ -211,6 +209,7 @@ public class TabListener implements ActionBar.TabListener {
 	        // TODO Auto-generated method stub
     		add.setVisible(true);
     		share.setVisible(true);
+    		refresh.setVisible(true);
     		
 	        ft.remove(fragment);
 	        
@@ -222,8 +221,7 @@ public class TabListener implements ActionBar.TabListener {
 			}
     		
 	    }
-    	
-	 
+  
 	    /* (non-Javadoc)
     	 * @see android.app.ActionBar.TabListener#onTabReselected(android.app.ActionBar.Tab, android.app.FragmentTransaction)
     	 */
@@ -234,28 +232,26 @@ public class TabListener implements ActionBar.TabListener {
     		if (tab.getPosition() == 0) {
         		add.setVisible(true);
         		share.setVisible(true);
-        		 
+        		refresh.setVisible(true);
         		
     		}
     		else if (tab.getPosition() == 1) {
     			add.setVisible(false);
     			share.setVisible(false);
+    			refresh.setVisible(false);
     			
 			}
     		
     		else if (tab.getPosition() == 2) {
     			add.setVisible(false);
         		share.setVisible(true);
+        		refresh.setVisible(false);
         		
 			}
-			
-    		
-    		
 	    }
     	
 	}
-	    
-	  
+
 	 /* (non-Javadoc)
  	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
  	 */
@@ -266,6 +262,7 @@ public class TabListener implements ActionBar.TabListener {
 		
 		add = menu.findItem(R.id.add);
 		share = menu.findItem(R.id.share);
+		refresh = menu.findItem(R.id.refresh);
 		
 		return true;
 	}
@@ -277,7 +274,12 @@ public class TabListener implements ActionBar.TabListener {
 	 @Override
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()) {
-		
+		case R.id.refresh:
+			if (tabFrag1.isVisible()) {
+				JSONParser.getApiResults();
+			}
+			
+			break;
 		//opens alert for add
 		case R.id.add:
 			if (tabFrag1.isVisible()) {
@@ -318,15 +320,17 @@ public class TabListener implements ActionBar.TabListener {
 	public void passTheData() {
 		// TODO Auto-generated method stub
 		map = new HashMap<String, String>();
+	
 		String test = WhatToDrink.beerName.getText().toString();
 		String description = WhatToDrink.beerDescription.getText().toString();
 		
 		map.put("description", description);
 		map.put("beerName", test);
+		//favs.add(map);
 		WhatToDrink.storeFile(context, "favorites", map, true);
-		Log.i("test", test);
+	
+		Log.i("test", map.toString());
 	}
-
 
 	/* (non-Javadoc)
 	 * @see com.cmozie.fragclasses.WhatToDrink.shareData#shareIntent()
@@ -340,8 +344,6 @@ public class TabListener implements ActionBar.TabListener {
 		startActivity(intent); 
 		
 	}
-
-
 	/* (non-Javadoc)
 	 * @see com.cmozie.fragclasses.Events.ShareEvent#eventShare()
 	 */
@@ -355,11 +357,6 @@ public class TabListener implements ActionBar.TabListener {
 		
 	}
 
-
-	
-
-
-	
 }
 	
 

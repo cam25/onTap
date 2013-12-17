@@ -436,7 +436,7 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 				}
 				 test.add(map);
 				 
-				//lv = (ListView)getActivity().findViewById(R.id.listView1);
+				//ListView lv = (ListView)getActivity().findViewById(R.id.listView1);
 					ListAdapter adapter = new SimpleAdapter(getActivity(), test, R.layout.listitems, new String[]{"name","company" },new int[]{R.id.listBeerType, R.id.listBeerCompany});
 					
 					lv.setAdapter(adapter);

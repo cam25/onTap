@@ -9,6 +9,10 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cmozie.fragclasses.WhatToDrink;
+
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
@@ -19,8 +23,10 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 	 String beerNam;
 
 	 String description;
+
 	public static HashMap<String, String> map;
 	public static List<Map<String,String>> test;
+	
 	@Override
 	protected String doInBackground(URL... urls) {
 		// TODO Auto-generated method stub
@@ -34,6 +40,7 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 	@Override
 	protected void onPostExecute(String result) {
 		// TODO Auto-generated method stub
+		
 		
 		try {
 			JSONObject json = new JSONObject(result);
@@ -60,6 +67,8 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 			e.printStackTrace();
 		}
 	}
+
+
 	
 	
 	

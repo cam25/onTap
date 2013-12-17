@@ -11,19 +11,16 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-   
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-       
         <activity
             android:name="com.cmozie.ontap.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name" 
-            >
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="com.cmozie.ontap.SplashPage"
@@ -49,8 +46,7 @@
             android:name="com.cmozie.fragclasses.FindABrew"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_find_abeer"
-            android:windowSoftInputMode="stateHidden"
-            >
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.cmozie.fragclasses.Events"
@@ -80,6 +76,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cmozie.ontap.Events" />
+        </activity>
+        <activity
+            android:name="com.cmozie.ontap.FavoriteList"
+            android:label="@string/title_activity_favorite_list" >
         </activity>
     </application>
 

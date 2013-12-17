@@ -10,9 +10,12 @@
 package com.cmozie.fragclasses;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -26,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.cmozie.classes.Network;
+
 import com.cmozie.ontap.Favorites;
 import com.cmozie.ontap.MainActivity;
 import com.cmozie.ontap.MoreDetails;
@@ -73,8 +77,9 @@ public class WhatToDrink extends Fragment  {
 	public static URL url;
 	public static HashMap<String, String> map;
 	public static MainActivity activity;
-	
+	public static ProgressDialog progressIndicator;
 	PassTheData dataReciever;
+	
 	
 	/* (non-Javadoc)
 	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
@@ -119,7 +124,6 @@ public class WhatToDrink extends Fragment  {
 		 */
 		public void passTheData();
 	}
-	
 	
 
 	/* (non-Javadoc)
@@ -182,7 +186,7 @@ public class WhatToDrink extends Fragment  {
 	 * The Class WhatToDrinkRequest.
 	 */
 	private class WhatToDrinkRequest extends AsyncTask<URL, Void, String>{
-		ProgressDialog progressIndicator;
+		
 		
 		/* (non-Javadoc)
 		 * @see android.os.AsyncTask#onPreExecute()
@@ -347,37 +351,7 @@ public class WhatToDrink extends Fragment  {
 		
 	}
 	
-	/**
-	 * Store string file.
-	 *
-	 * @param context the context
-	 * @param filename the filename
-	 * @param content the content
-	 * @param external the external
-	 * @return the boolean
-	 */
-	@SuppressWarnings("resource")
-	public static Boolean storeStringFile(Context context, String filename, String content, Boolean external){
-		
-		try {
-			File file;
-			FileOutputStream fos;
-			if (external) {
-				file = new File(context.getExternalFilesDir(null),filename);
-				fos = new FileOutputStream(file);
-				
-			}else {
-				
-				fos = context.openFileOutput(filename, Context.MODE_PRIVATE);
-			}
-			fos.write(content.getBytes());
-			fos.close();
-		} catch (IOException e) {
-			
-			Log.i("WRITE ERROR",filename);
-		}
-			return true;
-	}
+	
 	
 	/**
 	 * Inits the share intent.
@@ -388,11 +362,7 @@ public class WhatToDrink extends Fragment  {
 	 
 	                share.putExtra(Intent.EXTRA_SUBJECT,  "subject");
 	                share.putExtra(Intent.EXTRA_TEXT,     "your text");
-	               // share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(myPath)) ); // Optional, just if you wanna share an image.
-	              
-	               
-	       
-	    
+
 	}
 	
 	
@@ -416,7 +386,7 @@ public class WhatToDrink extends Fragment  {
 				
 				
 				fos = new FileOutputStream(file);
-				Log.i("file", file.toString());
+				Log.i("file", fos.toString());
 			}else {
 				
 				fos = context.openFileOutput(favorite, Context.MODE_PRIVATE);
@@ -430,8 +400,8 @@ public class WhatToDrink extends Fragment  {
 			
 			Log.i("File ","Saved");
 			AlertDialog.Builder alert = new AlertDialog.Builder(context);
-			alert.setTitle("Saved Files");
-			alert.setMessage("File Saved!");
+			alert.setTitle("Favorites");
+			alert.setMessage("Beer Saved To Favorites!");
 			alert.setCancelable(false);
 			alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
 				

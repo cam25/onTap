@@ -5,6 +5,8 @@ import java.net.URLEncoder;
 
 import org.json.JSONObject;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
@@ -20,8 +22,8 @@ public class JSONParser {
 	 String description;
 	
  public static void getApiResults(){
-		
-		String baseUrl = "http://api.brewerydb.com/v2/beer/random?key=4b77a2665f85f929d4a87d30bbeae67b";
+	 
+		String baseUrl = "http://api.brewerydb.com/v2/beer/random/?hasLabels=Y&key=4b77a2665f85f929d4a87d30bbeae67b";
 		String queryString;
 		try {
 			queryString = URLEncoder.encode(baseUrl,"UTF-8");
@@ -56,10 +58,23 @@ public class JSONParser {
 				
 				// TODO Auto-generated method stub
 				//Log.i("URL", result);
-				beerNam = data.getString("name");
-				description = data.getString("description");
-				beerDescription.setText(description);
-				beerName.setText(beerNam);
+				if (data.has("name")) {
+					WhatToDrink.beerNam = data.getString("name");
+					WhatToDrink.beerName.setText(WhatToDrink.beerNam);
+				}
+				// TODO Auto-generated method stub
+				//Log.i("URL", result);
+				
+				if (data.has("description")) {
+					WhatToDrink.description = data.getString("description");
+					
+					WhatToDrink.beerDescription.setText(WhatToDrink.description);
+				}else {
+					beerDescription.setText("No Description Available");
+				}
+				
+			
+				//beerName.setText(beerNam);
 				Log.i("beer", beerNam);
 			} catch (Exception e) {
 				// TODO: handle exception
