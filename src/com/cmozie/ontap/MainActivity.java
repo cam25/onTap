@@ -10,35 +10,23 @@
 package com.cmozie.ontap;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONArray;
-
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.cmozie.fragclasses.Events;
@@ -135,16 +123,17 @@ public class MainActivity extends Activity implements PassTheData, shareData, Sh
 	        if (getFragmentManager().getBackStackEntryCount() == 0)
 	        {
 	        	Log.i("back", "stack");
-	
-	        	//finishs the app on back 
+
+	        	//if no back stack finish app
 	            this.finish();
 	            return false;
 	        }
 	        else
 	        {
+	        	 Toast.makeText(this, "Click back again to exit", Toast.LENGTH_SHORT).show();
 	            getFragmentManager().popBackStack();
 	            Log.i("back", "Has Stack");
-
+	           
 	            return false;
 	        }
 	    }

@@ -61,7 +61,13 @@ import android.widget.TextView;
 					
 					WhatToDrink.beerDescription.setText(WhatToDrink.description);
 				}else {
-					WhatToDrink.beerDescription.setText("No Description Available");
+					JSONObject style = data.getJSONObject("style");
+					
+					 WhatToDrink.sDescription = style.getString("description");
+					
+					
+					Log.i("Style", WhatToDrink.sDescription);
+					WhatToDrink.beerDescription.setText(WhatToDrink.sDescription);
 				}
 				
 				if (labels.has("large")) {
@@ -86,7 +92,7 @@ import android.widget.TextView;
 			protected void onPreExecute() {
 				// TODO Auto-generated method stub
 				super.onPreExecute();
-			WhatToDrink.progressIndicator.show();
+			WhatToDrink.loading.show();
 				
 				
 			}
@@ -111,7 +117,7 @@ import android.widget.TextView;
                 @Override
                 protected void onPostExecute(Drawable result) 
                 {
-                	WhatToDrink.progressIndicator.dismiss();
+                	WhatToDrink.loading.dismiss();
                 	//set background
                 	WhatToDrink.beerImg.setBackground(result);
                         

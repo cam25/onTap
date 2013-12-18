@@ -89,11 +89,6 @@ eventsWebsite.setOnClickListener(new OnClickListener() {
 	}
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()) {
-		case android.R.id.home:
-			Intent homeIntent = new Intent(this, MainActivity.class);
-			  homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			  getApplicationContext().startActivity(homeIntent);
-	    break;
 		
 		
 		case R.id.shareEvent:

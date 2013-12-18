@@ -9,14 +9,11 @@
  */
 package com.cmozie.ontap;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +38,7 @@ import android.widget.TextView;
  * The Class Favorites.
  */
 public class Favorites extends Activity {
-	HashMap<String, String> _history;
+	HashMap<String, String> storedBeers;
 	public static List<Map<String,String>> favs;
 	static Context context;
 	/* (non-Javadoc)
@@ -52,7 +49,7 @@ public class Favorites extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_favorites);
 		ActionBar actionBar = getActionBar();
-	    actionBar.setDisplayHomeAsUpEnabled(true);
+	    actionBar.setDisplayHomeAsUpEnabled(false);
 		actionBar.setDisplayShowTitleEnabled(false);
 		favs = new ArrayList<Map<String,String>>();
 		TextView favBeerName = (TextView)findViewById(R.id.favBeerName);
@@ -61,9 +58,9 @@ public class Favorites extends Activity {
 		TextView favBeerABV = (TextView)findViewById(R.id.aBV);
 		TextView favBeerAvailability = (TextView)findViewById(R.id.availbleBeer);
 
-		_history = getHistory();
+		storedBeers = getFavorites();
 		
-		favs.add(_history);
+		favs.add(storedBeers);
 		//getString();
 		String setBeerName = favs.get(0).get("beerName");
 		String setBeerDescription = favs.get(0).get("description");
@@ -76,24 +73,24 @@ public class Favorites extends Activity {
 		favBeerName.setText(setBeerName);
 		favBeerDescription.setText(setBeerDescription);
 		
-		Log.i("HISTORY READ", _history.toString());
+		Log.i("HISTORY READ", storedBeers.toString());
 	      
 	}
-private HashMap<String, String> getHistory(){
+private HashMap<String, String> getFavorites(){
 		
 		//creates an object named stored that reads the object that is stored in local storage
-		Object  saved = readObjectFile(this, "favorites", true);
+		Object  favoritedBrews = readStorageObjectFile(this, "favorites", true);
 		
 		
 		//declares the hashmap history variable
 		HashMap<String, String> history;
 		
 		//if theres an error fire alert
-		if (saved == null) {
-			Log.i("HISTORY","NO HISTORY FILE FOUND");
+		if (favoritedBrews == null) {
+			
 			AlertDialog.Builder alert = new AlertDialog.Builder(this);
-			alert.setTitle("Saved Files");
-			alert.setMessage("There are no saved zipcodes in local storage. Once a search is made the zipcode will be saved.");
+			alert.setTitle("Saved Beers");
+			alert.setMessage("No brews have been added to favorites.");
 			alert.setCancelable(false);
 			alert.setPositiveButton("Alright", new DialogInterface.OnClickListener() {
 				
@@ -109,81 +106,35 @@ private HashMap<String, String> getHistory(){
 			//else store it into the history
 		}	else {
 			
-			history = (HashMap<String, String>) saved;
+			history = (HashMap<String, String>) favoritedBrews;
 		}
 		return history;
 		
 	}
 
-public static void getString(){
-	
-	readStringFile(context, "favorites", false);
-	
-	
-	
-	
-}
-
 @SuppressWarnings("resource")
-public static String readStringFile(Context context, String filename, Boolean external){
-	
-	String content = "";
-	try {
-		File file;
-		FileInputStream fin;
-		if (external) {
-			file = new File(context.getExternalFilesDir(null), filename);
-			fin = new FileInputStream(file);
-		}else{
-			file = new File(filename);
-			fin = context.openFileInput(filename);
-			
-		}
-		BufferedInputStream bin = new BufferedInputStream(fin);
-		byte[] contentBytes = new byte[1024];
-		int bytesRead = 0;
-		StringBuffer contentBuffer = new StringBuffer();
+public static Object readStorageObjectFile(Context context, String filename, Boolean external){
 		
-		while((bytesRead = bin.read(contentBytes))!= -1){
-			
-			content = new String(contentBytes,0,bytesRead);
-			contentBuffer.append(content);
-			
-		}
-		content = contentBuffer.toString();
-		fin.close();
-	} catch (FileNotFoundException e) {
-		Log.e("READ ERROR","FILE NOT FOUND" + filename);
-	}catch (IOException e) {
-		Log.e("READ ERROR","I/O ERROR");
-	}
-	return content;
-	
-}
-
-@SuppressWarnings("resource")
-public static Object readObjectFile(Context context, String filename, Boolean external){
-		
-		Object content = new Object();
+		Object brewContent = new Object();
 		try {
-			File file;
-			FileInputStream fin;
+			File actualFile;
+			FileInputStream inputStream;
 			if (external) {
-				file = new File(context.getExternalFilesDir(null), filename);
-				fin = new FileInputStream(file);
+				actualFile = new File(context.getExternalFilesDir(null), filename);
+				inputStream = new FileInputStream(actualFile);
 			}else{
-				file = new File(filename);
-				fin = context.openFileInput(filename);
+				actualFile = new File(filename);
+				inputStream = context.openFileInput(filename);
 				
 			}
-			ObjectInputStream ois = new ObjectInputStream(fin);
+			ObjectInputStream brewContentIS = new ObjectInputStream(inputStream);
 			try {
-				content = (Object) ois.readObject();
+				brewContent = (Object) brewContentIS.readObject();
 			} catch (Exception e) {
 				Log.e("READ ERROR","INVALID JAVA OBJECT FILE");
 			}
-			ois.close();
-			fin.close();
+			brewContentIS.close();
+			inputStream.close();
 		} catch (FileNotFoundException e) {
 			Log.e("READ ERROR","FILE NOT FOUND" + filename);
 			return null;
@@ -191,7 +142,7 @@ public static Object readObjectFile(Context context, String filename, Boolean ex
 			Log.e("READ ERROR","I/O ERROR");
 			
 		}
-		return content;
+		return brewContent;
 		
 	}
 	/* (non-Javadoc)
@@ -208,11 +159,6 @@ public static Object readObjectFile(Context context, String filename, Boolean ex
 		public boolean onOptionsItemSelected(MenuItem item){
 			switch (item.getItemId()) {
 			
-			case android.R.id.home:
-				Intent homeIntent = new Intent(this, MoreDetails.class);
-				  homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				  startActivity(homeIntent);
-				break;
 			case R.id.favorites:
 				
 				startActivity(new Intent(Favorites.this, Favorites.class));

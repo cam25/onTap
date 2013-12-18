@@ -50,7 +50,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/beertype"
         android:layout_centerHorizontal="true"
+        android:fontFamily="Arial"
         
+        android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceMedium"
          />
 
@@ -61,7 +63,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/beerLogo"
         android:fontFamily="Arial"
-      
+      	android:paddingRight="10dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="15sp"
         android:textStyle="bold" />

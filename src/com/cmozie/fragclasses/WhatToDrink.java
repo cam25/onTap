@@ -10,28 +10,21 @@
 package com.cmozie.fragclasses;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.List;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
-import com.cmozie.ontap.Favorites;
+
+
+
+
 import com.cmozie.ontap.MainActivity;
-import com.cmozie.ontap.MoreDetails;
 import com.cmozie.ontap.R;
 import com.cmozie.utils.Network;
 
@@ -39,17 +32,11 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,7 +44,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -77,9 +63,10 @@ public class WhatToDrink extends Fragment  {
 	public static URL url;
 	public static HashMap<String, String> map;
 	public static MainActivity activity;
-	public static ProgressDialog progressIndicator;
+	public static ProgressDialog loading;
 	PassTheData dataReciever;
-	
+	Boolean isConnected;
+	public static String sDescription;
 	
 	/* (non-Javadoc)
 	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
@@ -105,8 +92,32 @@ public class WhatToDrink extends Fragment  {
 		beerName = (TextView)getActivity().findViewById(R.id.beerTitle);
 		beerDescription = (TextView)getActivity().findViewById(R.id.descript);
 		beerImg = (ImageView)getActivity().findViewById(R.id.imageView1);
-		getApiResults();
 		
+		 isConnected = Network.getConnectionStatus(getActivity());
+		 
+		 Log.i("network", isConnected.toString());
+		 if (isConnected) {
+			 
+				
+				
+				Log.i("Network Connection", Network.getConnectionType(getActivity()));
+		getApiResults();
+		 }else {
+			 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+				alert.setTitle("Connection Required!");
+				alert.setMessage("You need to connect to an internet service!");
+				alert.setCancelable(false);
+				alert.setPositiveButton("Thanks", new DialogInterface.OnClickListener() {
+				
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+						dialog.cancel();
+					}
+				});
+				alert.show();
+				
+		}
 		//Fragment fm = getChildFragmentManager().findFragmentByTag("What To Drink");
 		
 		//Log.i("fragment?", fm.toString());
@@ -195,11 +206,11 @@ public class WhatToDrink extends Fragment  {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			progressIndicator = new ProgressDialog(getActivity());
-			progressIndicator.setMessage("Getting Info...");
-			progressIndicator.setIndeterminate(false);
-			progressIndicator.setCancelable(true);
-			progressIndicator.show();
+			loading = new ProgressDialog(getActivity());
+			loading.setMessage("Getting Info...");
+			loading.setIndeterminate(false);
+			loading.setCancelable(true);
+			loading.show();
 			
 		}
 
@@ -234,6 +245,7 @@ public class WhatToDrink extends Fragment  {
 				Log.i("WTDURL", result);
 				
 				if (data.has("name")) {
+					
 					beerNam = data.getString("name");
 					beerName.setText(beerNam);
 				}
@@ -244,7 +256,13 @@ public class WhatToDrink extends Fragment  {
 					description = data.getString("description");
 					beerDescription.setText(description);
 				}else {
-					beerDescription.setText("No Description Available");
+					JSONObject style = data.getJSONObject("style");
+					
+					 sDescription = style.getString("description");
+					
+					
+					Log.i("Style", sDescription);
+					beerDescription.setText(sDescription);
 				}
 				
 				
@@ -301,7 +319,7 @@ public class WhatToDrink extends Fragment  {
                 @Override
                 protected void onPostExecute(Drawable result) 
                 {
-                	progressIndicator.dismiss();
+                	loading.dismiss();
                 	//set background
                 	beerImg.setBackground(result);
                         
@@ -378,25 +396,25 @@ public class WhatToDrink extends Fragment  {
 	@SuppressWarnings("resource")
 	public static Boolean storeFile(Context context, String favorite, Object favs, Boolean external){
 		try {
-			File file;
-			FileOutputStream fos;
-			ObjectOutputStream oos;
+			File saveBrewFile;
+			FileOutputStream mainOutputStream;
+			ObjectOutputStream favsOutputStream;
 			if (external) {
-				file = new File(context.getExternalFilesDir(null),favorite);
+				saveBrewFile = new File(context.getExternalFilesDir(null),favorite);
 				
 				
-				fos = new FileOutputStream(file);
-				Log.i("file", fos.toString());
+				mainOutputStream = new FileOutputStream(saveBrewFile);
+				Log.i("file", mainOutputStream.toString());
 			}else {
 				
-				fos = context.openFileOutput(favorite, Context.MODE_PRIVATE);
-				Log.i("fos", fos.toString());
+				mainOutputStream = context.openFileOutput(favorite, Context.MODE_PRIVATE);
+				Log.i("fos", mainOutputStream.toString());
 			}
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject(favs);
-			oos.close();
+			favsOutputStream = new ObjectOutputStream(mainOutputStream);
+			favsOutputStream.writeObject(favs);
+			favsOutputStream.close();
 			
-			fos.close();
+			mainOutputStream.close();
 			
 			Log.i("File ","Saved");
 			AlertDialog.Builder alert = new AlertDialog.Builder(context);

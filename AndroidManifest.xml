@@ -67,7 +67,7 @@
         </activity>
         <activity
             android:name="com.cmozie.ontap.Favorites"
-            android:configChanges="orientation|keyboardHidden"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_favorites" >
         </activity>
         <activity

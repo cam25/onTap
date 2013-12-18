@@ -159,6 +159,8 @@ public class BreweryDetails extends Activity {
 		
 		
 	}
+	
+	//resetting bewerydetails button
 	@Override
 	   public boolean onKeyDown(int keyCode, KeyEvent event) {
 	if (keyCode == KeyEvent.KEYCODE_BACK) {

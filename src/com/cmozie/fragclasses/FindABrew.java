@@ -21,10 +21,7 @@ import org.json.JSONObject;
 
 import com.cmozie.ontap.MoreDetails;
 import com.cmozie.ontap.R;
-import com.cmozie.utils.AsyncRequest;
 import com.cmozie.utils.Network;
-import com.cmozie.utils.SearchAsyncTask;
-
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
@@ -33,32 +30,24 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.net.rtp.RtpStream;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView.OnEditorActionListener;
-import android.widget.Toast;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -77,8 +66,7 @@ public class FindABrew extends Fragment {
 	     };
 	
  ArrayList<HashMap<String, String>> listData = new ArrayList<HashMap<String, String>>();
- private static final String BEERNAME = "name";
- private static final String COMPANY = "company";
+
 	public static HashMap<String, String> map;
 	public static List<Map<String,String>> test;
 	public static ImageButton scan;
@@ -86,6 +74,7 @@ public class FindABrew extends Fragment {
 	public static EditText searchField;
 	public static  ListView lv;	
 	public URL url;
+	
 	/* (non-Javadoc)
 	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
 	 */
@@ -116,11 +105,15 @@ public class FindABrew extends Fragment {
 	     //ed.setText("Sam Adams");
 	     searchField = (EditText)getActivity().findViewById(R.id.searchField);
 	   
+	    
+	     
 	     searchField.setOnEditorActionListener(new OnEditorActionListener() {
 			
+	    	
 	    	 @Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				// TODO Auto-generated method stub
+	    		 
 	    		 if (actionId == EditorInfo.IME_ACTION_SEND) {
 					
 	    			 String search = searchField.getText().toString();
@@ -157,7 +150,10 @@ public class FindABrew extends Fragment {
 				intent.putExtra("SCAN_MODE", "PRODUCT_MODE");//for Qr code, its "QR_CODE_MODE" instead of "PRODUCT_MODE"
 			       intent.putExtra("SAVE_HISTORY", false);//th
 			       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-			    
+			       
+			      
+			     
+			       
 				 startActivityForResult(intent, 0);
 				
 			}catch (ActivityNotFoundException e) {
@@ -174,6 +170,8 @@ public class FindABrew extends Fragment {
 
 			        	 Uri uri = Uri.parse("market://search?q=pname:com.google.zxing.client.android");
 					        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+					        
+					        
 					        startActivity(intent);
 			            dialog.dismiss();
 			        }
@@ -213,6 +211,8 @@ public class FindABrew extends Fragment {
             	Log.i("RESULTCODE", String.valueOf(resultCode));
            	 contents = intent.getStringExtra("SCAN_RESULT"); //this is the result
            	 String beer = contents;
+           	 
+           	
            	  Log.i("beer", beer);
            	  String query = "http://api.brewerydb.com/v2/search/upc?code="+ beer +"&key=4b77a2665f85f929d4a87d30bbeae67b&format=json";
   
@@ -392,7 +392,13 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 				if (one.has("description")) {
 					map.put("description", one.getString("description"));
 				}else {
-					map.put("description", "No Description Available");
+					JSONObject style = one.getJSONObject("style");
+					
+					String styleDescription = style.getString("description");
+					
+					
+					Log.i("Style", styleDescription);
+					map.put("description", style.getString("description"));
 				}
 				
 				if (one.has("labels")) {

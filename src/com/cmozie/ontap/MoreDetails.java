@@ -541,25 +541,25 @@ public class MoreDetails extends Activity {
 	@SuppressWarnings("resource")
 	public static Boolean storeFile(Context context, String favorite, Object favs, Boolean external){
 		try {
-			File file;
-			FileOutputStream fos;
-			ObjectOutputStream oos;
+			File favBeerFile;
+			FileOutputStream outputFile;
+			ObjectOutputStream favsObjectOutputStream;
 			if (external) {
-				file = new File(context.getExternalFilesDir(null),favorite);
+				favBeerFile = new File(context.getExternalFilesDir(null),favorite);
 				
 				
-				fos = new FileOutputStream(file);
-				Log.i("file", file.toString());
+				outputFile = new FileOutputStream(favBeerFile);
+				Log.i("file", favBeerFile.toString());
 			}else {
 				
-				fos = context.openFileOutput(favorite, Context.MODE_PRIVATE);
-				Log.i("fos", fos.toString());
+				outputFile = context.openFileOutput(favorite, Context.MODE_PRIVATE);
+				Log.i("fos", outputFile.toString());
 			}
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject(favs);
-			oos.close();
+			favsObjectOutputStream = new ObjectOutputStream(outputFile);
+			favsObjectOutputStream.writeObject(favs);
+			favsObjectOutputStream.close();
 			
-			fos.close();
+			outputFile.close();
 			
 			Log.i("File ","Saved");
 			AlertDialog.Builder alert2 = new AlertDialog.Builder(context);
