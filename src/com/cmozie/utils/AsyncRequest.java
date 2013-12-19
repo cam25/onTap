@@ -60,15 +60,21 @@ import android.widget.TextView;
 					WhatToDrink.description = data.getString("description");
 					
 					WhatToDrink.beerDescription.setText(WhatToDrink.description);
-				}else {
-					JSONObject style = data.getJSONObject("style");
+				}else if (data.has("style")) {
 					
-					 WhatToDrink.sDescription = style.getString("description");
+				JSONObject style = data.getJSONObject("style");
+				
+				String styleDescription = style.getString("description");
+				
+				
+				Log.i("Style", styleDescription);
+				WhatToDrink.beerDescription.setText(styleDescription);
 					
-					
-					Log.i("Style", WhatToDrink.sDescription);
-					WhatToDrink.beerDescription.setText(WhatToDrink.sDescription);
-				}
+				}else{
+				
+					WhatToDrink.beerDescription.setText("Not Available");
+				
+			}
 				
 				if (labels.has("large")) {
 					ImageRequest image = new ImageRequest();

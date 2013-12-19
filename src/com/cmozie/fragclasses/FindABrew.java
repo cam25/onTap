@@ -363,6 +363,9 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 	@Override
 	protected void onPostExecute(String result) {
 		// TODO Auto-generated method stub
+		
+		
+		
 		progressIndicator.dismiss();
 		try {
 			JSONObject json = new JSONObject(result);
@@ -391,15 +394,21 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 			
 				if (one.has("description")) {
 					map.put("description", one.getString("description"));
-				}else {
-					JSONObject style = one.getJSONObject("style");
+				}else if (one.has("style")) {
 					
-					String styleDescription = style.getString("description");
+				JSONObject style = one.getJSONObject("style");
+				
+				String styleDescription = style.getString("description");
+				
+				
+				Log.i("Style", styleDescription);
+				map.put("description", style.getString("description"));
 					
-					
-					Log.i("Style", styleDescription);
-					map.put("description", style.getString("description"));
-				}
+				}else{
+				
+					map.put("description", "No Description Available");
+				
+			}
 				
 				if (one.has("labels")) {
 					JSONObject image = one.getJSONObject("labels");
@@ -443,6 +452,8 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 				}
 				 test.add(map);
 				 
+				 
+				 
 				//ListView lv = (ListView)getActivity().findViewById(R.id.listView1);
 					ListAdapter adapter = new SimpleAdapter(getActivity(), test, R.layout.listitems, new String[]{"name","company" },new int[]{R.id.listBeerType, R.id.listBeerCompany});
 					
@@ -455,6 +466,7 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 								long arg3) {
 							// TODO Auto-generated method stub
 							Intent intent = new Intent(getActivity(), MoreDetails.class);
+							
 							String name = test.get(+arg2).get("name");
 							String abv = test.get(+arg2).get("abv");
 							String descriptionText = test.get(+arg2).get("description");
@@ -495,7 +507,7 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 			
 		} catch (Exception e) {
 			// TODO: handle exception
-			
+			e.printStackTrace();
 		}
 	}
 }

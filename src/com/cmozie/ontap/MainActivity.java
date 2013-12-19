@@ -22,6 +22,7 @@ import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -130,9 +131,9 @@ public class MainActivity extends Activity implements PassTheData, shareData, Sh
 	        }
 	        else
 	        {
-	        	 Toast.makeText(this, "Click back again to exit", Toast.LENGTH_SHORT).show();
-	            getFragmentManager().popBackStack();
-	            Log.i("back", "Has Stack");
+	        	 
+	            finish();
+	            Log.i("close", "app");
 	           
 	            return false;
 	        }

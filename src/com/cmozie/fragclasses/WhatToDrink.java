@@ -241,6 +241,7 @@ public class WhatToDrink extends Fragment  {
 				//JSONObject details = data.getJSONObject("style");
 				
 				JSONObject labels = data.getJSONObject("labels");
+				//JSONObject style = data.getJSONObject("style");
 				 url = new URL(labels.getString("large"));
 				Log.i("WTDURL", result);
 				
@@ -255,15 +256,24 @@ public class WhatToDrink extends Fragment  {
 				if (data.has("description")) {
 					description = data.getString("description");
 					beerDescription.setText(description);
-				}else {
-					JSONObject style = data.getJSONObject("style");
+				}else if (data.has("style")) {
 					
-					 sDescription = style.getString("description");
+				JSONObject style = data.getJSONObject("style");
+				
+				String styleDescription = style.getString("description");
+				
+				
+				Log.i("Style", styleDescription);
+				beerDescription.setText(styleDescription);
+					
+				}else{
+				
+					beerDescription.setText("No Description Available");
+				
+			}
 					
 					
-					Log.i("Style", sDescription);
-					beerDescription.setText(sDescription);
-				}
+					
 				
 				
 				

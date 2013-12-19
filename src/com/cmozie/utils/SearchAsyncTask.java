@@ -53,6 +53,7 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 				
 			
 				 test.add(map);
+				 
 				Log.i("array", test.toString());
 				// TODO Auto-generated method stub
 				
