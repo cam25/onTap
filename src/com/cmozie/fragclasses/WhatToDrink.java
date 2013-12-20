@@ -123,7 +123,9 @@ public class WhatToDrink extends Fragment  {
 
 		Log.i("Started", "activit");
 	}
-	
+
+
+
 	/**
 	 * The Interface PassTheData.
 	 */
