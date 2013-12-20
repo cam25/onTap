@@ -1,3 +1,12 @@
+/*
+ * project 			onTap
+ * 
+ * package			com.cmozie.ontap
+ * 
+ * name				cameronmozie
+ * 
+ * date				Dec 19, 2013
+ */
 package com.cmozie.ontap;
 
 import java.util.HashMap;
@@ -9,6 +18,7 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +26,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-public class EventDetails extends Activity {
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventDetails.
+ */
+public class EventDetails extends FragmentActivity {
 
 	public static TextView eventName;
 	public static TextView eventType;
@@ -24,6 +38,12 @@ public class EventDetails extends Activity {
 	public static TextView eventVenue;
 	public static TextView eventsWebsite;
 	public static TextView eventSchedule;
+	
+	
+	
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,12 +101,19 @@ eventsWebsite.setOnClickListener(new OnClickListener() {
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.event_details, menu);
 		return true;
 	}
+	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()) {
 		

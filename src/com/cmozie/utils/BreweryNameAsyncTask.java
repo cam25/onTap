@@ -1,3 +1,12 @@
+/*
+ * project 			onTap
+ * 
+ * package			com.cmozie.utils
+ * 
+ * name				cameronmozie
+ * 
+ * date				Dec 19, 2013
+ */
 package com.cmozie.utils;
 
 import java.net.URL;
@@ -13,6 +22,10 @@ import android.util.Log;
 
 import com.cmozie.ontap.MoreDetails;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BreweryNameAsyncTask.
+ */
 public class BreweryNameAsyncTask  extends AsyncTask<URL, Void, String> {
 	
 		

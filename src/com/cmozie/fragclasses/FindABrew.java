@@ -5,7 +5,7 @@
  * 
  * name				cameronmozie
  * 
- * date				Dec 12, 2013
+ * date				Dec 19, 2013
  */
 package com.cmozie.fragclasses;
 
@@ -58,17 +58,12 @@ public class FindABrew extends Fragment {
 	TextView listBeerName;
 	TextView listBeerCompany;
 	
-	//beer object
-	String[] beers = {
-	    	"Samuel Adams Octoberfest",
-	    	"Samuel Adams WinterLager",
-	    	"Samuel Adams DoubleBock"
-	     };
+
 	
  ArrayList<HashMap<String, String>> listData = new ArrayList<HashMap<String, String>>();
 
 	public static HashMap<String, String> map;
-	public static List<Map<String,String>> test;
+	public static List<Map<String,String>> dataArray;
 	public static ImageButton scan;
 	public String labels;
 	public static EditText searchField;
@@ -96,17 +91,12 @@ public class FindABrew extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		
 		//UI elements 
-		// EditText ed = (EditText)getActivity().findViewById(R.id.beerText);
 	    lv = (ListView)getActivity().findViewById(R.id.listView1);
-	     //Button search = (Button)getActivity().findViewById(R.id.searchButn);
-	     
-	    // lv.setVisibility(View.GONE);
+
 	     scan = (ImageButton)getActivity().findViewById(R.id.scannerButn);
-	     //ed.setText("Sam Adams");
+
 	     searchField = (EditText)getActivity().findViewById(R.id.searchField);
-	   
-	    
-	     
+
 	     searchField.setOnEditorActionListener(new OnEditorActionListener() {
 			
 	    	
@@ -114,10 +104,10 @@ public class FindABrew extends Fragment {
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				// TODO Auto-generated method stub
 	    		 
-	    		 if (actionId == EditorInfo.IME_ACTION_SEND) {
+	    		 if (actionId == EditorInfo.IME_ACTION_GO) {
 					
 	    			 String search = searchField.getText().toString();
-	    			 //lv.setVisibility(View.VISIBLE);
+
 	    			 Log.i("search", search);
 	    			 getApiResults(search);
 	    			 getActivity();
@@ -132,9 +122,6 @@ public class FindABrew extends Fragment {
 				return false;
 			}
 		});
-	   
-	    
-	   
 
 		//scan button
 		scan.setOnClickListener(new View.OnClickListener() {
@@ -221,6 +208,7 @@ public class FindABrew extends Fragment {
                 searchField.setText("");
                  Log.i("Query",query);
                 
+                 
               
 			}
 	       
@@ -244,7 +232,7 @@ public  void getApiResults(String beer){
 			
 
 			queryString = URLEncoder.encode(beer,"UTF-8");
-			//queryString = URLEncoder.encode(beer,"UTF-8");
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			Log.e("ERROR-URL", "ENCODING ISSUE");
@@ -252,23 +240,19 @@ public  void getApiResults(String beer){
 		}
 		
 		 baseUrl = "http://api.brewerydb.com/v2/search/?q="+ queryString +"/?hasLabels=Y&type=beer&key=4b77a2665f85f929d4a87d30bbeae67b&format=json";
-		 //query = "http://api.brewerydb.com/v2/search/upc?code="+ beer +"&key=4b77a2665f85f929d4a87d30bbeae67b&format=json";
 		URL finalURL;
-		//URL finalURL2;
-		try {
+				try {
 			
 			 finalURL = new URL(baseUrl);
 			 //finalURL2 = new URL(query);
-			 SearchAsyncTask wtdRequest = new SearchAsyncTask();
+			 SearchAsyncTask queryRequest = new SearchAsyncTask();
 			
 			 	
 			 	Log.i("FinalURL", finalURL.toString());
-				// wtdRequest.execute(finalURL2);
+
 			
-				 wtdRequest.execute(finalURL);
-			
-				
-			
+				 queryRequest.execute(finalURL);
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			Log.i("BAD URL", "URL MALFORMED");
@@ -304,9 +288,9 @@ public  void getScanResults(String beer){
 		try {
 			
 			 finalURL2 = new URL(query);
-			 SearchAsyncTask wtdRequest = new SearchAsyncTask();
+			 SearchAsyncTask searchRequest = new SearchAsyncTask();
 			
-				 wtdRequest.execute(finalURL2);
+			 searchRequest.execute(finalURL2);
 			
 			
 				
@@ -371,7 +355,7 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 			JSONObject json = new JSONObject(result);
 			JSONArray data = json.getJSONArray("data");
 			//JSONObject label =;
-			test = new ArrayList<Map<String,String>>();
+			dataArray = new ArrayList<Map<String,String>>();
 			
 			for (int i = 0; i < data.length(); i++) {
 				
@@ -382,16 +366,13 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 				map = new HashMap<String, String>();
 				
 				
-				
-				//Log.i("TAG", data.toString());
-				 //url = new URL(label.getString("large"));
-				
+				//beer name
 				if (one.has("name")) {
 					 map.put("name", one.getString("name"));
 				}else{
 					map.put("name", "N/A");
 				}
-			
+				//description
 				if (one.has("description")) {
 					map.put("description", one.getString("description"));
 				}else if (one.has("style")) {
@@ -409,39 +390,41 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 					map.put("description", "No Description Available");
 				
 			}
-				
+				//label
 				if (one.has("labels")) {
 					JSONObject image = one.getJSONObject("labels");
 					
 					map.put("labels", image.getString("large"));
 					Log.i("map", map.toString());
-					
-					
+
 				}
 				
-				 
+				//abv 
 				if (one.has("abv")) {
 					 map.put("abv", one.getString("abv"));
 				}else {
 					map.put("abv", "N/A");
 				}
-				
+				//id for brewery
 				if (one.has("id")) {
 					map.put("id", one.getString("id"));
 				}
-				
+				//type
 				if (one.has("type")) {
 					map.put("type", one.getString("type"));
 				}else {
 					map.put("type", "N/A");
 				}
 				
+				//available
 				if (one.has("available")) {
 					JSONObject available = one.getJSONObject("available");
 					map.put("available", available.getString("name"));
 				}else {
 					map.put("available", "N/A");
 				}
+				
+				//style
 				if (one.has("style")) {
 					JSONObject style = one.getJSONObject("style");
 					JSONObject category = style.getJSONObject("category");
@@ -450,12 +433,12 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 				}else {
 					map.put("style", "N/A");
 				}
-				 test.add(map);
+				
+				//add map contents to array
+				dataArray.add(map);
 				 
-				 
-				 
-				//ListView lv = (ListView)getActivity().findViewById(R.id.listView1);
-					ListAdapter adapter = new SimpleAdapter(getActivity(), test, R.layout.listitems, new String[]{"name","company" },new int[]{R.id.listBeerType, R.id.listBeerCompany});
+				
+					ListAdapter adapter = new SimpleAdapter(getActivity(), dataArray, R.layout.listitems, new String[]{"name","company" },new int[]{R.id.listBeerType, R.id.listBeerCompany});
 					
 					lv.setAdapter(adapter);
 				
@@ -467,14 +450,14 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 							// TODO Auto-generated method stub
 							Intent intent = new Intent(getActivity(), MoreDetails.class);
 							
-							String name = test.get(+arg2).get("name");
-							String abv = test.get(+arg2).get("abv");
-							String descriptionText = test.get(+arg2).get("description");
-							String styleDescript = test.get(+arg2).get("labels");
-							String id = test.get(+arg2).get("id");
-							String type = test.get(+arg2).get("type");
-							String availability = test.get(+arg2).get("available");
-							String style = test.get(+arg2).get("style");
+							String name = dataArray.get(+arg2).get("name");
+							String abv = dataArray.get(+arg2).get("abv");
+							String descriptionText = dataArray.get(+arg2).get("description");
+							String styleDescript = dataArray.get(+arg2).get("labels");
+							String id = dataArray.get(+arg2).get("id");
+							String type = dataArray.get(+arg2).get("type");
+							String availability = dataArray.get(+arg2).get("available");
+							String style = dataArray.get(+arg2).get("style");
 						
 							
 							
@@ -486,28 +469,37 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 							intent.putExtra("type", type);
 							intent.putExtra("style", style);
 							intent.putExtra("available", availability);
-				         	//Toast.makeText(getActivity(), "You Clicked at "+test.get(+arg2).get("name"), Toast.LENGTH_SHORT).show();
 							
-			                startActivity(intent);
+			               startActivity(intent);
 							
 						}
 					});
 					
 					
 					
-				Log.i("array",String.valueOf(test));
+				Log.i("array",String.valueOf(dataArray));
 				// TODO Auto-generated method stub
 				
 				
 			}
-			
-			
-			
-			
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+			alert.setTitle("Scan Result");
+			alert.setMessage("UPC Not Found");
+			alert.setCancelable(false);
+			alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+					dialog.cancel();
+				}
+			});
+			alert.show();
+
 		}
 	}
 }

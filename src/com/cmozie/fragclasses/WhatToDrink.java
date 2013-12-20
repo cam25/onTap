@@ -5,7 +5,7 @@
  * 
  * name				cameronmozie
  * 
- * date				Dec 12, 2013
+ * date				Dec 19, 2013
  */
 package com.cmozie.fragclasses;
 
@@ -95,6 +95,8 @@ public class WhatToDrink extends Fragment  {
 		
 		 isConnected = Network.getConnectionStatus(getActivity());
 		 
+		 
+		 //network connection
 		 Log.i("network", isConnected.toString());
 		 if (isConnected) {
 			 
@@ -118,10 +120,7 @@ public class WhatToDrink extends Fragment  {
 				alert.show();
 				
 		}
-		//Fragment fm = getChildFragmentManager().findFragmentByTag("What To Drink");
-		
-		//Log.i("fragment?", fm.toString());
-		
+
 		Log.i("Started", "activit");
 	}
 	
@@ -238,10 +237,9 @@ public class WhatToDrink extends Fragment  {
 				JSONObject json = new JSONObject(result);
 				JSONObject data = json.getJSONObject("data");
 				
-				//JSONObject details = data.getJSONObject("style");
-				
+		
 				JSONObject labels = data.getJSONObject("labels");
-				//JSONObject style = data.getJSONObject("style");
+		
 				 url = new URL(labels.getString("large"));
 				Log.i("WTDURL", result);
 				
@@ -271,19 +269,13 @@ public class WhatToDrink extends Fragment  {
 					beerDescription.setText("No Description Available");
 				
 			}
-					
-					
-					
-				
-				
-				
+
 				if (labels.has("large")) {
 					ImageRequest image = new ImageRequest();
 					image.execute(url);
 					
 				}
-
-				//beerDescription.setText(description2);
+				
 				Log.i("beer", beerNam);
 			} catch (JSONException e) {
 				// TODO: handle exception
@@ -346,7 +338,6 @@ public class WhatToDrink extends Fragment  {
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()) {
 		
-	//favorites icon
 		case R.id.add:
 			
 			map = new HashMap<String, String>();
@@ -377,20 +368,6 @@ public class WhatToDrink extends Fragment  {
 		}
 		return super.onOptionsItemSelected(item);
 		
-	}
-	
-	
-	
-	/**
-	 * Inits the share intent.
-	 */
-	public static void initShareIntent() {
-	   
-	    Intent share = new Intent(android.content.Intent.ACTION_SEND);
-	 
-	                share.putExtra(Intent.EXTRA_SUBJECT,  "subject");
-	                share.putExtra(Intent.EXTRA_TEXT,     "your text");
-
 	}
 	
 	

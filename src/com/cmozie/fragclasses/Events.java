@@ -5,7 +5,7 @@
  * 
  * name				cameronmozie
  * 
- * date				Dec 5, 2013
+ * date				Dec 19, 2013
  */
 package com.cmozie.fragclasses;
 
@@ -58,8 +58,6 @@ import com.cmozie.utils.Network;
  */
 public class Events extends Fragment {
 
-	
-	
 	protected static final String TITLE = null;
 	public static TextView eventName;
 	public static TextView eventType;
@@ -69,8 +67,10 @@ public class Events extends Fragment {
 	public static TextView eventSchedule;
 	public static HashMap<String, String> myMap;
 	public static List<Map<String,String>> arrayList;
-	
+	public static ListView lv;
+	public static ListAdapter adapter;
 	ShareEvent callBack;
+	public static Intent intent;
 	
 	/* (non-Javadoc)
 	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
@@ -97,7 +97,9 @@ public class Events extends Fragment {
 	public interface ShareEvent {
         public void eventShare();
     }
-
+	
+	
+	
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -164,15 +166,10 @@ public void getApiResults(){
 			try {
 				JSONObject json = new JSONObject(result);
 				JSONArray data = json.getJSONArray("data");
-				
-				
-				
+
 				
 				for (int i = 0; i < data.length(); i++) {
-					
-					
-					
-					
+
 					JSONObject allEvents = data.getJSONObject(i);
 					myMap = new HashMap<String, String>();
 					Log.i("events", allEvents.toString());
@@ -208,8 +205,8 @@ public void getApiResults(){
 					
 					arrayList.add(myMap);
 					
-					ListView lv = (ListView)getActivity().findViewById(R.id.eventsList);
-					ListAdapter adapter = new SimpleAdapter(getActivity(), arrayList, R.layout.listitems, new String[]{"name","type" },new int[]{R.id.listBeerType, R.id.listBeerCompany});
+					 lv = (ListView)getActivity().findViewById(R.id.eventsList);
+					 adapter = new SimpleAdapter(getActivity(), arrayList, R.layout.listitems, new String[]{"name","type" },new int[]{R.id.listBeerType, R.id.listBeerCompany});
 					
 					lv.setAdapter(adapter);
 					
@@ -219,7 +216,7 @@ public void getApiResults(){
 						public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 								long arg3) {
 							// TODO Auto-generated method stub
-							Intent intent = new Intent(getActivity(), EventDetails.class);
+							 intent = new Intent(getActivity(), EventDetails.class);
 							String name = arrayList.get(+arg2).get("name");
 							String description = arrayList.get(+arg2).get("description");
 							String type = arrayList.get(+arg2).get("type");
@@ -233,52 +230,20 @@ public void getApiResults(){
 							intent.putExtra("website", website);
 							
 							Log.i("venue", venue);
-				         	//Toast.makeText(getActivity(), "You Clicked at "+test.get(+arg2).get("name"), Toast.LENGTH_SHORT).show();
-							
-							
-							
 			                startActivity(intent);
-							
-			                
+
 			                
 						}
 					});
 					
-					/*for (int j = 0; j <  arrayList.size(); j++) {
-						
-						if (allEvents.has("name")) {
-							String name = allEvents.getString("name");
-							//eventName.setText(name);
-						}
-							
-						if (allEvents.has("description")) {
-							String descript = allEvents.getString("description");
-							//eventDescription.setText(descript);
-						}
-						if (allEvents.has("type")) {
-							String typeEvent = allEvents.getString("type");
-							//eventType.setText(typeEvent);
-						}
-						if (allEvents.has("venueName")) {
-							String venueEvent = allEvents.getString("venueName");
-							//eventVenue.setText(venueEvent);
-						}
-						
-						if (allEvents.has("website")) {
-							String eventWebsite = allEvents.getString("website");
-							//eventsWebsite.setText(eventWebsite);
-						}
+				
 					}
-				*/
-					}
-				//beerDescription.setText(description2);
-				//Log.i("beer", beerNam);
+			
 			} catch (JSONException e) {
 				// TODO: handle exception
 				
 				e.printStackTrace();
-				//beerName.setText(beerNam);
-				//beerDescription.setText("No description");
+				
 				
 			}
 			
@@ -293,13 +258,7 @@ public void getApiResults(){
 		
 		
 	switch (item.getItemId()) {
-		
-		
-		case R.id.share:
-			
-			
-			  break;
-			  //opens favorites activity
+	
 		case R.id.favorites:
 			
 			startActivity(new Intent(getActivity(), Favorites.class));

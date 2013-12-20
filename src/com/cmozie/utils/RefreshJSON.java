@@ -1,3 +1,12 @@
+/*
+ * project 			onTap
+ * 
+ * package			com.cmozie.utils
+ * 
+ * name				cameronmozie
+ * 
+ * date				Dec 19, 2013
+ */
 package com.cmozie.utils;
 
 import java.net.URL;
@@ -14,6 +23,10 @@ import android.widget.TextView;
 import com.cmozie.fragclasses.WhatToDrink;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RefreshJSON.
+ */
 public class RefreshJSON {
 	
 	 TextView beerName;
@@ -21,6 +34,11 @@ public class RefreshJSON {
 	TextView beerDescription;
 	 String description;
 	
+ /**
+  * Gets the api results.
+  *
+  * @return the api results
+  */
  public static void getApiResults(){
 	 
 		String baseUrl = "http://api.brewerydb.com/v2/beer/random/?hasLabels=Y&key=4b77a2665f85f929d4a87d30bbeae67b";
@@ -47,6 +65,11 @@ public class RefreshJSON {
 	
 	
 	
+		/**
+		 * On post execute.
+		 *
+		 * @param result the result
+		 */
 		protected void onPostExecute(String result) {
 			// TODO Auto-generated method stub
 			

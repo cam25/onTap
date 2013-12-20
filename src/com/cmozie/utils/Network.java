@@ -1,11 +1,11 @@
 /*
  * project 			onTap
  * 
- * package			com.cmozie.fragclasses
+ * package			com.cmozie.utils
  * 
  * name				cameronmozie
  * 
- * date				Dec 6, 2013
+ * date				Dec 19, 2013
  */
 package com.cmozie.utils;
 
@@ -81,6 +81,13 @@ private static void networkData(Context context){
 		}
 	}
 }
+
+/**
+ * Load image from web operations.
+ *
+ * @param url the url
+ * @return the drawable
+ */
 public static Drawable LoadImageFromWebOperations(String url) {
     try {
         InputStream inputStream = (InputStream) new URL(url).getContent();

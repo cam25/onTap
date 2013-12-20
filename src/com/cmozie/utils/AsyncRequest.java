@@ -1,3 +1,12 @@
+/*
+ * project 			onTap
+ * 
+ * package			com.cmozie.utils
+ * 
+ * name				cameronmozie
+ * 
+ * date				Dec 19, 2013
+ */
 package com.cmozie.utils;
 
 import java.net.URL;
@@ -15,6 +24,10 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
 
+	// TODO: Auto-generated Javadoc
+/**
+	 * The Class AsyncRequest.
+	 */
 	@SuppressLint("NewApi")
 	public class AsyncRequest extends AsyncTask<URL, Void, String>{
 		 TextView beerName;
@@ -26,6 +39,9 @@ import android.widget.TextView;
 		
 		ProgressDialog progressIndicator;
 		
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#doInBackground(Params[])
+		 */
 		@Override
 		protected String doInBackground(URL... urls) {
 			// TODO Auto-generated method stub
@@ -36,6 +52,9 @@ import android.widget.TextView;
 			return reply;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+		 */
 		@Override
 		protected void onPostExecute(String result) {
 			// TODO Auto-generated method stub
@@ -72,7 +91,7 @@ import android.widget.TextView;
 					
 				}else{
 				
-					WhatToDrink.beerDescription.setText("Not Available");
+					WhatToDrink.beerDescription.setText("Description Not Available");
 				
 			}
 				
@@ -92,8 +111,16 @@ import android.widget.TextView;
 			
 			
 		}
+		
+		/**
+		 * The Class ImageRequest.
+		 */
 		public class ImageRequest extends AsyncTask<URL, Void, Drawable>
         {
+			
+			/* (non-Javadoc)
+			 * @see android.os.AsyncTask#onPreExecute()
+			 */
 			@Override
 			protected void onPreExecute() {
 				// TODO Auto-generated method stub

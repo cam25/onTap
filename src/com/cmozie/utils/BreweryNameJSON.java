@@ -1,3 +1,12 @@
+/*
+ * project 			onTap
+ * 
+ * package			com.cmozie.utils
+ * 
+ * name				cameronmozie
+ * 
+ * date				Dec 19, 2013
+ */
 package com.cmozie.utils;
 
 import java.net.URL;
@@ -17,8 +26,18 @@ import com.cmozie.ontap.BreweryDetails;
 import com.cmozie.ontap.MoreDetails;
 import com.cmozie.ontap.MoreDetails.brewDetails;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BreweryNameJSON.
+ */
 public class BreweryNameJSON {
 
+/**
+ * Gets the brewery details.
+ *
+ * @param beerId the beer id
+ * @return the brewery details
+ */
 public static  void getBreweryDetails(String beerId){
 
 		

@@ -5,7 +5,7 @@
  * 
  * name				cameronmozie
  * 
- * date				Dec 15, 2013
+ * date				Dec 19, 2013
  */
 package com.cmozie.ontap;
 
@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
 import android.content.Context;
@@ -57,6 +58,7 @@ public class MainActivity extends Activity implements PassTheData, shareData, Sh
 	public static Fragment tabFrag1 = new WhatToDrink();
 	public static Fragment tabFrag2 = new FindABrew();
 	public static Fragment tabFrag3 = new Events();
+	
 	Context context;
 	public MenuItem add;
 	public MenuItem share;
@@ -89,6 +91,8 @@ public class MainActivity extends Activity implements PassTheData, shareData, Sh
 	    actionBar.setDisplayShowTitleEnabled(false);
 	    
 	    
+	   
+	    
 	    //sets text to tabs
 	    WTD = actionBar.newTab().setText("What To Drink");
 	    FAB = actionBar.newTab().setText("Find A Brew");
@@ -103,6 +107,10 @@ public class MainActivity extends Activity implements PassTheData, shareData, Sh
 	    actionBar.addTab(WTD);
 	    actionBar.addTab(FAB);
 	    actionBar.addTab(EVNT);
+	    
+	   
+	    
+	    
 	
 	    //adds frags to backstack on transaction
 	  FragmentTransaction transactions = getFragmentManager().beginTransaction();
@@ -110,6 +118,8 @@ public class MainActivity extends Activity implements PassTheData, shareData, Sh
 		transactions.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 		transactions.commit();
 
+		
+		
 	}
 	
 	
@@ -237,6 +247,8 @@ public class TabListener implements ActionBar.TabListener {
         		share.setVisible(false);
         		refresh.setVisible(false);
         		
+        		
+        		
 			}
 	    }
     	
@@ -330,7 +342,7 @@ public class TabListener implements ActionBar.TabListener {
 		// TODO Auto-generated method stub
 		Intent intent = new Intent(Intent.ACTION_SEND);
 		intent.setType("text/plain");
-		intent.putExtra(android.content.Intent.EXTRA_TEXT,"Beer's Name:" + WhatToDrink.beerNam + "\n" + "Beer Description" + "\n " + WhatToDrink.description);
+		intent.putExtra(android.content.Intent.EXTRA_TEXT,"Beer's Name:" + WhatToDrink.beerNam + "\n" + "Beer Description" + "\n " + WhatToDrink.beerDescription.getText().toString());
 		startActivity(intent); 
 		
 	}
@@ -346,6 +358,9 @@ public class TabListener implements ActionBar.TabListener {
 		startActivity(intent);
 		
 	}
+
+
+	
 
 }
 	

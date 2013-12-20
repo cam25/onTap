@@ -5,7 +5,7 @@
  * 
  * name				cameronmozie
  * 
- * date				Dec 4, 2013
+ * date				Dec 19, 2013
  */
 package com.cmozie.ontap;
 
@@ -76,6 +76,12 @@ public class Favorites extends Activity {
 		Log.i("HISTORY READ", storedBeers.toString());
 	      
 	}
+
+/**
+ * Gets the favorites.
+ *
+ * @return the favorites
+ */
 private HashMap<String, String> getFavorites(){
 		
 		//creates an object named stored that reads the object that is stored in local storage
@@ -112,6 +118,14 @@ private HashMap<String, String> getFavorites(){
 		
 	}
 
+/**
+ * Read storage object file.
+ *
+ * @param context the context
+ * @param filename the filename
+ * @param external the external
+ * @return the object
+ */
 @SuppressWarnings("resource")
 public static Object readStorageObjectFile(Context context, String filename, Boolean external){
 		
@@ -155,7 +169,10 @@ public static Object readStorageObjectFile(Context context, String filename, Boo
 		return true;
 	}
 	
-	 @Override
+	 /* (non-Javadoc)
+ 	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+ 	 */
+ 	@Override
 		public boolean onOptionsItemSelected(MenuItem item){
 			switch (item.getItemId()) {
 			

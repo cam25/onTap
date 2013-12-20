@@ -5,7 +5,7 @@
  * 
  * name				cameronmozie
  * 
- * date				Dec 4, 2013
+ * date				Dec 19, 2013
  */
 package com.cmozie.ontap;
 
@@ -99,8 +99,8 @@ public class BreweryDetails extends Activity {
 				url = new URL(imageURL);
 				Log.i("URL", url.toString());
 
-				getBreweryImage al = new getBreweryImage(); 
-				al.execute(url);
+				getBreweryImage imgRequest = new getBreweryImage(); 
+				imgRequest.execute(url);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				brewImg.setImageDrawable(getResources().getDrawable(R.drawable.brewery));
@@ -160,7 +160,10 @@ public class BreweryDetails extends Activity {
 		
 	}
 	
-	//resetting bewerydetails button
+	//resetting 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
 	@Override
 	   public boolean onKeyDown(int keyCode, KeyEvent event) {
 	if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -171,6 +174,9 @@ public class BreweryDetails extends Activity {
 	return super.onKeyDown(keyCode, event);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onBackPressed()
+	 */
 	public void onBackPressed() {
 	MoreDetails.breweryDetails.setClickable(true);
 	Log.i("back", "press");
@@ -178,6 +184,14 @@ public class BreweryDetails extends Activity {
 	return;
 	    }
 	
+	/**
+	 * Gets the gps.
+	 *
+	 * @param address the address
+	 * @param locality the locality
+	 * @param locationCode the location code
+	 * @return the gps
+	 */
 	public void getGPS(String address,String locality,String locationCode){
 		Intent mapIntent = new Intent(Intent.ACTION_VIEW,
     			
@@ -189,6 +203,10 @@ public class BreweryDetails extends Activity {
 
 		startActivity(mapIntent);
 	}
+	
+	/**
+	 * The Class getBreweryImage.
+	 */
 	public class getBreweryImage extends AsyncTask<URL, Void, Drawable>
     {
 
@@ -218,10 +236,9 @@ public class BreweryDetails extends Activity {
 					brewImg.setImageDrawable(getResources().getDrawable(R.drawable.brewery));
 				}
             	
-            	//progressIndicator.dismiss();
+
             	brewImg.setBackground(result);
-            	
-                   // brewImg.setImageDrawable(result);
+         
         }
     }
 
@@ -234,7 +251,11 @@ public class BreweryDetails extends Activity {
 		getMenuInflater().inflate(R.menu.brewery_details, menu);
 		return true;
 	}
-	 @Override
+	 
+ 	/* (non-Javadoc)
+ 	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+ 	 */
+ 	@Override
 		public boolean onOptionsItemSelected(MenuItem item){
 			switch (item.getItemId()) {
 			

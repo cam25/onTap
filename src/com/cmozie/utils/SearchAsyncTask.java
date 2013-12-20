@@ -1,3 +1,12 @@
+/*
+ * project 			onTap
+ * 
+ * package			com.cmozie.utils
+ * 
+ * name				cameronmozie
+ * 
+ * date				Dec 19, 2013
+ */
 package com.cmozie.utils;
 
 import java.net.URL;
@@ -18,6 +27,10 @@ import android.util.Log;
 import android.widget.TextView;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SearchAsyncTask.
+ */
 public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 	 TextView beerName;
 	 String beerNam;
@@ -25,8 +38,11 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 	 String description;
 
 	public static HashMap<String, String> map;
-	public static List<Map<String,String>> test;
+	public static List<Map<String,String>> theDataArray;
 	
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#doInBackground(Params[])
+	 */
 	@Override
 	protected String doInBackground(URL... urls) {
 		// TODO Auto-generated method stub
@@ -37,6 +53,9 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 		return reply;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+	 */
 	@Override
 	protected void onPostExecute(String result) {
 		// TODO Auto-generated method stub
@@ -45,24 +64,21 @@ public class SearchAsyncTask extends AsyncTask<URL, Void, String>{
 		try {
 			JSONObject json = new JSONObject(result);
 			JSONArray data = json.getJSONArray("data");
-			 test = new ArrayList<Map<String,String>>();
+			theDataArray = new ArrayList<Map<String,String>>();
 			for (int i = 0; i < data.length(); i++) {
 				JSONObject one = data.getJSONObject(i);
 				map = new HashMap<String, String>();
 				 map.put("name", one.getString("name"));
 				
 			
-				 test.add(map);
+				 theDataArray.add(map);
 				 
-				Log.i("array", test.toString());
+				Log.i("array", theDataArray.toString());
 				// TODO Auto-generated method stub
 				
 				
 			}
-			
-			
-			
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
