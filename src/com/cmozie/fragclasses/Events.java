@@ -72,6 +72,7 @@ public class Events extends Fragment {
 	ShareEvent callBack;
 	public static Intent intent;
 	
+	
 	/* (non-Javadoc)
 	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
 	 */
@@ -93,6 +94,9 @@ public class Events extends Fragment {
 		
 	}
 	
+	public interface ListSelect {
+		public void getListItem(Intent intent);
+	}
 	
 	public interface ShareEvent {
         public void eventShare();
@@ -216,23 +220,36 @@ public void getApiResults(){
 						public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 								long arg3) {
 							// TODO Auto-generated method stub
-							 intent = new Intent(getActivity(), EventDetails.class);
+							 //intent = new Intent(getActivity(), EventDetails.class);
+							
+							Bundle arguments = new Bundle();
 							String name = arrayList.get(+arg2).get("name");
 							String description = arrayList.get(+arg2).get("description");
 							String type = arrayList.get(+arg2).get("type");
 							String venue = arrayList.get(+arg2).get("venueName");
 							String website = arrayList.get(+arg2).get("website");
 							
-							intent.putExtra("name", name);
-							intent.putExtra("description", description);						
-							intent.putExtra("venueName", venue);
-							intent.putExtra("type", type);
-							intent.putExtra("website", website);
+							arguments.putString("name", name);
+							arguments.putString("description", description);
+							arguments.putString("venueName", venue);
+							arguments.putString("type", type);
+							arguments.putString("website", website);
+							//intent.putExtra("name", name);
+							//intent.putExtra("description", description);						
+							//intent.putExtra("venueName", venue);
+							//intent.putExtra("type", type);
+							//intent.putExtra("website", website);
 							
-							Log.i("venue", venue);
-			                startActivity(intent);
+							
+							
+					
+						ed.setArguments(arguments);
+						android.app.FragmentTransaction trans = getFragmentManager().beginTransaction();
+						
+						
+						trans.replace(R.id.container, ed);
 
-			                
+			              trans.commit();  
 						}
 					});
 					

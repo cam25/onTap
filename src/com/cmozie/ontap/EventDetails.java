@@ -18,11 +18,15 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
@@ -30,7 +34,7 @@ import android.widget.TextView;
 /**
  * The Class EventDetails.
  */
-public class EventDetails extends FragmentActivity {
+public class EventDetails extends Fragment {
 
 	public static TextView eventName;
 	public static TextView eventType;
@@ -45,29 +49,38 @@ public class EventDetails extends FragmentActivity {
 	 * @see android.support.v4.app.FragmentActivity#onCreate(android.os.Bundle)
 	 */
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		View rootView = inflater.inflate(R.layout.activity_event_details, container,false);
 		
-		ActionBar actionBar = getActionBar();
+		return rootView;
+	}
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		
+		ActionBar actionBar = getActivity().getActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(false);
 	    actionBar.setDisplayShowTitleEnabled(false);
 	    
-		setContentView(R.layout.activity_event_details);
-		eventName = (TextView)findViewById(R.id.eventName);
-		 eventType = (TextView)findViewById(R.id.eventType);
-		 eventDescription = (TextView)findViewById(R.id.eventDescription);
-		 eventVenue = (TextView)findViewById(R.id.venue);
-		 eventsWebsite = (TextView)findViewById(R.id.eventWebsite);
-		eventSchedule = (TextView)findViewById(R.id.scheduleEvent);
+		//setContentView(R.layout.activity_event_details);
+		eventName = (TextView)getActivity().findViewById(R.id.eventName);
+		 eventType = (TextView)getActivity().findViewById(R.id.eventType);
+		 eventDescription = (TextView)getActivity().findViewById(R.id.eventDescription);
+		 eventVenue = (TextView)getActivity().findViewById(R.id.venue);
+		 eventsWebsite = (TextView)getActivity().findViewById(R.id.eventWebsite);
+		eventSchedule = (TextView)getActivity().findViewById(R.id.scheduleEvent);
 		
 		
-		eventName.setText(getIntent().getExtras().getString("name"));
-		eventType.setText(getIntent().getExtras().getString("type"));
-		eventDescription.setText(getIntent().getExtras().getString("description"));
-		eventVenue.setText(getIntent().getExtras().getString("venueName"));
+		eventName.setText(getActivity().getIntent().getExtras().getString("name"));
+		eventType.setText(getActivity().getIntent().getExtras().getString("type"));
+		eventDescription.setText(getActivity().getIntent().getExtras().getString("description"));
+		eventVenue.setText(getActivity().getIntent().getExtras().getString("venueName"));
 		
 		
-		eventsWebsite.setText(getIntent().getExtras().getString("website"));
+		eventsWebsite.setText(getActivity().getIntent().getExtras().getString("website"));
 		
 eventSchedule.setOnClickListener(new OnClickListener() {
 			
@@ -104,12 +117,7 @@ eventsWebsite.setOnClickListener(new OnClickListener() {
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
 	 */
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.event_details, menu);
-		return true;
-	}
+	
 	
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
@@ -127,7 +135,7 @@ eventsWebsite.setOnClickListener(new OnClickListener() {
 			  //favorites activity
 		case R.id.favorites:
 			
-			startActivity(new Intent(this, Favorites.class));
+			startActivity(new Intent(getActivity(), Favorites.class));
 
 			break;
 		default:
@@ -135,5 +143,11 @@ eventsWebsite.setOnClickListener(new OnClickListener() {
 		}
 		return super.onOptionsItemSelected(item);
 		
+	}
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// TODO Auto-generated method stub
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.event_details, menu);
 	}
 }

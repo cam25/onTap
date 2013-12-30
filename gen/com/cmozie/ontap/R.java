@@ -123,10 +123,11 @@ public final class R {
         public static final int activity_main=0x7f030004;
         public static final int activity_more_details=0x7f030005;
         public static final int activity_splash_page=0x7f030006;
-        public static final int events=0x7f030007;
-        public static final int findabrew=0x7f030008;
-        public static final int listitems=0x7f030009;
-        public static final int whattodrink=0x7f03000a;
+        public static final int eventdetailsfragment=0x7f030007;
+        public static final int events=0x7f030008;
+        public static final int findabrew=0x7f030009;
+        public static final int listitems=0x7f03000a;
+        public static final int whattodrink=0x7f03000b;
     }
     public static final class menu {
         public static final int age_verification=0x7f080000;

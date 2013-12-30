@@ -24,14 +24,19 @@ import android.app.ActionBar.Tab;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
+import android.text.GetChars;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.cmozie.fragclasses.Events;
+import com.cmozie.fragclasses.Events.ListSelect;
 import com.cmozie.fragclasses.FindABrew;
 import com.cmozie.fragclasses.WhatToDrink;
 import com.cmozie.fragclasses.Events.ShareEvent;
@@ -48,7 +53,7 @@ import com.cmozie.utils.RefreshJSON;
 /**
  * The Class MainActivity.
  */
-public class MainActivity extends Activity implements PassTheData, shareData, ShareEvent {
+public class MainActivity extends Activity implements PassTheData, shareData, ShareEvent, ListSelect {
 	
 	 Boolean connection = false;
 	//instatiates tabs
@@ -197,6 +202,9 @@ public class TabListener implements ActionBar.TabListener {
 			add.setVisible(false);
 			refresh.setVisible(false);
 			share.setVisible(false);
+		}
+    	if (tabFrag3.isVisible()) {
+			getListItem(Events.intent);
 		}
     	
 	    }
@@ -356,6 +364,40 @@ public class TabListener implements ActionBar.TabListener {
 		intent.setType("text/plain");
 		intent.putExtra(android.content.Intent.EXTRA_TEXT,"Event:" + Events.eventName.getText().toString() + "\n" +"Event Type:"+  Events.eventType.getText().toString());
 		startActivity(intent);
+		
+	}
+
+
+	@Override
+	public void getListItem(Intent intent) {
+		// TODO Auto-generated method stub
+		Events.lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				 Events.intent = new Intent(getApplicationContext(), EventDetails.class);
+				String name = Events.arrayList.get(+arg2).get("name");
+				String description = Events.arrayList.get(+arg2).get("description");
+				String type = Events.arrayList.get(+arg2).get("type");
+				String venue = Events.arrayList.get(+arg2).get("venueName");
+				String website = Events.arrayList.get(+arg2).get("website");
+				
+				Events.intent.putExtra("name", name);
+				Events.intent.putExtra("description", description);						
+				Events.intent.putExtra("venueName", venue);
+				Events.intent.putExtra("type", type);
+				Events.intent.putExtra("website", website);
+				
+				Log.i("venue", venue);
+				startActivity(Events.intent);
+                //startActivity(intent);
+
+                
+			}
+		});
+		
 		
 	}
 
